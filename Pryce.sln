@@ -1,0 +1,114 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34114.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PryceDevicesLib", "PryceDevicesLib\PryceDevicesLib.csproj", "{0649DAB9-EDD1-4F45-A65A-8988CEE27B99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DA", "DA\DA.csproj", "{7A2DD982-7517-48C5-934F-423249336E66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL_General", "BL_General\BL_General.csproj", "{9BD685F2-FD81-4AE6-BEAE-6DBC6A64BD89}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MyPryceNew", "MyPryceNew\", "{3939A5CA-8134-4E76-A668-6EF0A0B2E059}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{7a2dd982-7517-48c5-934f-423249336e66}|DA.dll;{9bd685f2-fd81-4ae6-beae-6dbc6a64bd89}|BL_General.dll;{96051113-a5b7-4fd9-8791-1791604ded68}|BL_Finance.dll;{6a25de9a-1e55-4f81-ab13-770ff8c06c93}|BL_Ems.dll;{f204c5b0-b022-452b-a5ae-2734f4615bda}|BL_EmailSystem.dll;{e4560222-0df5-4941-b7d9-d392a06643a9}|BL_Archiving.dll;{8dc4f4ed-93a2-42b2-8e2d-947e7e43b68f}|BL_ProjectManagement.dll;{bb77de45-9912-4b42-b393-7147c94ebf3a}|BL_ServiceManagement.dll;{5f874473-9ba9-4149-b749-22295211efb7}|BL_Inventory.dll;{fafbe0e2-59a8-4648-91c5-f3ad965de151}|BL_HrPayroll.dll;{42fc9c45-d261-4e03-8c75-64c850648ea4}|BL_Attendance.dll;{0649dab9-edd1-4f45-a65a-8988cee27b99}|PryceDevicesLib.dll;{358b6216-f922-4c1a-8178-bfa2cd761343}|PryceAPI.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_55202"
+		Debug.AspNetCompiler.PhysicalPath = "MyPryceNew\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55202\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_55202"
+		Release.AspNetCompiler.PhysicalPath = "MyPryceNew\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55202\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "55202"
+		SlnRelativePath = "MyPryceNew\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL_Attendance", "BL_Attendance\BL_Attendance.csproj", "{42FC9C45-D261-4E03-8C75-64C850648EA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL_Finance", "BL_Finance\BL_Finance.csproj", "{96051113-A5B7-4FD9-8791-1791604DED68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL_Inventory", "BL_Inventory\BL_Inventory.csproj", "{5F874473-9BA9-4149-B749-22295211EFB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL_ServiceManagement", "BL_ServiceManagement\BL_ServiceManagement.csproj", "{BB77DE45-9912-4B42-B393-7147C94EBF3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL_ProjectManagement", "BL_ProjectManagement\BL_ProjectManagement.csproj", "{8DC4F4ED-93A2-42B2-8E2D-947E7E43B68F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL_EmailSystem", "BL_EmailSystem\BL_EmailSystem.csproj", "{F204C5B0-B022-452B-A5AE-2734F4615BDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL_Archiving", "BL_Archiving\BL_Archiving.csproj", "{E4560222-0DF5-4941-B7D9-D392A06643A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL_HrPayroll", "BL_HrPayroll\BL_HrPayroll.csproj", "{FAFBE0E2-59A8-4648-91C5-F3AD965DE151}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL_Ems", "BL_Ems\BL_Ems.csproj", "{6A25DE9A-1E55-4F81-AB13-770FF8C06C93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PryceAPI", "PryceAPI\PryceAPI.csproj", "{358B6216-F922-4C1A-8178-BFA2CD761343}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PryceSetup", "PryceSetup\PryceSetup.vdproj", "{6A2E0DD2-9D4A-4C0B-BEB3-C53F0DC2E0A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0649DAB9-EDD1-4F45-A65A-8988CEE27B99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0649DAB9-EDD1-4F45-A65A-8988CEE27B99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0649DAB9-EDD1-4F45-A65A-8988CEE27B99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A2DD982-7517-48C5-934F-423249336E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A2DD982-7517-48C5-934F-423249336E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A2DD982-7517-48C5-934F-423249336E66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BD685F2-FD81-4AE6-BEAE-6DBC6A64BD89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BD685F2-FD81-4AE6-BEAE-6DBC6A64BD89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BD685F2-FD81-4AE6-BEAE-6DBC6A64BD89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3939A5CA-8134-4E76-A668-6EF0A0B2E059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3939A5CA-8134-4E76-A668-6EF0A0B2E059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3939A5CA-8134-4E76-A668-6EF0A0B2E059}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{3939A5CA-8134-4E76-A668-6EF0A0B2E059}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{42FC9C45-D261-4E03-8C75-64C850648EA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42FC9C45-D261-4E03-8C75-64C850648EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42FC9C45-D261-4E03-8C75-64C850648EA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96051113-A5B7-4FD9-8791-1791604DED68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96051113-A5B7-4FD9-8791-1791604DED68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96051113-A5B7-4FD9-8791-1791604DED68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F874473-9BA9-4149-B749-22295211EFB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F874473-9BA9-4149-B749-22295211EFB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F874473-9BA9-4149-B749-22295211EFB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB77DE45-9912-4B42-B393-7147C94EBF3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB77DE45-9912-4B42-B393-7147C94EBF3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB77DE45-9912-4B42-B393-7147C94EBF3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DC4F4ED-93A2-42B2-8E2D-947E7E43B68F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DC4F4ED-93A2-42B2-8E2D-947E7E43B68F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DC4F4ED-93A2-42B2-8E2D-947E7E43B68F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F204C5B0-B022-452B-A5AE-2734F4615BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F204C5B0-B022-452B-A5AE-2734F4615BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F204C5B0-B022-452B-A5AE-2734F4615BDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4560222-0DF5-4941-B7D9-D392A06643A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4560222-0DF5-4941-B7D9-D392A06643A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4560222-0DF5-4941-B7D9-D392A06643A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAFBE0E2-59A8-4648-91C5-F3AD965DE151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAFBE0E2-59A8-4648-91C5-F3AD965DE151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAFBE0E2-59A8-4648-91C5-F3AD965DE151}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A25DE9A-1E55-4F81-AB13-770FF8C06C93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A25DE9A-1E55-4F81-AB13-770FF8C06C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A25DE9A-1E55-4F81-AB13-770FF8C06C93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{358B6216-F922-4C1A-8178-BFA2CD761343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{358B6216-F922-4C1A-8178-BFA2CD761343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{358B6216-F922-4C1A-8178-BFA2CD761343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A2E0DD2-9D4A-4C0B-BEB3-C53F0DC2E0A4}.Debug|Any CPU.ActiveCfg = Debug
+		{6A2E0DD2-9D4A-4C0B-BEB3-C53F0DC2E0A4}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EE0263D0-EC35-4E15-B6F6-3CC91177D29F}
+	EndGlobalSection
+EndGlobal

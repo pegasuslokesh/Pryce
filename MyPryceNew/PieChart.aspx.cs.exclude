@@ -1,0 +1,59 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Drawing;
+using System.Web.UI.DataVisualization.Charting;
+using System.Data;
+using PegasusDataAccess;
+
+public partial class PieChart : System.Web.UI.Page
+{
+    DataAccessClass objDa = new DataAccessClass();
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        Session["AccordianId"] = "106";
+        if (!IsPostBack)
+        {
+            //double[] yValues = { 71.15, 23.19, 5.66 };
+            //string[] xValues = { "AAA", "BBB", "CCC" };
+            //Chart1.Series["Default"].Points.DataBindXY(xValues, yValues);
+
+            //Chart1.Series["Default"].Points[0].Color = Color.MediumSeaGreen;
+            //Chart1.Series["Default"].Points[1].Color = Color.PaleGreen;
+            //Chart1.Series["Default"].Points[2].Color = Color.LawnGreen;
+
+            //Chart1.Series["Default"].ChartType = SeriesChartType.Pie;
+//Chart1.Series["Default"]["PieLabelStyle"] = "Disabled";
+
+         //Chart1.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;
+
+            //Chart1.Legends[0].Enabled = true;
+            DataTable dtuser = objDa.return_DataTable("select id,Name,Age from Set_Chart");
+            Chart2.DataSource = dtuser;
+            Chart2.DataBind();
+             double[] Yvalue = new double[dtuser.Rows.Count];
+             string[] Xvalue = new string[dtuser.Rows.Count];
+            int i=0;
+            foreach (DataRow dr in dtuser.Rows)
+            {
+                Yvalue[i] = Convert.ToDouble(dr["Age"].ToString());
+                Xvalue[i] = dr["Name"].ToString();
+                i++;
+            }
+
+
+            Chart2.Series["Series1"].Points.DataBindXY(Xvalue,Yvalue);
+            Chart2.Series["Series1"].ChartType = SeriesChartType.Stock   ;
+            Chart2.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;
+            Chart2.Series["Series1"]["PieLabelStyle"] = "Enabled";
+            
+        }
+      
+    }
+
+
+}

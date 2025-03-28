@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="14.1.8.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="Att_SalaryReport" DataSource="#Ref-0" DataMember="sp_Att_AttendanceRegister_Report" Borders="All" Font="Times New Roman, 9.75pt" Version="14.1" PageHeight="1100" PageWidth="850" Margins="86, 72, 0, 0">
+  <Bands>
+    <Item1 Ref="2" ControlType="DetailBand" Name="Detail" KeepTogether="true" TextAlignment="TopLeft" Padding="0,0,0,0,100" HeightF="13.54167">
+      <Controls>
+        <Item1 Ref="3" Name="xrTable2" ControlType="XRTable" LocationFloat="0, 0" Borders="Left, Right, Bottom" SizeF="682,13.54167">
+          <Rows>
+            <Item1 Ref="4" ControlType="XRTableRow" Name="xrTableRow2" Weight="1">
+              <Cells>
+                <Item1 Ref="5" Name="xrTableCell4" ControlType="XRTableCell" Text="xrTableCell4" Weight="0.87712592087795782">
+                  <DataBindings>
+                    <Item1 Ref="6" PropertyName="Text" DataMember="Salary Report.Att_Date" />
+                  </DataBindings>
+                </Item1>
+                <Item2 Ref="7" Name="xrTableCell6" ControlType="XRTableCell" Text="[Salary Report.LateMinuteSalary]" Weight="1.3504364270388558">
+                  <DataBindings>
+                    <Item1 Ref="8" PropertyName="Text" DataMember="Salary Report.LateMinuteSalary" />
+                  </DataBindings>
+                </Item2>
+                <Item3 Ref="9" Name="xrTableCell8" ControlType="XRTableCell" Text="xrTableCell8" Weight="1.8803702030494367">
+                  <DataBindings>
+                    <Item1 Ref="10" PropertyName="Text" DataMember="Salary Report.EarlyMinuteSalary" />
+                  </DataBindings>
+                </Item3>
+                <Item4 Ref="11" Name="xrTableCell9" ControlType="XRTableCell" Font="Times New Roman, 8.25pt, charSet=0" Text="xrTableCell9" Weight="1.2718569585504918">
+                  <DataBindings>
+                    <Item1 Ref="12" PropertyName="Text" DataMember="Salary Report.WorkHourSalary" />
+                  </DataBindings>
+                  <StylePriority Ref="13" UseFont="false" />
+                </Item4>
+                <Item5 Ref="14" Name="xrTableCell10" ControlType="XRTableCell" Text="xrTableCell10" Weight="1.0908371842934763">
+                  <DataBindings>
+                    <Item1 Ref="15" PropertyName="Text" DataMember="Salary Report.Gross_Salary" />
+                  </DataBindings>
+                </Item5>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="16" UseBorders="false" />
+        </Item1>
+      </Controls>
+    </Item1>
+    <Item2 Ref="17" ControlType="TopMarginBand" Name="TopMargin" Padding="0,0,0,0,100" TextAlignment="TopLeft" HeightF="0" />
+    <Item3 Ref="18" ControlType="BottomMarginBand" Name="BottomMargin" Padding="0,0,0,0,100" TextAlignment="TopLeft" HeightF="0" />
+    <Item4 Ref="19" ControlType="PageFooterBand" Name="PageFooter" HeightF="23.95833">
+      <Controls>
+        <Item1 Ref="20" ControlType="XRPageInfo" Name="xrPageInfo2" SizeF="649.3749,23" Borders="None" LocationFloat="0, 0" Padding="2,2,0,0,100" TextAlignment="TopRight" Format="Page{0}">
+          <StylePriority Ref="21" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+    </Item4>
+    <Item5 Ref="22" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="136.5417">
+      <Controls>
+        <Item1 Ref="23" Name="xrLabel10" ControlType="XRLabel" SizeF="186.4217,15.70834" LocationFloat="91.95319, 0" TextAlignment="TopLeft" Font="Times New Roman, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="None" Text="xrLabel10">
+          <StylePriority Ref="24" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="25" Name="xrLabel9" ControlType="XRLabel" SizeF="91.95319,15.70834" LocationFloat="0, 0" Font="Times New Roman, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="None" Text="Created By:">
+          <StylePriority Ref="26" UseFont="false" UseBorders="false" />
+        </Item2>
+        <Item3 Ref="27" ControlType="XRPageInfo" Name="xrPageInfo1" PageInfo="DateTime" SizeF="237.9167,15.70834" Borders="None" LocationFloat="409.125, 0" Padding="2,2,0,0,100" Format="{0:dddd, MMMM dd, yyyy h:mm tt}">
+          <StylePriority Ref="28" UseBorders="false" />
+        </Item3>
+        <Item4 Ref="29" ControlType="XRPanel" Name="xrPanel1" SizeF="682.0001,120.8333" LocationFloat="0, 15.70833" Borders="Left, Top, Right">
+          <StylePriority Ref="30" UseBorders="false" />
+          <Controls>
+            <Item1 Ref="31" Name="xrTable4" ControlType="XRTable" LocationFloat="3.999996, 52.79164" SizeF="668.0627,25">
+              <Rows>
+                <Item1 Ref="32" ControlType="XRTableRow" Name="xrTableRow17" Weight="1">
+                  <Cells>
+                    <Item1 Ref="33" Name="xrTableCell67" ControlType="XRTableCell" Font="Times New Roman, 8pt, style=Bold" Borders="None" Weight="1.14469456942595">
+                      <StylePriority Ref="34" UseFont="false" UseBorders="false" />
+                    </Item1>
+                    <Item2 Ref="35" Name="xrTableCell70" ControlType="XRTableCell" Font="Times New Roman, 8pt" Borders="None" Weight="3.1291808535942875">
+                      <StylePriority Ref="36" UseFont="false" UseBorders="false" />
+                    </Item2>
+                    <Item3 Ref="37" Name="xrTableCell73" ControlType="XRTableCell" Font="Times New Roman, 8pt, style=Bold" Borders="None" Weight="1.1654627209440753">
+                      <StylePriority Ref="38" UseFont="false" UseBorders="false" />
+                    </Item3>
+                    <Item4 Ref="39" Name="xrTableCell74" ControlType="XRTableCell" Font="Times New Roman, 8pt" Borders="None" Text="xrTableCell40" Weight="3.2553751891119482">
+                      <StylePriority Ref="40" UseFont="false" UseBorders="false" />
+                    </Item4>
+                  </Cells>
+                </Item1>
+              </Rows>
+            </Item1>
+            <Item2 Ref="41" Name="xrTable6" ControlType="XRTable" LocationFloat="3.999996, 77.79164" SizeF="417.9343,24.08334">
+              <Rows>
+                <Item1 Ref="42" ControlType="XRTableRow" Name="xrTableRow18" Weight="1">
+                  <Cells>
+                    <Item1 Ref="43" Name="xrTableCell75" ControlType="XRTableCell" Font="Times New Roman, 8pt, style=Bold" Borders="None" Text="xrTableCell43" Weight="2.0080187483700422">
+                      <StylePriority Ref="44" UseFont="false" UseBorders="false" />
+                    </Item1>
+                    <Item2 Ref="45" Name="xrTableCell76" ControlType="XRTableCell" Font="Times New Roman, 8pt" Borders="None" Weight="7.4802128761961919">
+                      <StylePriority Ref="46" UseFont="false" UseBorders="false" />
+                    </Item2>
+                  </Cells>
+                </Item1>
+              </Rows>
+            </Item2>
+            <Item3 Ref="47" Name="xrCompAddress" ControlType="XRLabel" SizeF="353.125,22.04167" LocationFloat="2, 28" Font="Times New Roman, 9.75pt, style=Bold" Padding="2,2,0,0,100" Borders="None" Text="xrCompAddress">
+              <StylePriority Ref="48" UseFont="false" UseBorders="false" />
+            </Item3>
+            <Item4 Ref="49" Name="xrTitle" ControlType="XRLabel" SizeF="450.1771,16" LocationFloat="100, 102.875" TextAlignment="TopCenter" Font="Times New Roman, 9.75pt, style=Bold" Padding="2,2,0,0,100" Borders="None" Text="xrTitle">
+              <StylePriority Ref="50" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item4>
+            <Item5 Ref="51" Name="xrPictureBox1" ControlType="XRPictureBox" SizeF="97.06268,45.04167" Borders="None" LocationFloat="575, 2" Sizing="StretchImage">
+              <StylePriority Ref="52" UseBorders="false" />
+            </Item5>
+            <Item6 Ref="53" Name="xrCompName" ControlType="XRLabel" SizeF="353.125,23" LocationFloat="2, 3" Font="Times New Roman, 9.75pt, style=Bold" Padding="2,2,0,0,100" Borders="None" Text="xrCompName">
+              <StylePriority Ref="54" UseFont="false" UseBorders="false" />
+            </Item6>
+          </Controls>
+        </Item4>
+      </Controls>
+    </Item5>
+    <Item6 Ref="55" ControlType="GroupFooterBand" Name="GroupFooter1" HeightF="0" />
+    <Item7 Ref="56" ControlType="GroupHeaderBand" Name="GroupHeader1" HeightF="15.41665">
+      <Controls>
+        <Item1 Ref="57" Name="xrTable3" ControlType="XRTable" LocationFloat="0, 0" Font="Times New Roman, 8pt, style=Bold" Borders="Left, Right, Bottom" SizeF="682,14.99999">
+          <Rows>
+            <Item1 Ref="58" ControlType="XRTableRow" Name="xrTableRow3" Weight="1">
+              <Cells>
+                <Item1 Ref="59" Name="xrTableCell13" ControlType="XRTableCell" Weight="0.40797508122511839" />
+                <Item2 Ref="60" Name="xrTableCell14" ControlType="XRTableCell" TextAlignment="TopCenter" Font="Times New Roman, 9.75pt, style=Bold" Text=":" Weight="0.13541648864746092">
+                  <StylePriority Ref="61" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="62" Name="xrTableCell16" ControlType="XRTableCell" Text="xrTableCell16" Weight="0.96875007629394538">
+                  <DataBindings>
+                    <Item1 Ref="63" PropertyName="Text" DataMember="Salary Report.EmpId" />
+                  </DataBindings>
+                </Item3>
+                <Item4 Ref="64" Name="xrTableCell17" ControlType="XRTableCell" Weight="0.49263153076171884" />
+                <Item5 Ref="65" Name="xrTableCell18" ControlType="XRTableCell" TextAlignment="TopCenter" Font="Times New Roman, 9.75pt, style=Bold" Text=":" Weight="0.15929840087890612">
+                  <StylePriority Ref="66" UseFont="false" UseTextAlignment="false" />
+                </Item5>
+                <Item6 Ref="67" Name="xrTableCell15" ControlType="XRTableCell" Text="xrTableCell15" Weight="4.5744337659777656">
+                  <DataBindings>
+                    <Item1 Ref="68" PropertyName="Text" DataMember="Salary Report.Emp_Name" />
+                  </DataBindings>
+                </Item6>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="69" UseFont="false" UseBorders="false" />
+        </Item1>
+      </Controls>
+      <GroupFields>
+        <Item1 Ref="70" FieldName="Emp_Code" />
+      </GroupFields>
+    </Item7>
+    <Item8 Ref="71" ControlType="PageHeaderBand" Name="PageHeader" HeightF="14.99999">
+      <Controls>
+        <Item1 Ref="72" Name="xrTable1" ControlType="XRTable" LocationFloat="0, 0" Font="Times New Roman, 8pt, style=Bold" Borders="Left, Right, Bottom" SizeF="682.0001,14.99999">
+          <Rows>
+            <Item1 Ref="73" ControlType="XRTableRow" Name="xrTableRow1" Weight="1">
+              <Cells>
+                <Item1 Ref="74" Name="xrTableCell3" ControlType="XRTableCell" Borders="All" Weight="0.65900772999173851">
+                  <StylePriority Ref="75" UseBorders="false" />
+                </Item1>
+                <Item2 Ref="76" Name="xrTableCell7" ControlType="XRTableCell" Borders="All" Weight="0.95774743230044446">
+                  <StylePriority Ref="77" UseBorders="false" />
+                </Item2>
+                <Item3 Ref="78" Name="xrTableCell1" ControlType="XRTableCell" Borders="All" Weight="1.3335833821651117">
+                  <StylePriority Ref="79" UseBorders="false" />
+                </Item3>
+                <Item4 Ref="80" Name="xrTableCell5" ControlType="XRTableCell" Borders="All" Weight="0.90201843898606016">
+                  <StylePriority Ref="81" UseBorders="false" />
+                </Item4>
+                <Item5 Ref="82" Name="xrTableCell2" ControlType="XRTableCell" Borders="All" Weight="0.7530962084002536">
+                  <StylePriority Ref="83" UseBorders="false" />
+                </Item5>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="84" UseFont="false" UseBorders="false" />
+        </Item1>
+      </Controls>
+    </Item8>
+  </Bands>
+  <ObjectStorage>
+    <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v14.1" Ref="0" Content="~Xtra#NULL" Type="AttendanceDataSet" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

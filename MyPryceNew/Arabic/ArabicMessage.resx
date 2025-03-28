@@ -1,0 +1,1722 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actual Allowance Value Cannot be Greater Than Allowance Value" xml:space="preserve">
+    <value>القيمة الفعلية بدل لا يمكن أن يكون أكبر من بدل القيمة</value>
+  </data>
+  <data name="Actual Deduction Value Cannot be Greater Than Deduction Value" xml:space="preserve">
+    <value>القيمة الفعلية خصم لا يمكن أن يكون أكبر من خصم القيمة</value>
+  </data>
+  <data name="Allowance Already Exists" xml:space="preserve">
+    <value>بدل موجود بالفعل </value>
+  </data>
+  <data name="Allowance Name Already Exists - Go to Bin Tab" xml:space="preserve">
+    <value>بدل الاسم بالفعل - الذهاب إلى بن تبويب </value>
+  </data>
+  <data name="Cannot Generate Payroll in Wrong Sequence for EmployeeCode" xml:space="preserve">
+    <value>لا يمكن إنشاء الرواتب في تسلسل خاطئ للقانون الموظفين</value>
+  </data>
+  <data name="Claim Month and Year Should be Greater than Last Posted Month And Year" xml:space="preserve">
+    <value>المطالبة الشهر والسنة ينبغي أن يكون أكبر من النشر اخر شهر والسنة</value>
+  </data>
+  <data name="Claim Month and Year Should be Greater than Last Posted Month And Year For Employee Code" xml:space="preserve">
+    <value>المطالبة الشهر والسنة ينبغي أن يكون أكبر من شهر وسنة النشر اخر للكود موظف</value>
+  </data>
+  <data name="Claim Month and Year Should be Greater than or Equal to Date Of Joining" xml:space="preserve">
+    <value>المطالبة الشهر والسنة ينبغي أن يكون أكبر من أو يساوي تاريخ الانضمام</value>
+  </data>
+  <data name="Claim Month and Year Should be Greater than or Equal to Date Of Joining For Employee Code" xml:space="preserve">
+    <value>المطالبة الشهر والسنة ينبغي أن يكون أكبر من أو يساوي تاريخ الانضمام للكود موظف</value>
+  </data>
+  <data name="Claim Value Cannot be Greater Than Actual Value" xml:space="preserve">
+    <value>مطالبة القيمة لا يمكن أن يكون أكبر من القيمة الفعلية</value>
+  </data>
+  <data name="Deduction Already Exists" xml:space="preserve">
+    <value>خصم موجود بالفعل </value>
+  </data>
+  <data name="Deduction Already Exists-Go to Bin Tab" xml:space="preserve">
+    <value>خصم موجود بالفعل الذهاب إلى بن تبويب </value>
+  </data>
+  <data name="Employee has no Allowance or Deduction" xml:space="preserve">
+    <value>موظف لديه أي بدل أو خصم</value>
+  </data>
+  <data name="Employee Has no Posted Payroll" xml:space="preserve">
+    <value>موظف لا يوجد لديه الرواتب نشرت</value>
+  </data>
+  <data name="Employee Not Exists" xml:space="preserve">
+    <value>الموظف غير موجود</value>
+  </data>
+  <data name="End Date Is Not Valid" xml:space="preserve">
+    <value>تاريخ انتهاء غير صالح</value>
+  </data>
+  <data name="Enter Allowance Name" xml:space="preserve">
+    <value>دخول بدل اسم </value>
+  </data>
+  <data name="Enter Claim Name" xml:space="preserve">
+    <value>أدخل اسم المطالبة</value>
+  </data>
+  <data name="Enter Claim Value" xml:space="preserve">
+    <value>دخول المطالبة القيمة</value>
+  </data>
+  <data name="Enter Deduction Name" xml:space="preserve">
+    <value>أدخل اسم خصم </value>
+  </data>
+  <data name="Enter Duration" xml:space="preserve">
+    <value>أدخل المدة</value>
+  </data>
+  <data name="Enter Employee Name" xml:space="preserve">
+    <value>ادخل اسم الموظف</value>
+  </data>
+  <data name="Enter Expected End Date" xml:space="preserve">
+    <value>أدخل تاريخ الانتهاء المتوقع</value>
+  </data>
+  <data name="Enter Interest" xml:space="preserve">
+    <value>ادخل الفائدة</value>
+  </data>
+  <data name="Enter Loan Amount" xml:space="preserve">
+    <value>أدخل مبلغ القرض</value>
+  </data>
+  <data name="Enter Loan Name" xml:space="preserve">
+    <value>أدخل اسم قرض</value>
+  </data>
+  <data name="Enter Penalty Name" xml:space="preserve">
+    <value>أدخل اسم من ضربة جزاء</value>
+  </data>
+  <data name="Enter Penalty Value" xml:space="preserve">
+    <value>دخول عقوبة القيمة</value>
+  </data>
+  <data name="Enter Project Name" xml:space="preserve">
+    <value>أدخل اسم المشروع</value>
+  </data>
+  <data name="Enter Project Title" xml:space="preserve">
+    <value>أدخل عنوان المشروع</value>
+  </data>
+  <data name="Enter Project Type" xml:space="preserve">
+    <value>أدخل نوع المشروع</value>
+  </data>
+  <data name="Enter Start Date" xml:space="preserve">
+    <value>أدخل تاريخ البدء</value>
+  </data>
+  <data name="Enter Year" xml:space="preserve">
+    <value>ادخل السنة</value>
+  </data>
+  <data name="Expected End Date Is Not Valid" xml:space="preserve">
+    <value>يتوقع نهاية التاريخ غير صالح</value>
+  </data>
+  <data name="Generate Payroll Successfully" xml:space="preserve">
+    <value>توليد الرواتب بنجاح</value>
+  </data>
+  <data name="Insert Calculation Value" xml:space="preserve">
+    <value>إدراج حساب القيمة</value>
+  </data>
+  <data name="Loan Is already Approved,You Can Not Update" xml:space="preserve">
+    <value>قرض تمت الموافقة بالفعل، لا يمكنك تحديث</value>
+  </data>
+  <data name="Location Name Already Exists" xml:space="preserve">
+    <value>موقع الاسم موجود مسبقا</value>
+  </data>
+  <data name="Payroll Already Posted Before Now You Can Not Generate Again for EmployeeCode" xml:space="preserve">
+    <value>الرواتب أرسلت بالفعل قبل الآن يمكنك غير إنشاء مرة أخرى لقانون الموظفين</value>
+  </data>
+  <data name="Payroll is RollBack successfully" xml:space="preserve">
+    <value>الرواتب هو الاستعادة بنجاح</value>
+  </data>
+  <data name="Payroll Month and year should be greater than or equal to Date Of Joining for EmployeeCode" xml:space="preserve">
+    <value>الرواتب الشهر والسنة ينبغي أن يكون أكبر من أو يساوي تاريخ الانضمام للكود موظف</value>
+  </data>
+  <data name="Payroll Not Generated" xml:space="preserve">
+    <value>الرواتب لم تولد</value>
+  </data>
+  <data name="Payroll Posted For This Month and Year" xml:space="preserve">
+    <value>أرسلت كشوف المرتبات لهذا الشهر والسنة</value>
+  </data>
+  <data name="Payroll Posted Successfully" xml:space="preserve">
+    <value>الرواتب أرسلت بنجاح</value>
+  </data>
+  <data name="Penalty Month and Year Should be Greater than Last Posted Month And Year" xml:space="preserve">
+    <value>عقوبة الشهر والسنة ينبغي أن يكون أكبر من شهر والنشر اخر السنة</value>
+  </data>
+  <data name="Penalty Month and Year Should be Greater than Last Posted Month And Year For Employee Code" xml:space="preserve">
+    <value>عقوبة الشهر والسنة ينبغي أن يكون أكبر من شهر وسنة النشر اخر للكود موظف</value>
+  </data>
+  <data name="Penalty Month and Year Should be Greater than or Equal to Date Of Joining" xml:space="preserve">
+    <value>عقوبة الشهر والسنة ينبغي أن يكون أكبر من أو يساوي تاريخ الانضمام</value>
+  </data>
+  <data name="Penalty Month and Year Should be Greater than or Equal to Date Of Joining For Employee Code" xml:space="preserve">
+    <value>عقوبة الشهر والسنة ينبغي أن يكون أكبر من أو يساوي تاريخ الانضمام للكود موظف</value>
+  </data>
+  <data name="Penalty Value Cannot be Greater Than Actual Value" xml:space="preserve">
+    <value>عقوبة القيمة لا يمكن أن يكون أكبر من القيمة الفعلية</value>
+  </data>
+  <data name="Please Post Generated PayRoll First for EmployeeCode" xml:space="preserve">
+    <value>يرجى مشاركة منشأ المرتبات الأول لكود موظف</value>
+  </data>
+  <data name="Please Select Record" xml:space="preserve">
+    <value>الرجاء الإختيار سجل </value>
+  </data>
+  <data name="Press Tab Key for GrossAmount" xml:space="preserve">
+    <value>الصحافة تبويب المبلغ الإجمالي الرئيسية ل</value>
+  </data>
+  <data name="Record  Not Deleted" xml:space="preserve">
+    <value>سجل غير المحذوفة </value>
+  </data>
+  <data name="Record  Not Updated" xml:space="preserve">
+    <value>سجل غير التحديث </value>
+  </data>
+  <data name="Record Activated" xml:space="preserve">
+    <value>سجل المنشط </value>
+  </data>
+  <data name="Record Deleted" xml:space="preserve">
+    <value>سجل محذوف</value>
+  </data>
+  <data name="Record Not Activated" xml:space="preserve">
+    <value>سجل غير المنشط</value>
+  </data>
+  <data name="Record Not found" xml:space="preserve">
+    <value>لم يتم العثور على السجل</value>
+  </data>
+  <data name="Record Not Saved" xml:space="preserve">
+    <value>سجل غير المحفوظة </value>
+  </data>
+  <data name="Record Saved" xml:space="preserve">
+    <value>تم الحفظ سجل</value>
+  </data>
+  <data name="Record Updated" xml:space="preserve">
+    <value>سجل المحدث</value>
+  </data>
+  <data name="Select Allowance or Deduction" xml:space="preserve">
+    <value>تحديد بدل أو خصم</value>
+  </data>
+  <data name="Select Employee First" xml:space="preserve">
+    <value>حدد الموظف الأول</value>
+  </data>
+  <data name="Select Group First" xml:space="preserve">
+    <value>حدد المجموعة الأولى</value>
+  </data>
+  <data name="Select Month" xml:space="preserve">
+    <value>اختر الشهر</value>
+  </data>
+  <data name="Select Type" xml:space="preserve">
+    <value>حدد نوع</value>
+  </data>
+  <data name="Select Value Type" xml:space="preserve">
+    <value>حدد نوع القيمة</value>
+  </data>
+  <data name="Start Date Is Not Valid" xml:space="preserve">
+    <value>تاريخ البدء غير صالح</value>
+  </data>
+  <data name="Super admin Cannot Request For Claim Or Login User not in Payroll" xml:space="preserve">
+    <value>سوبر مشرف لا يمكن طلب للمطالبة أو دخول المستخدم لا في الرواتب</value>
+  </data>
+  <data name="Super admin Cannot Request For Loan Or Login User not in Payroll" xml:space="preserve">
+    <value>سوبر مشرف لا يمكن طلب القرض أو دخول المستخدم لا في الرواتب</value>
+  </data>
+  <data name="This Allowances In Use,You Can Not Delete" xml:space="preserve">
+    <value>هذه البدلات في استخدام، لا يمكنك حذف </value>
+  </data>
+  <data name="This Deduction In Use,You Can Not Delete" xml:space="preserve">
+    <value>هذا الخصم في استخدام، لا يمكنك حذف </value>
+  </data>
+  <data name="You Can Not Adjust The Amount" xml:space="preserve">
+    <value>لا يمكنك ضبط كمية</value>
+  </data>
+  <data name="You Cannot Request For Claim First Set Approval For Claim On Approval Master" xml:space="preserve">
+    <value>لا يمكنك طلب لامتلاك مجموعة الأولى الموافقة على المطالبة عند القبول ماجستير</value>
+  </data>
+  <data name="You Cannot Request For Loan First Set Approval For loan on Approval Master" xml:space="preserve">
+    <value>لا يمكنك طلب للاعارة مجموعة الأولى الموافقة على القرض على الموافقة ماستر</value>
+  </data>
+  <data name="You have Not Posted Month and Year for Rollback" xml:space="preserve">
+    <value>أنت لم تنشر الشهر والسنة للالاستعادة</value>
+  </data>
+  <data name="Employees Are Not Exists In Selected Groups" xml:space="preserve">
+    <value>الموظفون هم غير موجود في مجموعات مختارة </value>
+  </data>
+  <data name="Log Already Posted For Employee" xml:space="preserve">
+    <value>سجل أرسلت بالفعل موظف </value>
+  </data>
+  <data name="Log Already Posted For Selected Group Employee" xml:space="preserve">
+    <value>سجل أرسلت بالفعل مجموعة مختارة موظف </value>
+  </data>
+  <data name="Log Has Not Processed So You Can Not Log Post For Employee" xml:space="preserve">
+    <value>سجل لم المجهزة لذلك لا يمكنك تسجيل مشاركة لموظف </value>
+  </data>
+  <data name="Log Posted Successfully" xml:space="preserve">
+    <value>تسجيل أرسلت بنجاح </value>
+  </data>
+  <data name="Log Posted Successfully For Employees" xml:space="preserve">
+    <value>سجل أرسلت بنجاح للموظفين </value>
+  </data>
+  <data name="Log Processed" xml:space="preserve">
+    <value>تسجيل المصنعة </value>
+  </data>
+  <data name="Please Enter Year" xml:space="preserve">
+    <value>يرجى إدخال سنة </value>
+  </data>
+  <data name="Please Fill Value" xml:space="preserve">
+    <value>يرجى ملء القيمة</value>
+  </data>
+  <data name="Please Select Month" xml:space="preserve">
+    <value>الرجاء اختر الشهر </value>
+  </data>
+  <data name="Select Atleast One Employee" xml:space="preserve">
+    <value>تحديد أتلست موظف واحد </value>
+  </data>
+  <data name="Select Company" xml:space="preserve">
+    <value>اختر الشركة </value>
+  </data>
+  <data name="Select Group First1" xml:space="preserve">
+    <value>تحديد المجموعة الأولى </value>
+  </data>
+  <data name="You May Not Proceed Before Joining Date of Employee" xml:space="preserve">
+    <value>قد لا انتقل قبل تاريخ الالتحاق بالعمل الموظف </value>
+  </data>
+  <data name="Nationality is in Use ,you cannot delete this" xml:space="preserve">
+    <value>الجنسية قيد الاستخدام، لا يمكنك حذف هذا </value>
+  </data>
+  <data name="Nationality Name Already Exists - Go to Bin Tab" xml:space="preserve">
+    <value>الاسم الجنسية موجود بالفعل - الذهاب إلى تبويب بن</value>
+  </data>
+  <data name="Nationality Name is Already Exists" xml:space="preserve">
+    <value>الاسم الجنسية هو موجود بالفعل </value>
+  </data>
+  <data name="Please Enter Nationality Name" xml:space="preserve">
+    <value>الرجاء أدخل اسم الجنسية </value>
+  </data>
+  <data name="Please Enter Qualification Name" xml:space="preserve">
+    <value>الرجاء أدخل اسم التأهيل </value>
+  </data>
+  <data name="Please Enter Religion Name" xml:space="preserve">
+    <value>يرجى إدخال اسم الدين </value>
+  </data>
+  <data name="Qualification Name is Already Exists" xml:space="preserve">
+    <value>اسم المؤهل هو موجود بالفعل </value>
+  </data>
+  <data name="Qualification Name is Already Exists - Go to Bin Tab" xml:space="preserve">
+    <value>اسم المؤهل هو موجود بالفعل - الذهاب إلى تبويب بن</value>
+  </data>
+  <data name="Record is in Use ,you cannot delete this" xml:space="preserve">
+    <value>سجل قيد الاستخدام، لا يمكنك حذف هذا </value>
+  </data>
+  <data name="Religion is in Use ,you cannot delete this" xml:space="preserve">
+    <value>الدين هو قيد الاستخدام، لا يمكنك حذف هذا </value>
+  </data>
+  <data name="Religion Name Already Exists - Go to Bin Tab" xml:space="preserve">
+    <value>الدين الاسم بالفعل - الذهاب إلى تبويب بن</value>
+  </data>
+  <data name="Religion Name is Already Exists" xml:space="preserve">
+    <value>الدين هو اسم موجود بالفعل </value>
+  </data>
+  <data name="Date Not In Proper Format" xml:space="preserve">
+    <value>التاريخ غير في شكل مناسب </value>
+  </data>
+  <data name="From Date Required" xml:space="preserve">
+    <value>من التسجيل مطلوب </value>
+  </data>
+  <data name="Please Select Day" xml:space="preserve">
+    <value>الرجاء اختيار اليوم </value>
+  </data>
+  <data name="Please Select Shift" xml:space="preserve">
+    <value>الرجاء الإختيار التحول </value>
+  </data>
+  <data name="Please Select Timetable" xml:space="preserve">
+    <value>الرجاء الإختيار الجدول الزمني </value>
+  </data>
+  <data name="Shift Not Defined" xml:space="preserve">
+    <value>تحول غير معرف </value>
+  </data>
+  <data name="Shift Overlapping" xml:space="preserve">
+    <value>تحويل المتراكبة</value>
+  </data>
+  <data name="Time Overlaped" xml:space="preserve">
+    <value>الوقت متراكب </value>
+  </data>
+  <data name="To Date Required" xml:space="preserve">
+    <value>التسجيل مطلوب ل </value>
+  </data>
+  <data name="To Date should be Greater" xml:space="preserve">
+    <value>إلى التسجيل يجب أن يكون الكبرى </value>
+  </data>
+  <data name="Country Code is Already Exists" xml:space="preserve">
+    <value>رمز البلد هو موجود بالفعل</value>
+  </data>
+  <data name="Country Code is Already Exists in Bin Section" xml:space="preserve">
+    <value>رمز البلد هو موجود بالفعل في القسم بن</value>
+  </data>
+  <data name="Country is not Assigned for this Currency" xml:space="preserve">
+    <value>لم يتم تعيين البلاد لهذه العملة</value>
+  </data>
+  <data name="Country Name Already Exists in Bin Section" xml:space="preserve">
+    <value>اسم بلد موجود بالفعل في القسم بن </value>
+  </data>
+  <data name="Country Name is Already Exists" xml:space="preserve">
+    <value>اسم البلاد هو موجود بالفعل </value>
+  </data>
+  <data name="Currency Code is Already Exists" xml:space="preserve">
+    <value>رمز العملة هو موجود بالفعل </value>
+  </data>
+  <data name="Currency Name Already Exists in Bin Section" xml:space="preserve">
+    <value>اسم العملة موجود بالفعل في القسم بن</value>
+  </data>
+  <data name="Currency Name is Already Exists" xml:space="preserve">
+    <value>اسم العملة هو موجود بالفعل </value>
+  </data>
+  <data name="Department Code Already Exists in Bin Section" xml:space="preserve">
+    <value>كود قسم موجود بالفعل في القسم بن </value>
+  </data>
+  <data name="Department Code is Already Exists" xml:space="preserve">
+    <value>كود قسم هو موجود بالفعل </value>
+  </data>
+  <data name="Department Name Already Exists in Bin Section" xml:space="preserve">
+    <value>اسم قسم موجود بالفعل في القسم بن </value>
+  </data>
+  <data name="Department Name is Already Exists" xml:space="preserve">
+    <value>اسم القسم هو موجود بالفعل </value>
+  </data>
+  <data name="Enter Country Code" xml:space="preserve">
+    <value>إدخال رمز البلد </value>
+  </data>
+  <data name="Enter Country Name" xml:space="preserve">
+    <value>أدخل اسم البلد </value>
+  </data>
+  <data name="Enter Currency Name" xml:space="preserve">
+    <value>أدخل اسم العملة </value>
+  </data>
+  <data name="Enter Currency Value" xml:space="preserve">
+    <value>أدخل قيمة العملات </value>
+  </data>
+  <data name="Enter Department Code" xml:space="preserve">
+    <value>أدخل رمز القسم </value>
+  </data>
+  <data name="Enter Department Name" xml:space="preserve">
+    <value>أدخل اسم الإدارة </value>
+  </data>
+  <data name="Enter Numeric Value Only" xml:space="preserve">
+    <value>إدخال قيمة رقمية فقط </value>
+  </data>
+  <data name="Select Country From List" xml:space="preserve">
+    <value>اختيار البلد من قائمة </value>
+  </data>
+  <data name="Account Group Id Already Exits" xml:space="preserve">
+    <value>حساب المجموعة رقم بالفعل مخارج </value>
+  </data>
+  <data name="Account Name is Already Exists!" xml:space="preserve">
+    <value>اسم الحساب غير موجود مسبقا! </value>
+  </data>
+  <data name="Account No. Already Exits" xml:space="preserve">
+    <value>رقم حساب بالفعل مخارج </value>
+  </data>
+  <data name="Add at least one product" xml:space="preserve">
+    <value>إضافة منتج واحد على الأقل </value>
+  </data>
+  <data name="Add at least one Product1" xml:space="preserve">
+    <value>إضافة واحد على الأقل المنتج </value>
+  </data>
+  <data name="Add Atleast One Product" xml:space="preserve">
+    <value>إضافة أتلست المنتج احدة </value>
+  </data>
+  <data name="All Sales price and Description should not be blank" xml:space="preserve">
+    <value>لا ينبغي أن يكون كل سعر المبيعات والوصف فارغة </value>
+  </data>
+  <data name="Already Exist Aternate Id" xml:space="preserve">
+    <value>بالفعل موجود المناوب رقم</value>
+  </data>
+  <data name="Alternate Id Already Exists" xml:space="preserve">
+    <value>رقم بديل موجود بالفعل</value>
+  </data>
+  <data name="Brand Name Already Exists" xml:space="preserve">
+    <value>اسم العلامة التجارية موجودة بالفعل </value>
+  </data>
+  <data name="Brand Name Already Exists - Go to Bin Tab" xml:space="preserve">
+    <value>اسم العلامة التجارية موجود بالفعل - الذهاب إلى تبويب بن </value>
+  </data>
+  <data name="Can not Delete,It has Posted" xml:space="preserve">
+    <value>لا يمكن حذف، وقد أرسلت و </value>
+  </data>
+  <data name="Can not Edit,It has Posted" xml:space="preserve">
+    <value>لا يمكن تحرير، وقد أرسلت و </value>
+  </data>
+  <data name="Category Name Already Exists" xml:space="preserve">
+    <value>اسم التصنيف موجود مسبقا </value>
+  </data>
+  <data name="Category Name Already Exists - Go to Bin Tab" xml:space="preserve">
+    <value>اسم التصنيف موجود بالفعل - الذهاب إلى تبويب بن </value>
+  </data>
+  <data name="Choose in Suggestion Only" xml:space="preserve">
+    <value>اختيار في اقتراح فقط </value>
+  </data>
+  <data name="Choose In Suggestions Only" xml:space="preserve">
+    <value>اختيار واقتراحات فقط </value>
+  </data>
+  <data name="Choose Record In Inquiry Section For Create Quotation" xml:space="preserve">
+    <value>اختيار سجل في القسم رسالتك لخلق الاقتباس </value>
+  </data>
+  <data name="Currency Required On Company Level" xml:space="preserve">
+    <value>العملة المطلوبة على مستوى الشركة </value>
+  </data>
+  <data name="Customer Choose In Suggestion Only" xml:space="preserve">
+    <value>اختيار العملاء في اقتراح فقط </value>
+  </data>
+  <data name="Customer id is not found with customer name" xml:space="preserve">
+    <value>لم يتم العثور على هوية العميل مع اسم العميل </value>
+  </data>
+  <data name="Do not transaction ,Stock Work is going On in" xml:space="preserve">
+    <value>لا المعاملات، المالية العمل يجري في </value>
+  </data>
+  <data name="Don't transaction ,Stock Work is going On..." xml:space="preserve">
+    <value>لا المعاملات، المالية العمل يجري في ... </value>
+  </data>
+  <data name="Don't transaction ,Stock Work is going On...1" xml:space="preserve">
+    <value>لا المعاملات، المالية العمل يجري في ... </value>
+  </data>
+  <data name="Ener Unit Cost" xml:space="preserve">
+    <value>الموفرة للطاقة ال تكلفة الوحدة </value>
+  </data>
+  <data name="Enter  Sales Tender Date in format" xml:space="preserve">
+    <value>أدخل المبيعات العطاء التسجيل في شكل </value>
+  </data>
+  <data name="Enter Account Group Id" xml:space="preserve">
+    <value>أدخل رقم حساب المجموعة </value>
+  </data>
+  <data name="Enter Account Name" xml:space="preserve">
+    <value>أدخل اسم الحساب </value>
+  </data>
+  <data name="Enter Account No" xml:space="preserve">
+    <value>أدخل رقم الحساب </value>
+  </data>
+  <data name="Enter Account No." xml:space="preserve">
+    <value>أدخل رقم الحساب </value>
+  </data>
+  <data name="Enter Address Name" xml:space="preserve">
+    <value>أدخل الاسم العنوان </value>
+  </data>
+  <data name="Enter Brand Name" xml:space="preserve">
+    <value>أدخل اسم العلامة التجارية </value>
+  </data>
+  <data name="Enter buying Priority" xml:space="preserve">
+    <value>أدخل شراء الأولوية </value>
+  </data>
+  <data name="Enter Category Name" xml:space="preserve">
+    <value>إدخال اسم التصنيف </value>
+  </data>
+  <data name="Enter Contact Name" xml:space="preserve">
+    <value>أدخل اسم الاتصال </value>
+  </data>
+  <data name="Enter Customer Name" xml:space="preserve">
+    <value>أدخل اسم العميل </value>
+  </data>
+  <data name="Enter Customer Name in suggestion Only" xml:space="preserve">
+    <value>أدخل اسم العميل في اقتراح فقط </value>
+  </data>
+  <data name="Enter Date" xml:space="preserve">
+    <value>دخول التسجيل </value>
+  </data>
+  <data name="Enter Delievery Date in format" xml:space="preserve">
+    <value>ادخل تاريخ التسليم في شكل</value>
+  </data>
+  <data name="Enter Department" xml:space="preserve">
+    <value>أدخل زارة </value>
+  </data>
+  <data name="Enter Description" xml:space="preserve">
+    <value>أدخل الوصف </value>
+  </data>
+  <data name="Enter Description1" xml:space="preserve">
+    <value>أدخل الوصف </value>
+  </data>
+  <data name="Enter Detail" xml:space="preserve">
+    <value>إدخال التفاصيل </value>
+  </data>
+  <data name="Enter Employee" xml:space="preserve">
+    <value>دخول الموظفين </value>
+  </data>
+  <data name="Enter Estimated Delievery Date" xml:space="preserve">
+    <value>أدخل يقدر تاريخ التسليم</value>
+  </data>
+  <data name="Enter Estimated Delievery Date Date in format" xml:space="preserve">
+    <value>أدخل يقدر تاريخ التسليم التسجيل في شكل</value>
+  </data>
+  <data name="Enter Expected Delievery Date" xml:space="preserve">
+    <value>ادخل تاريخ التسليم المتوقع</value>
+  </data>
+  <data name="Enter Expenses Charges" xml:space="preserve">
+    <value>أدخل مصروفات رسوم </value>
+  </data>
+  <data name="Enter Expenses Name" xml:space="preserve">
+    <value>أدخل اسم المصاريف </value>
+  </data>
+  <data name="Enter Finance No." xml:space="preserve">
+    <value>أدخل المالية رقم </value>
+  </data>
+  <data name="Enter From Date" xml:space="preserve">
+    <value>أدخل من التسجيل </value>
+  </data>
+  <data name="Enter From Date in format" xml:space="preserve">
+    <value>أدخل من التسجيل في شكل </value>
+  </data>
+  <data name="Enter Handled Employee Name" xml:space="preserve">
+    <value>أدخل المتداولة اسم الموظف </value>
+  </data>
+  <data name="Enter Inquiry Date in format" xml:space="preserve">
+    <value>أدخل رسالتك التسجيل في شكل </value>
+  </data>
+  <data name="Enter Inquiry No." xml:space="preserve">
+    <value>أدخل رسالتك رقم </value>
+  </data>
+  <data name="Enter Invoice Date" xml:space="preserve">
+    <value>أدخل تاريخ الفاتورة </value>
+  </data>
+  <data name="Enter Invoice Date in format" xml:space="preserve">
+    <value>أدخل تاريخ الفاتورة في شكل </value>
+  </data>
+  <data name="Enter Invoice No" xml:space="preserve">
+    <value>أدخل رقم الفاتورة </value>
+  </data>
+  <data name="Enter Invoice No Is Invalid, Choose In Suggestion Only" xml:space="preserve">
+    <value>أدخل رقم الفاتورة غير صحيح، اختر في اقتراح فقط </value>
+  </data>
+  <data name="Enter Location Name" xml:space="preserve">
+    <value>أدخل اسم الموقع </value>
+  </data>
+  <data name="Enter Model Name" xml:space="preserve">
+    <value>أدخل اسم الموديل </value>
+  </data>
+  <data name="Enter Model No" xml:space="preserve">
+    <value>إدخال نموذج رقم </value>
+  </data>
+  <data name="Enter Model No Or Model Name" xml:space="preserve">
+    <value>أدخل اسم نموذج رقم أو نموذج </value>
+  </data>
+  <data name="Enter Nature Group Id" xml:space="preserve">
+    <value>أدخل الطبيعة المجموعة رقم </value>
+  </data>
+  <data name="Enter Net Price" xml:space="preserve">
+    <value>أدخل صافي الأسعار</value>
+  </data>
+  <data name="Enter Option" xml:space="preserve">
+    <value>إدخال الخيار </value>
+  </data>
+  <data name="Enter Option Category" xml:space="preserve">
+    <value>إدخال الخيار الفئة </value>
+  </data>
+  <data name="Enter Option Category Name" xml:space="preserve">
+    <value>إدخال الخيار اسم التصنيف </value>
+  </data>
+  <data name="Enter Option Short Description" xml:space="preserve">
+    <value>إدخال الخيار وصف قصير </value>
+  </data>
+  <data name="Enter Order Close Date" xml:space="preserve">
+    <value>أدخل بالدفع إغلاق التسجيل </value>
+  </data>
+  <data name="Enter Order Close Date in format" xml:space="preserve">
+    <value>أدخل بالدفع إغلاق التسجيل في شكل </value>
+  </data>
+  <data name="Enter Order Quantity" xml:space="preserve">
+    <value>أدخل للطلب الكمية </value>
+  </data>
+  <data name="Enter Parameter Value" xml:space="preserve">
+    <value>إدخال قيمة معلمة </value>
+  </data>
+  <data name="Enter Product" xml:space="preserve">
+    <value>إدخال المنتج </value>
+  </data>
+  <data name="Enter Product Country" xml:space="preserve">
+    <value>إدخال المنتجات البلد </value>
+  </data>
+  <data name="Enter Product Details" xml:space="preserve">
+    <value>أدخل تفاصيل المنتج </value>
+  </data>
+  <data name="Enter Product Id" xml:space="preserve">
+    <value>أدخل رقم المنتج </value>
+  </data>
+  <data name="Enter Product Name" xml:space="preserve">
+    <value>أدخل اسم المنتج </value>
+  </data>
+  <data name="Enter Product Quantity" xml:space="preserve">
+    <value>أدخل الكمية المنتج </value>
+  </data>
+  <data name="Enter Product Unit" xml:space="preserve">
+    <value>أدخل وحدة المنتج </value>
+  </data>
+  <data name="Enter Purchase Inquiry Date" xml:space="preserve">
+    <value>أدخل شراء رسالتك التسجيل </value>
+  </data>
+  <data name="Enter Purchase Inquiry No." xml:space="preserve">
+    <value>أدخل رسالتك شراء رقم </value>
+  </data>
+  <data name="Enter Purchase Invoice No." xml:space="preserve">
+    <value>أدخل رقم فاتورة الشراء </value>
+  </data>
+  <data name="Enter Purchase Order Date" xml:space="preserve">
+    <value>إدخال أمر شراء التسجيل </value>
+  </data>
+  <data name="Enter Purchase order Date in format" xml:space="preserve">
+    <value>إدخال أمر شراء التسجيل في شكل </value>
+  </data>
+  <data name="Enter Purchase Order No" xml:space="preserve">
+    <value>إدخال أمر الشراء لا </value>
+  </data>
+  <data name="Enter Purchase Quotation Date" xml:space="preserve">
+    <value>أدخل شراء تسعيرة التسجيل </value>
+  </data>
+  <data name="Enter Purchase Quotation Date in format" xml:space="preserve">
+    <value>أدخل تسعيرة شراء التسجيل في شكل</value>
+  </data>
+  <data name="Enter Purchase Quotation No." xml:space="preserve">
+    <value>أدخل رقم تسعيرة شراء </value>
+  </data>
+  <data name="Enter Quantity" xml:space="preserve">
+    <value>أدخل الكمية </value>
+  </data>
+  <data name="Enter Quantity1" xml:space="preserve">
+    <value>أدخل الكمية</value>
+  </data>
+  <data name="Enter Rack Name" xml:space="preserve">
+    <value>أدخل اسم حامل </value>
+  </data>
+  <data name="Enter Received Employee Name" xml:space="preserve">
+    <value>تلقى أدخل اسم الموظف </value>
+  </data>
+  <data name="Enter Remark" xml:space="preserve">
+    <value>أدخل الملاحظة </value>
+  </data>
+  <data name="Enter Remarks" xml:space="preserve">
+    <value>إدخال ملاحظات </value>
+  </data>
+  <data name="Enter Reorder Level" xml:space="preserve">
+    <value>أدخل إعادة ترتيب مستوى </value>
+  </data>
+  <data name="Enter Request Date" xml:space="preserve">
+    <value>ادخل تاريخ طلب </value>
+  </data>
+  <data name="Enter Request Date in format" xml:space="preserve">
+    <value>ادخل تاريخ طلب في شكل </value>
+  </data>
+  <data name="Enter Request No." xml:space="preserve">
+    <value>أدخل طلب رقم </value>
+  </data>
+  <data name="Enter Required Quantity" xml:space="preserve">
+    <value>أدخل الكمية المطلوبة </value>
+  </data>
+  <data name="Enter Return No." xml:space="preserve">
+    <value>أدخل رقم العودة </value>
+  </data>
+  <data name="Enter Sales Inquiry date" xml:space="preserve">
+    <value>أدخل التاريخ المبيعات رسالتك </value>
+  </data>
+  <data name="Enter Sales Inquiry Date in format" xml:space="preserve">
+    <value>أدخل المبيعات رسالتك التسجيل في شكل </value>
+  </data>
+  <data name="Enter Sales Invoice Date" xml:space="preserve">
+    <value>إدخال فاتورة المبيعات التسجيل </value>
+  </data>
+  <data name="Enter Sales Invoice Date in format" xml:space="preserve">
+    <value>إدخال فاتورة المبيعات التسجيل في شكل </value>
+  </data>
+  <data name="Enter Sales Invoice No." xml:space="preserve">
+    <value>أدخل رقم فاتورة المبيعات </value>
+  </data>
+  <data name="Enter Sales Order Date" xml:space="preserve">
+    <value>أدخل المبيعات الترتيب التاريخ </value>
+  </data>
+  <data name="Enter Sales Order Date in format" xml:space="preserve">
+    <value>أدخل المبيعات الترتيب التاريخ في شكل </value>
+  </data>
+  <data name="Enter Sales Order No." xml:space="preserve">
+    <value>أدخل المبيعات الأمر رقم </value>
+  </data>
+  <data name="Enter Sales Person" xml:space="preserve">
+    <value>إدخال شخص المبيعات </value>
+  </data>
+  <data name="Enter Sales Price" xml:space="preserve">
+    <value>أدخل المبيعات السعر </value>
+  </data>
+  <data name="Enter Sales Quantity" xml:space="preserve">
+    <value>أدخل الكمية المبيعات </value>
+  </data>
+  <data name="Enter Sales Quotation Date" xml:space="preserve">
+    <value>أدخل المبيعات تسعيرة التسجيل </value>
+  </data>
+  <data name="Enter Sales Quotation Date in format" xml:space="preserve">
+    <value>أدخل المبيعات تاريخ الاقتباس في الشكل </value>
+  </data>
+  <data name="Enter Sales Quotation No." xml:space="preserve">
+    <value>أدخل رقم المبيعات الاقتباس </value>
+  </data>
+  <data name="Enter Sales Return Date" xml:space="preserve">
+    <value>أدخل المبيعات تاريخ العودة </value>
+  </data>
+  <data name="Enter Sales Return Date in format" xml:space="preserve">
+    <value>أدخل المبيعات تاريخ العودة في شكل </value>
+  </data>
+  <data name="Enter Sales Return No." xml:space="preserve">
+    <value>أدخل رقم المبيعات العودة </value>
+  </data>
+  <data name="Enter Sales Tender date" xml:space="preserve">
+    <value>أدخل التاريخ المبيعات العطاء </value>
+  </data>
+  <data name="Enter Shipping Address" xml:space="preserve">
+    <value>أدخل عنوان الشحن </value>
+  </data>
+  <data name="Enter Start Date in format" xml:space="preserve">
+    <value>أدخل التاريخ بالتنسيق ابدأ </value>
+  </data>
+  <data name="Enter Supplier Invoice Date in format" xml:space="preserve">
+    <value>إدخال فاتورة المورد التسجيل في شكل </value>
+  </data>
+  <data name="Enter Supplier Invoice No" xml:space="preserve">
+    <value>إدخال فاتورة المورد لا </value>
+  </data>
+  <data name="Enter Supplier Name" xml:space="preserve">
+    <value>أدخل اسم المورد </value>
+  </data>
+  <data name="Enter To Date" xml:space="preserve">
+    <value>أدخل إلى تاريخ </value>
+  </data>
+  <data name="Enter To Date in format" xml:space="preserve">
+    <value>أدخل إلى تاريخ في شكل </value>
+  </data>
+  <data name="Enter To Location" xml:space="preserve">
+    <value>أدخل إلى الموقع </value>
+  </data>
+  <data name="Enter Transfer Date in format" xml:space="preserve">
+    <value>ادخل تاريخ التحويل في شكل </value>
+  </data>
+  <data name="Enter Transfer No." xml:space="preserve">
+    <value>أدخل نقل رقم </value>
+  </data>
+  <data name="Enter Unit Cost" xml:space="preserve">
+    <value>أدخل وحدة التكلفة </value>
+  </data>
+  <data name="Enter Unit Name" xml:space="preserve">
+    <value>أدخل اسم وحدة. </value>
+  </data>
+  <data name="Enter Unit Price" xml:space="preserve">
+    <value>أدخل سعر الوحدة </value>
+  </data>
+  <data name="Enter Voucher Date" xml:space="preserve">
+    <value>أدخل قسيمة التسجيل </value>
+  </data>
+  <data name="Enter Voucher Date in Format" xml:space="preserve">
+    <value>أدخل قسيمة التسجيل في تنسيق </value>
+  </data>
+  <data name="Enter Voucher Date in format1" xml:space="preserve">
+    <value>أدخل قسيمة التسجيل في شكل </value>
+  </data>
+  <data name="Enter Voucher Date." xml:space="preserve">
+    <value>أدخل قسيمة التسجيل. </value>
+  </data>
+  <data name="Enter Voucher No." xml:space="preserve">
+    <value>أدخل رقم القسيمة </value>
+  </data>
+  <data name="Entered Quantity Is Greater Then Received Quantity" xml:space="preserve">
+    <value>دخلت كمية أكبر ثم استقبل الكمية </value>
+  </data>
+  <data name="Expenses Name Already Exists" xml:space="preserve">
+    <value>نفقات الاسم موجود مسبقا </value>
+  </data>
+  <data name="Expenses Name Already Exists - Go to Bin Tab" xml:space="preserve">
+    <value>نفقات اسم موجود بالفعل - الذهاب إلى تبويب بن </value>
+  </data>
+  <data name="File is already exists!" xml:space="preserve">
+    <value>الملف موجود بالفعل! </value>
+  </data>
+  <data name="Fill Account Name" xml:space="preserve">
+    <value>ملء اسم الحساب </value>
+  </data>
+  <data name="Fill Customer Name" xml:space="preserve">
+    <value>ملء اسم العميل </value>
+  </data>
+  <data name="Fill Finance Code" xml:space="preserve">
+    <value>تعبئة التمويل كود </value>
+  </data>
+  <data name="Fill Group Name" xml:space="preserve">
+    <value>ملء اسم المجموعة </value>
+  </data>
+  <data name="Fill Name" xml:space="preserve">
+    <value>اسم ملء </value>
+  </data>
+  <data name="Fill Nature Of Account" xml:space="preserve">
+    <value>ملء طبيعة الحساب </value>
+  </data>
+  <data name="Fill Supplier Name" xml:space="preserve">
+    <value>ملء اسم المورد </value>
+  </data>
+  <data name="Finance No. Already Exits" xml:space="preserve">
+    <value>المالية رقم بالفعل مخارج </value>
+  </data>
+  <data name="Financial had Closed, So it cannot be Edited" xml:space="preserve">
+    <value>كان مالية مغلقة، لذلك لا يمكن تحريرها </value>
+  </data>
+  <data name="Financial Period cannot  be more than one Year." xml:space="preserve">
+    <value>الفترة المالية لا يمكن أن يكون أكثر من سنة واحدة. </value>
+  </data>
+  <data name="Financial Year For this Period Already Exists !" xml:space="preserve">
+    <value>السنة المالية لهذه الفترة موجود مسبقا! </value>
+  </data>
+  <data name="Financial Year is Closed, So it Cannot be Deleted" xml:space="preserve">
+    <value>السنة المالية غير مغلقة، لذلك لا يمكن المحذوفة </value>
+  </data>
+  <data name="First Choose Post Option To Forward." xml:space="preserve">
+    <value>أولا اختيار آخر خيار إلى الأمام. </value>
+  </data>
+  <data name="First Of All Post This Invoice" xml:space="preserve">
+    <value>أولا وقبل كل مشاركة هذه الفاتورة </value>
+  </data>
+  <data name="First of all select the product" xml:space="preserve">
+    <value>أولا حدد المنتج </value>
+  </data>
+  <data name="First Of All Stop Transaction" xml:space="preserve">
+    <value>أولا وقبل كل توقف عملية </value>
+  </data>
+  <data name="From Date Must Be Less then To Date" xml:space="preserve">
+    <value>من التسجيل يجب أن يكون أقل بعد ذلك إلى تاريخ</value>
+  </data>
+  <data name="Get Net Amount" xml:space="preserve">
+    <value>الحصول على صافي قيمة </value>
+  </data>
+  <data name="Inquiry is used in quotation , you can not delete this record" xml:space="preserve">
+    <value>يستخدم التحقيق في الاقتباس، لا يمكنك حذف هذا السجل </value>
+  </data>
+  <data name="Inquiry is used in quotation , you can not Edit this record" xml:space="preserve">
+    <value>يستخدم التحقيق في الاقتباس، لا يمكنك تحرير هذا السجل </value>
+  </data>
+  <data name="Inquiry No Already Exist" xml:space="preserve">
+    <value>رسالتك لا توجد بالفعل </value>
+  </data>
+  <data name="Invalid Location" xml:space="preserve">
+    <value>المكان غير صالح </value>
+  </data>
+  <data name="Invalid Part No" xml:space="preserve">
+    <value>صالح رقم الجزء </value>
+  </data>
+  <data name="Invalid Serial Number" xml:space="preserve">
+    <value>الرقم التسلسلي غير صالح </value>
+  </data>
+  <data name="Invalid Supplier Name" xml:space="preserve">
+    <value>اسم مورد غير صالح </value>
+  </data>
+  <data name="Model Name Already Exists" xml:space="preserve">
+    <value>اسم نموذج موجود بالفعل </value>
+  </data>
+  <data name="Model Name Already Exists :- Go to Bin Tab" xml:space="preserve">
+    <value>اسم نموذج موجود بالفعل: - الذهاب إلى تبويب بن </value>
+  </data>
+  <data name="Model No Already Exists" xml:space="preserve">
+    <value>نموذج رقم موجود بالفعل </value>
+  </data>
+  <data name="Model No Already Exists :- Go to Bin Tab" xml:space="preserve">
+    <value>نموذج رقم موجود بالفعل: - الذهاب إلى تبويب بن </value>
+  </data>
+  <data name="Nature Group Id Already Exits" xml:space="preserve">
+    <value>طبيعة المجموعة رقم يخرج بالفعل </value>
+  </data>
+  <data name="Nature Group Name Already Exists" xml:space="preserve">
+    <value>طبيعة اسم المجموعة موجود بالفعل </value>
+  </data>
+  <data name="No Account Found" xml:space="preserve">
+    <value>ليس لديك حساب موجود </value>
+  </data>
+  <data name="No Product available For Generate Sales Invoice" xml:space="preserve">
+    <value>لا المنتجات المتاحة لتوليد فاتورة المبيعات </value>
+  </data>
+  <data name="No Product available For Generate Sales Order" xml:space="preserve">
+    <value>لا المنتجات المتاحة لتوليد ترتيب المبيعات </value>
+  </data>
+  <data name="No Product Found" xml:space="preserve">
+    <value>لم يتم العثور على المنتج </value>
+  </data>
+  <data name="Option Category Already Exists" xml:space="preserve">
+    <value>الفئة الخيار موجود بالفعل </value>
+  </data>
+  <data name="Option Category Already Exists :- Go to Bin Tab" xml:space="preserve">
+    <value>الفئة الخيار موجود بالفعل: - الذهاب إلى تبويب بن </value>
+  </data>
+  <data name="Option Id Already Exists" xml:space="preserve">
+    <value>الخيار رقم موجود بالفعل </value>
+  </data>
+  <data name="Out quantity  should not be greater than request quantity" xml:space="preserve">
+    <value>من يجب أن لا تكون كمية أكبر من كمية الطلب </value>
+  </data>
+  <data name="Please Choose Account Name In Suggestions Only" xml:space="preserve">
+    <value>يرجى اختيار اسم الحساب واقتراحات فقط </value>
+  </data>
+  <data name="Please Enter Account Group" xml:space="preserve">
+    <value>يرجى إدخال حساب المجموعة </value>
+  </data>
+  <data name="Please Select at least one Record" xml:space="preserve">
+    <value>الرجاء الإختيار سجل واحد على الأقل </value>
+  </data>
+  <data name="Product already exists!" xml:space="preserve">
+    <value>منتج موجود بالفعل! </value>
+  </data>
+  <data name="Product Brand Name Already Exists" xml:space="preserve">
+    <value>المنتج اسم العلامة التجارية موجودة بالفعل </value>
+  </data>
+  <data name="Product Id Is Already Exits" xml:space="preserve">
+    <value>رقم المنتج هو بالفعل مخارج </value>
+  </data>
+  <data name="Product Id Is Already Exits :- Go To Bin Tab" xml:space="preserve">
+    <value>رقم المنتج هو بالفعل المخارج: - اذهب إلى بن تبويب </value>
+  </data>
+  <data name="Product is already exists" xml:space="preserve">
+    <value>المنتج هو موجود بالفعل </value>
+  </data>
+  <data name="Product is already exists!" xml:space="preserve">
+    <value>المنتج هو موجود بالفعل! </value>
+  </data>
+  <data name="Product Name Already Exists" xml:space="preserve">
+    <value>اسم المنتج موجود بالفعل </value>
+  </data>
+  <data name="Product Not Found" xml:space="preserve">
+    <value>المنتج غير موجود </value>
+  </data>
+  <data name="Purchase Inquiry No. Already Exits" xml:space="preserve">
+    <value>شراء رسالتك رقم بالفعل مخارج </value>
+  </data>
+  <data name="Purchase Invoice has Created,So this Record cannot be Deleted" xml:space="preserve">
+    <value>قد مكون شراء الفاتورة، لذلك لا يمكن أن يتم حذف هذا السجل </value>
+  </data>
+  <data name="Purchase Invoice has Created,So this Record cannot be Edited" xml:space="preserve">
+    <value>قد مكون شراء الفاتورة، لذلك لا يمكن تحرير هذا السجل </value>
+  </data>
+  <data name="Purchase Invoice No Already Exist" xml:space="preserve">
+    <value>شراء الفاتورة لا توجد بالفعل </value>
+  </data>
+  <data name="Purchase Invoice No Already Exist :- Go To Bin" xml:space="preserve">
+    <value>شراء الفاتورة لا موجود بالفعل: - اذهب إلى بن </value>
+  </data>
+  <data name="Purchase Order No. Already Exist" xml:space="preserve">
+    <value>طلب شراء رقم موجودة بالفعل</value>
+  </data>
+  <data name="Purchase Order No. Already Exist :- Go To Bin" xml:space="preserve">
+    <value>أمر الشراء لا موجود بالفعل: - اذهب إلى بن </value>
+  </data>
+  <data name="Purchase Return No. Already Exits" xml:space="preserve">
+    <value>شراء العودة رقم بالفعل مخارج </value>
+  </data>
+  <data name="Quotation is used in purchase order ,can not Delete this record" xml:space="preserve">
+    <value>يستخدم الاقتباس في أمر الشراء، لا يمكن حذف هذا السجل </value>
+  </data>
+  <data name="Quotation is used in purchase order ,can not edit this record" xml:space="preserve">
+    <value>يستخدم الاقتباس في أمر الشراء، لا يمكن تعديل هذا السجل</value>
+  </data>
+  <data name="Rack Name Already Exists" xml:space="preserve">
+    <value>اسم حامل موجود بالفعل </value>
+  </data>
+  <data name="Rack Name Already Exists - Go to Bin Tab" xml:space="preserve">
+    <value>اسم حامل موجود بالفعل - الذهاب إلى تبويب بن </value>
+  </data>
+  <data name="Record Activate" xml:space="preserve">
+    <value>سجل تنشيط </value>
+  </data>
+  <data name="Record Cannot be Deleted" xml:space="preserve">
+    <value>سجل لا يمكن حذف </value>
+  </data>
+  <data name="Record Delete" xml:space="preserve">
+    <value>سجل حذف </value>
+  </data>
+  <data name="Record Delete and Move Child" xml:space="preserve">
+    <value>سجل حذف ونقل الطفل </value>
+  </data>
+  <data name="Record Deleted Successfully" xml:space="preserve">
+    <value>سجل بنجاح المحذوفة </value>
+  </data>
+  <data name="Record has Posted,Can not be update" xml:space="preserve">
+    <value>وقد سجل الإعلان عنها، لا يمكن أن يكون التحديث </value>
+  </data>
+  <data name="Record is posted,you can not delete this record" xml:space="preserve">
+    <value>يتم نشر سجل، لا يمكنك حذف هذا السجل </value>
+  </data>
+  <data name="Record is posted,you can not Edit this record" xml:space="preserve">
+    <value>يتم نشر سجل، لا يمكنك تحرير هذا السجل </value>
+  </data>
+  <data name="Record Saved Successfully" xml:space="preserve">
+    <value>سجل المحفوظة بنجاح </value>
+  </data>
+  <data name="Record Saved Successfully !" xml:space="preserve">
+    <value>سجل المحفوظة بنجاح! </value>
+  </data>
+  <data name="Record Update" xml:space="preserve">
+    <value>سجل تحديث </value>
+  </data>
+  <data name="Record Updated Successfully" xml:space="preserve">
+    <value>سجل تحديثها بنجاح </value>
+  </data>
+  <data name="Record Updated Successfully !" xml:space="preserve">
+    <value>سجل تحديثها بنجاح! </value>
+  </data>
+  <data name="Request No Already Exists" xml:space="preserve">
+    <value>الطلب موجود بالفعل لا </value>
+  </data>
+  <data name="Request No Already Exists :- Go To Bin Tab" xml:space="preserve">
+    <value>طلب لا موجود بالفعل: - اذهب إلى بن تبويب</value>
+  </data>
+  <data name="Return Quantity Is Greater Then Main Quantity" xml:space="preserve">
+    <value>عودة الكمية أكبر ثم الكمية الرئيسية </value>
+  </data>
+  <data name="Return Quantity should be less than or equal to receive quantity" xml:space="preserve">
+    <value>يجب أن تكون عودة الكمية أقل من أو يساوي لتلقي كمية</value>
+  </data>
+  <data name="Return quantity should be less than or equal to the Invoice Quantity" xml:space="preserve">
+    <value>يجب أن تكون كمية العائد أقل من أو يساوي الفاتورة الكمية </value>
+  </data>
+  <data name="Return quantity should be less than or equal to the Invoice Quantity1" xml:space="preserve">
+    <value>يجب أن تكون كمية العائد أقل من أو يساوي الفاتورة الكمية</value>
+  </data>
+  <data name="Sales Inquiry No. Already Exits" xml:space="preserve">
+    <value>رسالتك المبيعات رقم بالفعل مخارج </value>
+  </data>
+  <data name="Sales Invoice has posted,can not be Delete" xml:space="preserve">
+    <value>فاتورة المبيعات حققت، لا يمكن حذف </value>
+  </data>
+  <data name="Sales Invoice has posted,can not be Update" xml:space="preserve">
+    <value>وقد نشر فاتورة المبيعات، لا يمكن أن يكون التحديث </value>
+  </data>
+  <data name="Sales Invoice No. Already Exists" xml:space="preserve">
+    <value>فاتورة المبيعات رقم موجود بالفعل </value>
+  </data>
+  <data name="Sales Order Not Found" xml:space="preserve">
+    <value>ترتيب المبيعات غير موجود </value>
+  </data>
+  <data name="Sales Person Choose In Suggestion Only" xml:space="preserve">
+    <value>اختيار الشخص المبيعات في اقتراح فقط </value>
+  </data>
+  <data name="Sales price and Description should not be blank" xml:space="preserve">
+    <value>لا ينبغي أن يكون سعر البيع والوصف فارغة </value>
+  </data>
+  <data name="Sales Quantity should be less then or equal to the Remaining Quantity" xml:space="preserve">
+    <value>يجب أن تكون الكمية المبيعات أقل أو يساوي ثم باقي الكمية </value>
+  </data>
+  <data name="Sales quotation is used in Sales order" xml:space="preserve">
+    <value>يستخدم مبيعات الاقتباس من أجل المبيعات </value>
+  </data>
+  <data name="Sales Quotation No. Already Exits" xml:space="preserve">
+    <value>تسعيرة المبيعات رقم بالفعل مخارج </value>
+  </data>
+  <data name="Select at least one product" xml:space="preserve">
+    <value>اختيار منتج واحد على الأقل </value>
+  </data>
+  <data name="Select at least one Product1" xml:space="preserve">
+    <value>اختيار واحد على الأقل المنتج </value>
+  </data>
+  <data name="Select Atleast one brand" xml:space="preserve">
+    <value>تحديد أتلست علامة تجارية واحدة </value>
+  </data>
+  <data name="Select Atleast one product" xml:space="preserve">
+    <value>تحديد أتلست منتج واحد </value>
+  </data>
+  <data name="Select Currency" xml:space="preserve">
+    <value>اختيار العملة </value>
+  </data>
+  <data name="Select Currency Name" xml:space="preserve">
+    <value>حدد اسم العملة </value>
+  </data>
+  <data name="Select Customer Name" xml:space="preserve">
+    <value>حدد اسم العميل </value>
+  </data>
+  <data name="Select Customer Name In Suggestions Only" xml:space="preserve">
+    <value>حدد اسم العميل واقتراحات فقط </value>
+  </data>
+  <data name="Select Date" xml:space="preserve">
+    <value>حدد التاريخ </value>
+  </data>
+  <data name="Select Employee In Suggestions Only" xml:space="preserve">
+    <value>حدد الموظف في اقتراحات فقط </value>
+  </data>
+  <data name="Select Expenses" xml:space="preserve">
+    <value>حدد المصروفات </value>
+  </data>
+  <data name="Select Finance Code In Suggestions Only" xml:space="preserve">
+    <value>تحديد التمويل كود في اقتراحات فقط </value>
+  </data>
+  <data name="Select From Date" xml:space="preserve">
+    <value>حدد من التسجيل </value>
+  </data>
+  <data name="Select Group In Suggestions Only" xml:space="preserve">
+    <value>حدد المجموعة في اقتراحات فقط </value>
+  </data>
+  <data name="Select In Suggestions Only" xml:space="preserve">
+    <value>تحديد واقتراحات فقط </value>
+  </data>
+  <data name="Select Inquiry Type" xml:space="preserve">
+    <value>اختر نوع رسالتك </value>
+  </data>
+  <data name="Select Inventory Type" xml:space="preserve">
+    <value>حدد نوع الجرد </value>
+  </data>
+  <data name="Select Invoice Type" xml:space="preserve">
+    <value>تحديد نوع الفاتورة </value>
+  </data>
+  <data name="Select Item Type" xml:space="preserve">
+    <value>حدد نوع العنصر </value>
+  </data>
+  <data name="Select Location" xml:space="preserve">
+    <value>اختر الموقع </value>
+  </data>
+  <data name="Select Made In Country" xml:space="preserve">
+    <value>اختر صنع في البلد </value>
+  </data>
+  <data name="Select Model Name" xml:space="preserve">
+    <value>تحديد اسم الموديل </value>
+  </data>
+  <data name="Select Model No" xml:space="preserve">
+    <value>تحديد نموذج رقم </value>
+  </data>
+  <data name="Select One With Purchase Order Or WithOut Purchase Order" xml:space="preserve">
+    <value>اختر احد مع أو بدون طلب شراء طلب شراء </value>
+  </data>
+  <data name="Select Option Category" xml:space="preserve">
+    <value>حدد الخيار الفئة </value>
+  </data>
+  <data name="Select Order Type" xml:space="preserve">
+    <value>تحديد نوع الطلب </value>
+  </data>
+  <data name="Select Payment Mode" xml:space="preserve">
+    <value>حدد طريقة الدفع </value>
+  </data>
+  <data name="Select PaymentMode" xml:space="preserve">
+    <value>حدد طريقة الدفع</value>
+  </data>
+  <data name="Select Product" xml:space="preserve">
+    <value>حدد المنتج </value>
+  </data>
+  <data name="Select Product in Suggestion only" xml:space="preserve">
+    <value>حدد المنتج في اقتراح فقط </value>
+  </data>
+  <data name="Select Product Unit" xml:space="preserve">
+    <value>تحديد وحدة المنتج </value>
+  </data>
+  <data name="Select Purchase Invoice No." xml:space="preserve">
+    <value>تحديد رقم فاتورة الشراء </value>
+  </data>
+  <data name="Select Purchase Order No" xml:space="preserve">
+    <value>حدد أمر الشراء لا </value>
+  </data>
+  <data name="Select Quotation" xml:space="preserve">
+    <value>حدد تسعيرة </value>
+  </data>
+  <data name="Select Reference No" xml:space="preserve">
+    <value>حدد مرجع لا </value>
+  </data>
+  <data name="Select Supplier" xml:space="preserve">
+    <value>حدد المورد </value>
+  </data>
+  <data name="Select Supplier Invoice Date" xml:space="preserve">
+    <value>حدد فاتورة المورد التسجيل </value>
+  </data>
+  <data name="Select Supplier Name" xml:space="preserve">
+    <value>حدد اسم المورد </value>
+  </data>
+  <data name="Select To Date" xml:space="preserve">
+    <value>تحديد إلى تاريخ </value>
+  </data>
+  <data name="Select Type Of Adjustment" xml:space="preserve">
+    <value>حدد نوع التكيف </value>
+  </data>
+  <data name="Select Unit" xml:space="preserve">
+    <value>حدد وحدة </value>
+  </data>
+  <data name="Select Unit Name" xml:space="preserve">
+    <value>تحديد اسم وحدة </value>
+  </data>
+  <data name="Select Unit1" xml:space="preserve">
+    <value>حدد وحدة</value>
+  </data>
+  <data name="Ship To Choose In Suggestion Only" xml:space="preserve">
+    <value>سفينة لاختيار واقتراح فقط </value>
+  </data>
+  <data name="Supplier Name Already Exists" xml:space="preserve">
+    <value>اسم المورد موجود مسبقا </value>
+  </data>
+  <data name="This Purchase Invoice in use,can not be Delete" xml:space="preserve">
+    <value>هذه فاتورة الشراء في الاستخدام، لا يمكن حذف </value>
+  </data>
+  <data name="This Purchase Invoice in use,can not be Update" xml:space="preserve">
+    <value>هذه فاتورة الشراء في الاستخدام، لا يمكن أن يكون التحديث </value>
+  </data>
+  <data name="This Record has posted ,Can not edit" xml:space="preserve">
+    <value>هذا وقد سجل نشرها، لا يمكن تحرير </value>
+  </data>
+  <data name="This Record in use,can not be Update" xml:space="preserve">
+    <value>هذا سجل في الاستخدام، لا يمكن أن يكون التحديث </value>
+  </data>
+  <data name="This Request is Approved From The Department" xml:space="preserve">
+    <value>تمت الموافقة على هذا الطلب من وزارة </value>
+  </data>
+  <data name="This Request is Cancelled From The Department" xml:space="preserve">
+    <value>وألغي هذا طلب من وزارة </value>
+  </data>
+  <data name="This Request Number is Used in Purchase Inquiry" xml:space="preserve">
+    <value>يتم استخدام هذا الرقم طلب شراء في رسالتك </value>
+  </data>
+  <data name="To Location Choose In Suggestion Only." xml:space="preserve">
+    <value>لاختيار المكان وفي اقتراح فقط. </value>
+  </data>
+  <data name="ToDate and From Date Cannot be Equal" xml:space="preserve">
+    <value>وتوداتي من التسجيل لا يمكن أن يكون تكافؤ </value>
+  </data>
+  <data name="ToDate Should be Greater than From Date" xml:space="preserve">
+    <value>توداتي يجب أن تكون أكبر من من التسجيل </value>
+  </data>
+  <data name="Transfer Request in use,can not be Delete" xml:space="preserve">
+    <value>طلب نقل قيد الاستخدام، لا يمكن حذف </value>
+  </data>
+  <data name="Transfer Request in use,can not be Update" xml:space="preserve">
+    <value>طلب نقل قيد الاستخدام، لا يمكن أن يكون التحديث </value>
+  </data>
+  <data name="Unit Code Already Exists" xml:space="preserve">
+    <value>وحدة كود موجود بالفعل </value>
+  </data>
+  <data name="Unit Code Already Exists :- Go to Bin Tab" xml:space="preserve">
+    <value>وحدة كود موجود بالفعل: - الذهاب إلى تبويب بن </value>
+  </data>
+  <data name="Unit Name Already Exists" xml:space="preserve">
+    <value>وحدة الاسم موجود مسبقا </value>
+  </data>
+  <data name="Unit Name Already Exists :- Go to Bin Tab" xml:space="preserve">
+    <value>وحدة الاسم بالفعل: - الذهاب إلى تبويب بن </value>
+  </data>
+  <data name="Upload The File" xml:space="preserve">
+    <value>تحميل الملف </value>
+  </data>
+  <data name="Voucher cannot be Created, No Financial Year is in Open Status!" xml:space="preserve">
+    <value>قسيمة لا يمكن مكون، لا السنة المالية المفتوحة في الحالة! </value>
+  </data>
+  <data name="Voucher has Posted" xml:space="preserve">
+    <value>قسيمة والإعلان </value>
+  </data>
+  <data name="Voucher is posted, So it cannot be Deleted !" xml:space="preserve">
+    <value>يتم نشر قسيمة، لذلك لا يمكن المحذوفة! </value>
+  </data>
+  <data name="Voucher is Posted, So record cannot be Edited" xml:space="preserve">
+    <value>وأرسلت قسيمة، لذا لا يمكن تحرير سجل </value>
+  </data>
+  <data name="Voucher No. Already Exits" xml:space="preserve">
+    <value>قسيمة رقم بالفعل مخارج </value>
+  </data>
+  <data name="You Cant Post This Because You Not Received Any Quantity" xml:space="preserve">
+    <value>أضف كنت غير قادر على هذا لأنك لم تتلق أي الكمية </value>
+  </data>
+  <data name="You have no Product For Generate Quotation" xml:space="preserve">
+    <value>لا يوجد لديك المنتج للتوليد الاقتباس </value>
+  </data>
+  <data name="You have no Product For Generate Sales Invoice" xml:space="preserve">
+    <value>لا يوجد لديك المنتج للتوليد فاتورة المبيعات </value>
+  </data>
+  <data name="You have no Product For Generate Sales Order" xml:space="preserve">
+    <value>لا يوجد لديك المنتج للتوليد ترتيب المبيعات </value>
+  </data>
+  <data name="You Have No Product In Sales Invoice" xml:space="preserve">
+    <value>ليس لديك أي منتج في فاتورة المبيعات </value>
+  </data>
+  <data name="You Have No Sales Invoice Id." xml:space="preserve">
+    <value>لا يوجد لديك رقم فاتورة المبيعات. </value>
+  </data>
+  <data name="You have no supplier" xml:space="preserve">
+    <value>لا يوجد لديك المورد </value>
+  </data>
+  <data name="Beginning In Required" xml:space="preserve">
+    <value>وفي بداية المطلوبة </value>
+  </data>
+  <data name="Beginning Out Required" xml:space="preserve">
+    <value>ابتداء خارج المطلوبة </value>
+  </data>
+  <data name="Break Minute Required" xml:space="preserve">
+    <value>مطلوب دقيقة استراحة </value>
+  </data>
+  <data name="Break Minutes Cannot be Greater than or Equal to Work Minutes" xml:space="preserve">
+    <value>استراحة دقائق لا يمكن أن يكون أكبر من أو تساوي العمل دقائق </value>
+  </data>
+  <data name="Break Minutes Cannot be Greater than or Equal to Work Minutes1" xml:space="preserve">
+    <value>استراحة دقائق لا يمكن أن يكون أكبر من أو تساوي العمل دقائق </value>
+  </data>
+  <data name="Company does not provide partial leave" xml:space="preserve">
+    <value>الشركة لا توفر إجازة الجزئي </value>
+  </data>
+  <data name="Employee does not have sufficient balance" xml:space="preserve">
+    <value>موظف غير خاص رصيد كاف </value>
+  </data>
+  <data name="Employee does not have sufficient leave" xml:space="preserve">
+    <value>موظف غير خاص إجازة كافية </value>
+  </data>
+  <data name="Employee Has Holiday On Date" xml:space="preserve">
+    <value>موظف لديه عطلة على تاريخ </value>
+  </data>
+  <data name="Employee Has Week Off On Date" xml:space="preserve">
+    <value>موظف لديه معطلة أسبوع على تاريخ </value>
+  </data>
+  <data name="Ending In Required" xml:space="preserve">
+    <value>تنتهي في المطلوبة </value>
+  </data>
+  <data name="Ending Out Required" xml:space="preserve">
+    <value>إنهاء خارج المطلوبة </value>
+  </data>
+  <data name="Enter Apply Date" xml:space="preserve">
+    <value>أدخل تطبيق التسجيل </value>
+  </data>
+  <data name="Enter Correct From Date Format" xml:space="preserve">
+    <value>أدخل الصحيحة من تنسيق التاريخ </value>
+  </data>
+  <data name="Enter Correct From Date Format dd-MMM-yyyy" xml:space="preserve">
+    <value>أدخل الصحيحة من تنسيق التاريخ DD-MMM-سنة </value>
+  </data>
+  <data name="Enter Correct To Date Format" xml:space="preserve">
+    <value>أدخل الصحيحة لتنسيق التاريخ </value>
+  </data>
+  <data name="Enter Correct To Date Format dd-MMM-yyyy" xml:space="preserve">
+    <value>أدخل الصحيحة لتنسيق التاريخ DD-MMM-سنة </value>
+  </data>
+  <data name="Enter Cycle No." xml:space="preserve">
+    <value>دورة إدخال رقم </value>
+  </data>
+  <data name="Enter In Time" xml:space="preserve">
+    <value>تدخل في الوقت المناسب </value>
+  </data>
+  <data name="Enter Out Time" xml:space="preserve">
+    <value>أدخل خارج الزمن </value>
+  </data>
+  <data name="Enter Shift Name" xml:space="preserve">
+    <value>أدخل اسم التحول </value>
+  </data>
+  <data name="Enter TimeTable Name" xml:space="preserve">
+    <value>أدخل اسم جدول زمني </value>
+  </data>
+  <data name="Fill From Date" xml:space="preserve">
+    <value>ملء من التاريخ </value>
+  </data>
+  <data name="Fill To Date" xml:space="preserve">
+    <value>ملء إلى تاريخ </value>
+  </data>
+  <data name="From Date Can Not be Greater then To Date" xml:space="preserve">
+    <value>من التاريخ لا يمكن الكبرى ثم إلى تاريخ </value>
+  </data>
+  <data name="From Date cannot be greater than To Date" xml:space="preserve">
+    <value>من التاريخ لا يمكن أن يكون أكبر من التسجيل ل </value>
+  </data>
+  <data name="From Date Not In Proper Format" xml:space="preserve">
+    <value>من التاريخ غير في شكل مناسب </value>
+  </data>
+  <data name="Half Day Already Apply On Date" xml:space="preserve">
+    <value>نصف يوم تنطبق بالفعل على التسجيل </value>
+  </data>
+  <data name="Half Day Leave Approved" xml:space="preserve">
+    <value>اليوم نصف الإجازة المعتمدة </value>
+  </data>
+  <data name="Half Day Leave Rejected" xml:space="preserve">
+    <value>اليوم نصف اترك مرفوض </value>
+  </data>
+  <data name="Half Day Leave Submitted" xml:space="preserve">
+    <value>اليوم نصف اترك نشره </value>
+  </data>
+  <data name="In" xml:space="preserve">
+    <value>في </value>
+  </data>
+  <data name="Invalid Time ! Please Read * Note" xml:space="preserve">
+    <value>التوقيت غير صالح! يرجى قراءة * ملاحظة </value>
+  </data>
+  <data name="Leave not Assigned to employee" xml:space="preserve">
+    <value>ترك لم يعهد بها موظف </value>
+  </data>
+  <data name="Leave Rejected" xml:space="preserve">
+    <value>ترك مرفوض </value>
+  </data>
+  <data name="Leave submitted" xml:space="preserve">
+    <value>ترك نشره </value>
+  </data>
+  <data name="Leave type not assigned to employee" xml:space="preserve">
+    <value>ترك نوع لم يعهد بها الموظف </value>
+  </data>
+  <data name="Log Already Posted For Employee :-" xml:space="preserve">
+    <value>تسجيل أرسلت بالفعل الموظف: - </value>
+  </data>
+  <data name="Log Exists For Employee Codes" xml:space="preserve">
+    <value>سجل موجود لرموز موظف </value>
+  </data>
+  <data name="Log Has Not Processed So You Can Not Log Post For Employee :-" xml:space="preserve">
+    <value>سجل لم المجهزة لذلك لا يمكنك تسجيل لمشاركة الموظف: - </value>
+  </data>
+  <data name="Log Posted Successfully For Employees:-" xml:space="preserve">
+    <value>أرسلت بنجاح لتسجيل الموظفين: - </value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>دقائق </value>
+  </data>
+  <data name="minutes in a day" xml:space="preserve">
+    <value>دقيقة خلال اليوم </value>
+  </data>
+  <data name="No Data Exists" xml:space="preserve">
+    <value>لا يوجد بيانات </value>
+  </data>
+  <data name="No Half Day Assign To Employee" xml:space="preserve">
+    <value>أي نصف يوم لتعيين موظف </value>
+  </data>
+  <data name="No Half Day Remaining To These Employee" xml:space="preserve">
+    <value>أي يوم النصف المتبقي لهذه الموظف </value>
+  </data>
+  <data name="No leave assign to this employee" xml:space="preserve">
+    <value>لا إجازة لتعيين هذا الموظف </value>
+  </data>
+  <data name="Off Duty Time Required" xml:space="preserve">
+    <value>من واجب الوقت المطلوب </value>
+  </data>
+  <data name="On Duty Time Required" xml:space="preserve">
+    <value>على واجب الوقت المطلوب </value>
+  </data>
+  <data name="Overlapped Days!" xml:space="preserve">
+    <value>المتراكبة يوم </value>
+  </data>
+  <data name="Partial leave cannot assign to this employee" xml:space="preserve">
+    <value>إجازة الجزئي لا يمكن تعيينها لهذا الموظف </value>
+  </data>
+  <data name="Partial leave submitted" xml:space="preserve">
+    <value>إجازة الجزئي نشره </value>
+  </data>
+  <data name="Partial leave updated" xml:space="preserve">
+    <value>إجازة التحديث الجزئي </value>
+  </data>
+  <data name="Please Apply Leave In Assign Shift" xml:space="preserve">
+    <value>يرجى تطبيق إجازة في تعيين التحول </value>
+  </data>
+  <data name="Please enter schedule days" xml:space="preserve">
+    <value>يرجى إدخال جدول يوم </value>
+  </data>
+  <data name="Please Enter Value" xml:space="preserve">
+    <value>يرجى إدخال قيمة </value>
+  </data>
+  <data name="Please Fill Time" xml:space="preserve">
+    <value>يرجى ملء التوقيت </value>
+  </data>
+  <data name="Please First Select Date in List" xml:space="preserve">
+    <value>إرضاء الأولى اختر التسجيل في قائمة </value>
+  </data>
+  <data name="Please Save Record First" xml:space="preserve">
+    <value>الرجاء حفظ السجل أولا </value>
+  </data>
+  <data name="Please select a Day for Time Table" xml:space="preserve">
+    <value>الرجاء تحديد الجدول الزمني ليوم </value>
+  </data>
+  <data name="Please select a Time Table" xml:space="preserve">
+    <value>يرجى تحديد جدول التوقيت </value>
+  </data>
+  <data name="Please select at least one employee from list" xml:space="preserve">
+    <value>الرجاء اختيار واحدة على الأقل الموظف من قائمة </value>
+  </data>
+  <data name="Please select Monthly or Yearly" xml:space="preserve">
+    <value>الرجاء اختر شهري أو سنوي </value>
+  </data>
+  <data name="Please Select Morning or Evening" xml:space="preserve">
+    <value>الرجاء الإختيار الصباح أو في المساء </value>
+  </data>
+  <data name="Please select Personal or Official" xml:space="preserve">
+    <value>الرجاء اختيار الشخصية أو الرسمية </value>
+  </data>
+  <data name="Please Select Report" xml:space="preserve">
+    <value>الرجاء الإختيار تقرير</value>
+  </data>
+  <data name="Record Can Not Delete For Employee :-" xml:space="preserve">
+    <value>سجل يمكن غير حذف لموظف </value>
+  </data>
+  <data name="Record Not Deleted" xml:space="preserve">
+    <value>سجل غير المحذوفة </value>
+  </data>
+  <data name="Record Not Updated" xml:space="preserve">
+    <value>سجل غير التحديث </value>
+  </data>
+  <data name="Same as First Page" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Select At least One Employee" xml:space="preserve">
+    <value>اختر واحدة على الأقل موظف </value>
+  </data>
+  <data name="Select Atleast One Employee6" xml:space="preserve">
+    <value>تحديد أتلست موظف واحد </value>
+  </data>
+  <data name="Select Atleast One TimeTable" xml:space="preserve">
+    <value>تحديد جدول زمني لمدة أتلست </value>
+  </data>
+  <data name="Select Group First6" xml:space="preserve">
+    <value>تحديد المجموعة الأولى </value>
+  </data>
+  <data name="Shift Name Already Exists" xml:space="preserve">
+    <value>تحول اسم موجود مسبقا </value>
+  </data>
+  <data name="Shift Name Already Exists - Go to Bin Tab&quot;" xml:space="preserve">
+    <value>اسم التحول موجود بالفعل - الذهاب إلى تبويب بن </value>
+  </data>
+  <data name="Shift Overlapping :" xml:space="preserve">
+    <value>تحويل المتراكبة </value>
+  </data>
+  <data name="So Cannot Apply" xml:space="preserve">
+    <value>لذلك لا يمكن تطبيق </value>
+  </data>
+  <data name="So You May Not Apply Full Day Leave" xml:space="preserve">
+    <value>لذلك قد لا تنطبق يوم كامل إجازة </value>
+  </data>
+  <data name="TimeTable Name Already Exists" xml:space="preserve">
+    <value>اسم جدول زمني موجود مسبقا </value>
+  </data>
+  <data name="TimeTable Name Already Exists - Go to Bin Tab" xml:space="preserve">
+    <value>اسم جدول زمني موجود بالفعل - الذهاب إلى تبويب بن </value>
+  </data>
+  <data name="To Date Not In Proper Format" xml:space="preserve">
+    <value>حتى الآن ليس في شكل مناسب </value>
+  </data>
+  <data name="Work Minutes Cannot be Less than Shortest Time Table Duration" xml:space="preserve">
+    <value>دقائق العمل لا يمكن أن يكون أقل من مدة أقصر وقت الجدول </value>
+  </data>
+  <data name="You cannot delete this shift" xml:space="preserve">
+    <value>لا يمكنك حذف هذا التحول </value>
+  </data>
+  <data name="You cannot delete this timetable" xml:space="preserve">
+    <value>لا يمكنك حذف هذا الجدول الزمني </value>
+  </data>
+  <data name="You cannot edit this shift" xml:space="preserve">
+    <value>لا يمكنك تحرير هذا التحول </value>
+  </data>
+  <data name="You cannot request for Half Day Leave first set approval for Half Day Leave on Approval Master" xml:space="preserve">
+    <value>لا يمكنك طلب لنصف يوم إجازة موافقة مجموعة الأولى لنصف يوم إجازة على الموافقة ماستر</value>
+  </data>
+  <data name="You cannot request for leave first set approval for leave on Approval Master" xml:space="preserve">
+    <value>لا يمكنك طلب للحصول على إجازة المجموعة الأولى الموافقة للحصول على إجازة في الموافقة ماستر </value>
+  </data>
+  <data name="You cannot request for leave first set approval for leave on Approval Master1" xml:space="preserve">
+    <value>لا يمكنك طلب للحصول على إجازة المجموعة الأولى الموافقة للحصول على إجازة في الموافقة ماستر </value>
+  </data>
+  <data name="You cannot request leave for this month" xml:space="preserve">
+    <value>لا يمكنك طلب الإجازة لهذا الشهر </value>
+  </data>
+  <data name="You cannot request more than" xml:space="preserve">
+    <value>لا يمكنك طلب أكثر من </value>
+  </data>
+  <data name="You have Already Apply Leave between From Date and to Date" xml:space="preserve">
+    <value>لديك بالفعل تطبيق إجازة بين من التسجيل والتسجيل </value>
+  </data>
+  <data name="You Have Already Apply Partial Leave For Date :" xml:space="preserve">
+    <value>لديك بالفعل تطبيق إجازة الجزئي للتاريخ: </value>
+  </data>
+  <data name="You May Not Proceed Before Joining Date of Employee :-" xml:space="preserve">
+    <value>قد لا انتقل قبل تاريخ الموظف الالتحاق بالعمل: - </value>
+  </data>
+  <data name="Your Half Day Leave Already Approved On Date :" xml:space="preserve">
+    <value>لديك نصف يوم إجازة وافق بالفعل على التسجيل: </value>
+  </data>
+  <data name="Your Partial Leave Already Approved On Date :" xml:space="preserve">
+    <value>إجازة الجزئي الخاص وافق بالفعل على التسجيل: </value>
+  </data>
+</root>

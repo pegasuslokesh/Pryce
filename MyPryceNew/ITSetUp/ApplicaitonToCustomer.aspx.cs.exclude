@@ -1,0 +1,1028 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+using System.IO;
+
+public partial class ITSetup_ApplicaitonToCustomer : BasePage
+{
+    EmployeeParameter objEmpParam = new EmployeeParameter();
+    Common cmn = new Common();
+    EmployeeMaster objEmp = new EmployeeMaster();
+    SystemParameter objSys = new SystemParameter();
+    CountryMaster objCountry = new CountryMaster();
+    IT_ApplicationMaster objApp = new IT_ApplicationMaster();
+    CompanyMaster objComp = new CompanyMaster();
+    IT_Application_Customer objAppCust = new IT_Application_Customer();
+    BrandMaster objBrand = new BrandMaster();
+    LocationMaster objLocation = new LocationMaster();
+    UserMaster objUser = new UserMaster();
+    IT_ObjectEntry objObjectEntry = new IT_ObjectEntry();
+    RoleMaster objRole = new RoleMaster();
+    Set_ApplicationParameter objAppParam = new Set_ApplicationParameter();
+    RolePermission objRolePermission = new RolePermission();
+    Set_CustomerMaster ObjCust = new Set_CustomerMaster();
+    RoleDataPermission objRoleDataPerm = new RoleDataPermission();
+    Set_CustomerMaster objCustomer = new Set_CustomerMaster();
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (Session["UserId"] == null)
+        {
+            Response.Redirect("~/ERPLogin.aspx");
+        }
+        AllPageCode();
+        if (!IsPostBack)
+        {
+            txtValue.Focus();
+
+            FillGridBin();
+            FillGrid();
+            FillApplicationDDL();
+            btnList_Click(null, null);
+        }
+    }
+    public void FillApplicationDDL()
+    {
+        DataTable dt = objApp.GetApplicationMaster();
+        if (dt.Rows.Count > 0)
+        {
+            ddlApplication.DataSource = null;
+            ddlApplication.DataBind();
+            ddlApplication.DataSource = dt;
+            ddlApplication.DataTextField = "Application_Name";
+            ddlApplication.DataValueField = "Application_Id";
+            ddlApplication.DataBind();
+
+            ListItem li = new ListItem("--Select--", "0");
+            ddlApplication.Items.Insert(0, li);
+            ddlApplication.SelectedIndex = 0;
+        }
+        else
+        {
+            try
+            {
+                ddlApplication.Items.Clear();
+                ddlApplication.DataSource = null;
+                ddlApplication.DataBind();
+                ListItem li = new ListItem("--Select--", "0");
+                ddlApplication.Items.Insert(0, li);
+                ddlApplication.SelectedIndex = 0;
+            }
+            catch
+            {
+                ListItem li = new ListItem("--Select--", "0");
+                ddlApplication.Items.Insert(0, li);
+                ddlApplication.SelectedIndex = 0;
+
+            }
+        }
+    }
+    public void AllPageCode()
+    {
+        Page.Title = objSys.GetSysTitle();
+
+        Session["AccordianId"] = "37";
+        Session["HeaderText"] = "IT Setup";
+        DataTable dtAllPageCode = cmn.GetAllPagePermission(Session["UserId"].ToString(), "37", "218");
+        if (dtAllPageCode.Rows.Count != 0)
+        {
+            if (dtAllPageCode.Rows[0][0].ToString() == "SuperAdmin")
+            {
+                btnSave.Visible = true;
+                foreach (GridViewRow Row in gvApplication.Rows)
+                {
+                    ((ImageButton)Row.FindControl("btnEdit")).Visible = true;
+                    ((ImageButton)Row.FindControl("IbtnDelete")).Visible = true;
+                }
+                imgBtnRestore.Visible = true;
+                ImgbtnSelectAll.Visible = true;
+            }
+            else
+            {
+                foreach (DataRow DtRow in dtAllPageCode.Rows)
+                {
+                    if (Convert.ToBoolean(DtRow["Op_Add"].ToString()))
+                    {
+                        btnSave.Visible = true;
+                    }
+                    foreach (GridViewRow Row in gvApplication.Rows)
+                    {
+                        if (Convert.ToBoolean(DtRow["Op_Edit"].ToString()))
+                        {
+                            ((ImageButton)Row.FindControl("btnEdit")).Visible = true;
+                        }
+                        if (Convert.ToBoolean(DtRow["Op_Delete"].ToString()))
+                        {
+                            ((ImageButton)Row.FindControl("IbtnDelete")).Visible = true;
+                        }
+                    }
+                    if (Convert.ToBoolean(DtRow["Op_Restore"].ToString()))
+                    {
+                        imgBtnRestore.Visible = true;
+                        ImgbtnSelectAll.Visible = true;
+                    }
+                    if (Convert.ToBoolean(DtRow["Op_View"].ToString()))
+                    {
+
+                    }
+                    if (Convert.ToBoolean(DtRow["Op_Print"].ToString()))
+                    {
+
+                    }
+                    if (Convert.ToBoolean(DtRow["Op_Download"].ToString()))
+                    {
+
+                    }
+                    if (Convert.ToBoolean(DtRow["Op_Upload"].ToString()))
+                    {
+
+                    }
+                }
+
+            }
+
+
+        }
+
+
+    }
+    protected void btnList_Click(object sender, EventArgs e)
+    {
+        txtValue.Focus();
+        pnlMenuList.BackColor = System.Drawing.ColorTranslator.FromHtml("#ccddee");
+
+        pnlMenuNew.BackColor = System.Drawing.ColorTranslator.FromHtml("#90bde9");
+        pnlMenuBin.BackColor = System.Drawing.ColorTranslator.FromHtml("#90bde9");
+
+        PnlList.Visible = true;
+        PnlNewEdit.Visible = false;
+        PnlBin.Visible = false;
+    }
+    protected void btnNew_Click(object sender, EventArgs e)
+    {
+        txtCustomerName.Focus();
+        pnlMenuNew.BackColor = System.Drawing.ColorTranslator.FromHtml("#ccddee");
+
+        pnlMenuList.BackColor = System.Drawing.ColorTranslator.FromHtml("#90bde9");
+        pnlMenuBin.BackColor = System.Drawing.ColorTranslator.FromHtml("#90bde9");
+
+        PnlList.Visible = false;
+        PnlNewEdit.Visible = true;
+        PnlBin.Visible = false;
+
+    }
+    protected void btnBin_Click(object sender, EventArgs e)
+    {
+        txtbinValue.Focus();
+        pnlMenuBin.BackColor = System.Drawing.ColorTranslator.FromHtml("#ccddee");
+
+        pnlMenuNew.BackColor = System.Drawing.ColorTranslator.FromHtml("#90bde9");
+        pnlMenuList.BackColor = System.Drawing.ColorTranslator.FromHtml("#90bde9");
+        PnlNewEdit.Visible = false;
+        PnlBin.Visible = true;
+        PnlList.Visible = false;
+        FillGridBin();
+    }
+
+    protected void btnRefresh_Click(object sender, ImageClickEventArgs e)
+    {
+        FillGrid();
+        FillGridBin();
+
+        ddlOption.SelectedIndex = 2;
+        ddlFieldName.SelectedIndex = 0;
+        txtValue.Text = "";
+    }
+
+
+
+    protected void btnbind_Click(object sender, ImageClickEventArgs e)
+    {
+        if (ddlOption.SelectedIndex != 0)
+        {
+            string condition = string.Empty;
+
+
+            if (ddlOption.SelectedIndex == 1)
+            {
+                condition = "convert(" + ddlFieldName.SelectedValue + ",System.String)='" + txtValue.Text.Trim() + "'";
+            }
+            else if (ddlOption.SelectedIndex == 2)
+            {
+                condition = "convert(" + ddlFieldName.SelectedValue + ",System.String) like '%" + txtValue.Text.Trim() + "%'";
+            }
+            else
+            {
+                condition = "convert(" + ddlFieldName.SelectedValue + ",System.String) Like '" + txtValue.Text.Trim() + "%'";
+            }
+            DataTable dtCust = (DataTable)Session["Country"];
+
+
+            DataView view = new DataView(dtCust, condition, "", DataViewRowState.CurrentRows);
+            Session["dtFilter_Ap_TC"] = view.ToTable();
+            lblTotalRecords.Text = Resources.Attendance.Total_Records + ": " + view.ToTable().Rows.Count.ToString() + "";
+
+            gvApplication.DataSource = view.ToTable();
+            gvApplication.DataBind();
+            AllPageCode();
+
+
+        }
+
+
+    }
+    protected void btnbinbind_Click(object sender, ImageClickEventArgs e)
+    {
+        if (ddlbinOption.SelectedIndex != 0)
+        {
+            string condition = string.Empty;
+
+
+            if (ddlbinOption.SelectedIndex == 1)
+            {
+                condition = "convert(" + ddlbinFieldName.SelectedValue + ",System.String)='" + txtbinValue.Text.Trim() + "'";
+            }
+            else if (ddlbinOption.SelectedIndex == 2)
+            {
+                condition = "convert(" + ddlbinFieldName.SelectedValue + ",System.String) like '%" + txtbinValue.Text + "%'";
+            }
+            else
+            {
+                condition = "convert(" + ddlbinFieldName.SelectedValue + ",System.String) Like '" + txtbinValue.Text + "%'";
+            }
+            DataTable dtCust = (DataTable)Session["dtbinCountry"];
+
+
+            DataView view = new DataView(dtCust, condition, "", DataViewRowState.CurrentRows);
+            Session["dtbinFilter"] = view.ToTable();
+            lblbinTotalRecords.Text = Resources.Attendance.Total_Records + ": " + view.ToTable().Rows.Count.ToString() + "";
+
+            gvApplicationBin.DataSource = view.ToTable();
+            gvApplicationBin.DataBind();
+
+
+            if (view.ToTable().Rows.Count == 0)
+            {
+                imgBtnRestore.Visible = false;
+                ImgbtnSelectAll.Visible = false;
+            }
+            else
+            {
+                AllPageCode();
+            }
+        }
+    }
+
+    protected void btnbinRefresh_Click(object sender, ImageClickEventArgs e)
+    {
+        FillGrid();
+        FillGridBin();
+
+        ddlbinOption.SelectedIndex = 2;
+        ddlbinFieldName.SelectedIndex = 0;
+        txtbinValue.Text = "";
+        lblSelectedRecord.Text = "";
+    }
+
+    protected void gvApplicationBin_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+
+        gvApplicationBin.PageIndex = e.NewPageIndex;
+        if (HDFSortbin.Value == "")
+            FillGridBin();
+        else
+        {
+            DataTable dt = (DataTable)Session["dtbinFilter"];
+            gvApplicationBin.DataSource = dt;
+            gvApplicationBin.DataBind();
+            AllPageCode();
+        }
+        string temp = string.Empty;
+        bool isselcted;
+
+        for (int i = 0; i < gvApplicationBin.Rows.Count; i++)
+        {
+            Label lblconid = (Label)gvApplicationBin.Rows[i].FindControl("lblCountryId");
+            string[] split = lblSelectedRecord.Text.Split(',');
+
+            for (int j = 0; j < lblSelectedRecord.Text.Split(',').Length; j++)
+            {
+                if (lblSelectedRecord.Text.Split(',')[j] != "")
+                {
+                    if (lblconid.Text.Trim().ToString() == lblSelectedRecord.Text.Split(',')[j].Trim().ToString())
+                    {
+                        ((CheckBox)gvApplicationBin.Rows[i].FindControl("chkgvSelect")).Checked = true;
+                    }
+                }
+            }
+        }
+
+    }
+    protected void gvApplicationBin_OnSorting(object sender, GridViewSortEventArgs e)
+    {
+        lblSelectedRecord.Text = "";
+        HDFSortbin.Value = HDFSortbin.Value == "ASC" ? "DESC" : "ASC";
+        DataTable dt = new DataTable();
+        dt = objCountry.GetCountryMasterInactive();
+        DataView dv = new DataView(dt);
+        string Query = "" + e.SortExpression + " " + HDFSortbin.Value + "";
+        dv.Sort = Query;
+        dt = dv.ToTable();
+        Session["dtbinFilter"] = dt;
+        gvApplicationBin.DataSource = dt;
+        gvApplicationBin.DataBind();
+        AllPageCode();
+
+    }
+
+
+
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        int b = 0;
+
+        if (txtCustomerName.Text == "")
+        {
+            DisplayMessage("Enter Customer Name");
+            txtCustomerName.Focus();
+
+            return;
+        }
+
+        if (ddlApplication.SelectedIndex == 0)
+        {
+            DisplayMessage("Select Application");
+            ddlApplication.Focus();
+
+            return;
+        }
+        if (txtUserName.Text == "")
+        {
+            DisplayMessage("Enter User Id");
+            txtUserName.Focus();
+
+            return;
+        }
+        if (txtPassword.Text == "")
+        {
+            DisplayMessage("Enter Password");
+            txtPassword.Focus();
+
+            return;
+        }
+        if (editid.Value == "")
+        {
+
+            DataTable dtUser = objUser.GetUserMasterByUserId(txtUserName.Text);
+            if (dtUser.Rows.Count > 0)
+            {
+                DisplayMessage("User Id alredy exists");
+                txtUserName.Text = "";
+                txtUserName.Focus();
+                return;
+
+            }
+
+
+            BrandMaster objBrand = new BrandMaster();
+            LocationMaster objLocation = new LocationMaster();
+
+            int Brand = 0;
+            int Loc = 0;
+
+            int Emp = 0;
+
+
+            b = objComp.InsertCompanyMaster(txtCompanyName.Text, txtCompanyName.Text, txtCompanyName.Text.Substring(0, 3), "", "0", "0", "2", "1", "", "", "", "", "", "", false.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
+
+            DataTable dtParam = objAppParam.GetApplicationParameterByCompanyId("", "1");
+            if (dtParam.Rows.Count > 0)
+            {
+                for (int i = 0; i < dtParam.Rows.Count; i++)
+                {
+                    objAppParam.InsertApplicationParameterMaster(b.ToString(), dtParam.Rows[i]["Param_Name"].ToString(), dtParam.Rows[i]["Param_Value"].ToString(), dtParam.Rows[i]["Param_Cat_Id"].ToString(), dtParam.Rows[i]["Description"].ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
+
+                }
+
+            }
+
+
+            Brand = objBrand.InsertBrandMaster(b.ToString(), txtCompanyName.Text, txtCompanyName.Text, txtCompanyName.Text.Substring(0, 3), "0", "", "", "", "", "", "", false.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
+
+            Loc = objLocation.InsertLocationMaster(b.ToString(), txtCompanyName.Text, txtCompanyName.Text, txtCompanyName.Text.Substring(0, 3), Brand.ToString(), "0", "0", "0", "", "", "", "", "", false.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
+
+            Emp = objEmp.InsertEmployeeMaster(b.ToString(), txtCustomerName.Text.Split('/')[0].ToString(), txtCustomerName.Text.Split('/')[0].ToString(), "1", "", Brand.ToString(), Loc.ToString(), "0", "0", "0", "0", "0", "0", "1/1/2000", "1/1/2000", "On Role", "1/1/2050", "M", "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), "0", "0");
+
+            objEmpParam.InsertEmployeeParameterOnEmployeeInsert(Session["CompId"].ToString(), b.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
+
+            int RoleId = objRole.InsertRoleMaster(b.ToString(), "Admin", "Admin", "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
+
+            DataTable dt = new DataTable();
+            dt = objObjectEntry.GetModuleObjectByApplicationId(ddlApplication.SelectedValue);
+
+
+
+
+
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    int refid = 0;
+                    refid = objRolePermission.InsertRolePermission(RoleId.ToString(), dt.Rows[i]["Module_Id"].ToString(), dt.Rows[i]["Object_Id"].ToString(), true.ToString(), "superadmin", DateTime.Now.ToString(), "superadmin", DateTime.Now.ToString());
+
+
+                    objRolePermission.InsertRoleOpPermission(refid.ToString(), true.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString());
+                    objRolePermission.InsertRoleOpPermission(refid.ToString(), false.ToString(), true.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString());
+                    objRolePermission.InsertRoleOpPermission(refid.ToString(), false.ToString(), false.ToString(), true.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString());
+                    objRolePermission.InsertRoleOpPermission(refid.ToString(), false.ToString(), false.ToString(), false.ToString(), true.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString());
+                    objRolePermission.InsertRoleOpPermission(refid.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), true.ToString(), false.ToString(), false.ToString(), false.ToString());
+                    objRolePermission.InsertRoleOpPermission(refid.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), true.ToString(), false.ToString(), false.ToString());
+                    objRolePermission.InsertRoleOpPermission(refid.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), true.ToString(), false.ToString());
+                    objRolePermission.InsertRoleOpPermission(refid.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), false.ToString(), true.ToString());
+
+
+                }
+
+
+            }
+
+
+            objRoleDataPerm.InsertRoleDataPermission(RoleId.ToString(), b.ToString(), "B", Brand.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
+
+            objRoleDataPerm.InsertRoleDataPermission(RoleId.ToString(), b.ToString(), "L", Loc.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
+
+
+            objUser.InsertUserMaster(b.ToString(), txtUserName.Text, txtPassword.Text, Emp.ToString(), RoleId.ToString(), false.ToString(), "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
+
+
+            b = objAppCust.InsertApplicationCustomerMaster(GetCustomerId(), ddlApplication.SelectedValue, txtUserName.Text, txtPassword.Text, b.ToString(), Brand.ToString(), Loc.ToString(), "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
+            if (b != 0)
+            {
+
+
+                DisplayMessage("Record Saved");
+                FillGrid();
+                Reset();
+
+            }
+            else
+            {
+                DisplayMessage("Record Not Saved");
+            }
+        }
+        else
+        {
+
+
+
+            //  b = objCountry.UpdateCountryMaster(editid.Value,txtCountryName.Text, txtCountryNameL.Text, txtCountryCode.Text,"","","","","",true.ToString(),DateTime.Now.ToString(),true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
+
+            if (b != 0)
+            {
+                btnList_Click(null, null);
+                DisplayMessage("Record Updated");
+                Reset();
+                FillGrid();
+
+
+            }
+            else
+            {
+                DisplayMessage("Record Not Updated");
+            }
+
+        }
+    }
+    protected string GetCustomerName(string strCustomerId)
+    {
+        string strCustomerName = string.Empty;
+        if (strCustomerId != "0" && strCustomerId != "")
+        {
+            DataTable dtCName = ObjCust.GetCustomerAllDataByCustomerId("", "", strCustomerId);
+            if (dtCName.Rows.Count > 0)
+            {
+                strCustomerName = dtCName.Rows[0]["Name"].ToString();
+            }
+        }
+        else
+        {
+            strCustomerName = "";
+        }
+        return strCustomerName;
+    }
+
+
+    protected void btnEdit_Command(object sender, CommandEventArgs e)
+    {
+        editid.Value = e.CommandArgument.ToString();
+
+
+
+        DataTable dt = objAppCust.GetApplicationCustomerByTransId(editid.Value);
+        if (dt.Rows.Count > 0)
+        {
+
+
+            try
+            {
+                ddlApplication.SelectedValue = dt.Rows[0]["Application_Id"].ToString();
+            }
+            catch
+            {
+
+            }
+            txtUserName.Text = dt.Rows[0]["User_Id"].ToString();
+            txtPassword.Text = dt.Rows[0]["Password"].ToString();
+            txtCompanyName.Text = dt.Rows[0]["Company_Name"].ToString();
+
+            string strCustomerId = dt.Rows[0]["Customer_Id"].ToString();
+            txtCustomerName.Text = GetCustomerName(strCustomerId) + "/" + strCustomerId;
+
+
+
+            btnNew_Click(null, null);
+            btnNew.Text = Resources.Attendance.Edit;
+
+        }
+
+
+
+    }
+
+    protected void IbtnDelete_Command(object sender, CommandEventArgs e)
+    {
+        int b = 0;
+        b = objCountry.DeleteCountryMaster(e.CommandArgument.ToString(), false.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
+        if (b != 0)
+        {
+            DisplayMessage("Record Deleted");
+
+            FillGridBin();
+            FillGrid();
+            Reset();
+        }
+        else
+        {
+            DisplayMessage("Record Not Deleted");
+        }
+    }
+    protected void gvApplication_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvApplication.PageIndex = e.NewPageIndex;
+
+        DataTable dt = (DataTable)Session["dtFilter_Ap_TC"];
+        gvApplication.DataSource = dt;
+        gvApplication.DataBind();
+        AllPageCode();
+
+    }
+    protected void gvApplication_OnSorting(object sender, GridViewSortEventArgs e)
+    {
+        HDFSort.Value = HDFSort.Value == "ASC" ? "DESC" : "ASC";
+        DataTable dt = new DataTable();
+        dt = (DataTable)Session["dtFilter_Ap_TC"];
+        DataView dv = new DataView(dt);
+        string Query = "" + e.SortExpression + " " + HDFSort.Value + "";
+        dv.Sort = Query;
+        dt = dv.ToTable();
+        Session["dtFilter_Ap_TC"] = dt;
+        gvApplication.DataSource = dt;
+        gvApplication.DataBind();
+        AllPageCode();
+    }
+
+    [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+    public static string[] GetCompletionListCountryCode(string prefixText, int count, string contextKey)
+    {
+        CountryMaster objCountryMaster = new CountryMaster();
+        DataTable dt = new DataView(objCountryMaster.GetCountryMaster(), "Country_Code like '" + prefixText.ToString() + "%'", "", DataViewRowState.CurrentRows).ToTable();
+        string[] txt = new string[dt.Rows.Count];
+
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            txt[i] = dt.Rows[i]["Country_Code"].ToString();
+        }
+        return txt;
+    }
+    [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+    public static string[] GetCompletionListCountryName(string prefixText, int count, string contextKey)
+    {
+        CountryMaster objCountryMaster = new CountryMaster();
+        DataTable dt = new DataView(objCountryMaster.GetCountryMaster(), "Country_Name like '" + prefixText.ToString() + "%'", "", DataViewRowState.CurrentRows).ToTable();
+        string[] txt = new string[dt.Rows.Count];
+
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            txt[i] = dt.Rows[i]["Country_Name"].ToString();
+        }
+        return txt;
+    }
+
+
+    public void DisplayMessage(string str)
+    {
+        ScriptManager.RegisterStartupScript(this, GetType(), "", "alert('" + str + "');", true);
+    }
+    protected void btnReset_Click(object sender, EventArgs e)
+    {
+        Reset();
+    }
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        FillGrid();
+        FillGridBin();
+        Reset();
+        btnList_Click(null, null);
+    }
+
+    public void FillGrid()
+    {
+        DataTable dt = objAppCust.GetApplicationCustomer();
+        gvApplication.DataSource = dt;
+        gvApplication.DataBind();
+        AllPageCode();
+        Session["dtFilter_Ap_TC"] = dt;
+        Session["Country"] = dt;
+
+        lblTotalRecords.Text = Resources.Attendance.Total_Records + ": " + dt.Rows.Count.ToString() + "";
+
+    }
+    public void FillGridBin()
+    {
+        DataTable dt = new DataTable();
+        dt = objCountry.GetCountryMasterInactive();
+
+        gvApplicationBin.DataSource = dt;
+        gvApplicationBin.DataBind();
+
+
+        Session["dtbinFilter"] = dt;
+        Session["dtbinCountry"] = dt;
+        lblbinTotalRecords.Text = Resources.Attendance.Total_Records + ": " + dt.Rows.Count.ToString() + "";
+        if (dt.Rows.Count == 0)
+        {
+            imgBtnRestore.Visible = false;
+            ImgbtnSelectAll.Visible = false;
+        }
+        else
+        {
+
+            AllPageCode();
+        }
+
+    }
+
+
+    protected void chkgvSelectAll_CheckedChanged(object sender, EventArgs e)
+    {
+        CheckBox chkSelAll = ((CheckBox)gvApplicationBin.HeaderRow.FindControl("chkgvSelectAll"));
+        for (int i = 0; i < gvApplicationBin.Rows.Count; i++)
+        {
+            ((CheckBox)gvApplicationBin.Rows[i].FindControl("chkgvSelect")).Checked = chkSelAll.Checked;
+            if (chkSelAll.Checked)
+            {
+                if (!lblSelectedRecord.Text.Split(',').Contains(((Label)(gvApplicationBin.Rows[i].FindControl("lblCountryId"))).Text.Trim().ToString()))
+                {
+                    lblSelectedRecord.Text += ((Label)(gvApplicationBin.Rows[i].FindControl("lblCountryId"))).Text.Trim().ToString() + ",";
+                }
+            }
+            else
+            {
+                string temp = string.Empty;
+                string[] split = lblSelectedRecord.Text.Split(',');
+                foreach (string item in split)
+                {
+                    if (item != ((Label)(gvApplicationBin.Rows[i].FindControl("lblCountryId"))).Text.Trim().ToString())
+                    {
+                        if (item != "")
+                        {
+                            temp += item + ",";
+                        }
+                    }
+                }
+                lblSelectedRecord.Text = temp;
+            }
+        }
+    }
+    protected void chkgvSelect_CheckedChanged(object sender, EventArgs e)
+    {
+        string empidlist = string.Empty;
+        string temp = string.Empty;
+        int index = ((GridViewRow)((CheckBox)sender).Parent.Parent).RowIndex;
+        Label lb = (Label)gvApplicationBin.Rows[index].FindControl("lblCountryId");
+        if (((CheckBox)gvApplicationBin.Rows[index].FindControl("chkgvSelect")).Checked)
+        {
+            empidlist += lb.Text.Trim().ToString() + ",";
+            lblSelectedRecord.Text += empidlist;
+
+        }
+
+        else
+        {
+
+            empidlist += lb.Text.ToString().Trim();
+            lblSelectedRecord.Text += empidlist;
+            string[] split = lblSelectedRecord.Text.Split(',');
+            foreach (string item in split)
+            {
+                if (item != empidlist)
+                {
+                    if (item != "")
+                    {
+                        if (item != "")
+                        {
+                            temp += item + ",";
+                        }
+                    }
+                }
+            }
+            lblSelectedRecord.Text = temp;
+        }
+    }
+    protected void ImgbtnSelectAll_Click(object sender, ImageClickEventArgs e)
+    {
+        DataTable dtUnit = (DataTable)Session["dtbinFilter"];
+
+        if (ViewState["Select"] == null)
+        {
+            ViewState["Select"] = 1;
+            foreach (DataRow dr in dtUnit.Rows)
+            {
+                if (!lblSelectedRecord.Text.Split(',').Contains(dr["Country_Id"]))
+                {
+                    lblSelectedRecord.Text += dr["Country_Id"] + ",";
+                }
+            }
+            for (int i = 0; i < gvApplicationBin.Rows.Count; i++)
+            {
+                string[] split = lblSelectedRecord.Text.Split(',');
+                Label lblconid = (Label)gvApplicationBin.Rows[i].FindControl("lblCountryId");
+                for (int j = 0; j < lblSelectedRecord.Text.Split(',').Length; j++)
+                {
+                    if (lblSelectedRecord.Text.Split(',')[j] != "")
+                    {
+                        if (lblconid.Text.Trim().ToString() == lblSelectedRecord.Text.Split(',')[j].Trim().ToString())
+                        {
+                            ((CheckBox)gvApplicationBin.Rows[i].FindControl("chkgvSelect")).Checked = true;
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            lblSelectedRecord.Text = "";
+            DataTable dtUnit1 = (DataTable)Session["dtBinFilter"];
+            gvApplicationBin.DataSource = dtUnit1;
+            gvApplicationBin.DataBind();
+            ViewState["Select"] = null;
+        }
+
+
+
+    }
+
+
+    protected void imgBtnRestore_Click(object sender, ImageClickEventArgs e)
+    {
+        int b = 0;
+        if (lblSelectedRecord.Text != "")
+        {
+            for (int j = 0; j < lblSelectedRecord.Text.Split(',').Length; j++)
+            {
+                if (lblSelectedRecord.Text.Split(',')[j] != "")
+                {
+                    b = objCountry.DeleteCountryMaster(lblSelectedRecord.Text.Split(',')[j].Trim(), true.ToString(), Session["UserId"].ToString().ToString(), DateTime.Now.ToString());
+
+                }
+            }
+        }
+
+        if (b != 0)
+        {
+
+            FillGrid();
+            FillGridBin();
+            lblSelectedRecord.Text = "";
+            ViewState["Select"] = null;
+            DisplayMessage("Record Activated");
+        }
+        else
+        {
+            int fleg = 0;
+            foreach (GridViewRow Gvr in gvApplicationBin.Rows)
+            {
+                CheckBox chk = (CheckBox)Gvr.FindControl("chkgvSelect");
+                if (chk.Checked)
+                {
+                    fleg = 1;
+                }
+                else
+                {
+                    fleg = 0;
+                }
+            }
+            if (fleg == 0)
+            {
+                DisplayMessage("Please Select Record");
+            }
+            else
+            {
+                DisplayMessage("Record Not Activated");
+            }
+        }
+
+    }
+    protected void txtCompanyName_OnTextChanged(object sender, EventArgs e)
+    {
+
+        if (editid.Value == "")
+        {
+            DataTable dt = objComp.GetCompanyMasterByCompanyName(txtCompanyName.Text.Trim());
+            if (dt.Rows.Count > 0)
+            {
+                txtCompanyName.Text = "";
+                DisplayMessage("Company Name Already Exists");
+                System.Web.UI.ScriptManager.GetCurrent(this).SetFocus(txtCompanyName);
+                return;
+            }
+            DataTable dt1 = objComp.GetCompanyMasterInactive();
+            dt1 = new DataView(dt1, "Company_Name='" + txtCompanyName.Text + "'", "", DataViewRowState.CurrentRows).ToTable();
+            if (dt1.Rows.Count > 0)
+            {
+                txtCompanyName.Text = "";
+                DisplayMessage("Company Name Already Exists - Go to Bin Tab");
+                System.Web.UI.ScriptManager.GetCurrent(this).SetFocus(txtCompanyName);
+                return;
+            }
+            btnSave.Focus();
+        }
+        else
+        {
+            DataTable dtTemp = objComp.GetCompanyMasterById(editid.Value);
+            if (dtTemp.Rows.Count > 0)
+            {
+                if (dtTemp.Rows[0]["Company_Name"].ToString() != txtCompanyName.Text)
+                {
+                    DataTable dt = objComp.GetCompanyMaster();
+                    dt = new DataView(dt, "Company_Name='" + txtCompanyName.Text + "'", "", DataViewRowState.CurrentRows).ToTable();
+                    if (dt.Rows.Count > 0)
+                    {
+                        txtCompanyName.Text = "";
+                        DisplayMessage("Company Name Already Exists");
+                        System.Web.UI.ScriptManager.GetCurrent(this).SetFocus(txtCompanyName);
+                        return;
+                    }
+
+                }
+            }
+            btnSave.Focus();
+        }
+    }
+
+
+    [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+    public static string[] GetCompletionListCustomer(string prefixText, int count, string contextKey)
+    {
+        Set_CustomerMaster objCustomer = new Set_CustomerMaster();
+        DataTable dtCustomer = objCustomer.GetCustomerAllData(HttpContext.Current.Session["CompId"].ToString(), HttpContext.Current.Session["BrandId"].ToString());
+        dtCustomer = new DataView(dtCustomer, "Name like '" + prefixText.ToString() + "%'", "", DataViewRowState.CurrentRows).ToTable();
+               
+        string[] txt = new string[dtCustomer.Rows.Count];
+
+        if (dtCustomer.Rows.Count > 0)
+        {
+            for (int i = 0; i < dtCustomer.Rows.Count; i++)
+            {
+                txt[i] = dtCustomer.Rows[i]["Name"].ToString() + "/" + dtCustomer.Rows[i]["Customer_Id"].ToString() + "";
+            }
+        }
+        else
+        {
+            dtCustomer = objCustomer.GetCustomerAllData(HttpContext.Current.Session["CompId"].ToString(), HttpContext.Current.Session["BrandId"].ToString());
+            if (dtCustomer.Rows.Count > 0)
+            {
+                txt = new string[dtCustomer.Rows.Count];
+                for (int i = 0; i < dtCustomer.Rows.Count; i++)
+                {
+                    txt[i] = dtCustomer.Rows[i]["Name"].ToString() + "/" + dtCustomer.Rows[i]["Customer_Id"].ToString() + "";
+                }
+            }
+            //}
+        }
+        return txt;
+    }
+    [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+    public static string[] GetCompletionListCompanyName(string prefixText, int count, string contextKey)
+    {
+        CompanyMaster ObjCompanyMaster = new CompanyMaster();
+        DataTable dt = new DataView(ObjCompanyMaster.GetCompanyMaster(), "Company_Name like '" + prefixText.ToString() + "%'", "", DataViewRowState.CurrentRows).ToTable();
+        string[] txt = new string[dt.Rows.Count];
+
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            txt[i] = dt.Rows[i]["Company_Name"].ToString();
+        }
+        return txt;
+    }
+    private string GetCustomerId()
+    {
+        string retval = string.Empty;
+        if (txtCustomerName.Text != "")
+        {
+            DataTable dtCustomer = objCustomer.GetCustomerAllData(Session["CompId"].ToString(), Session["BrandId"].ToString());
+            dtCustomer = new DataView(dtCustomer, "Name='" + txtCustomerName.Text.Trim().Split('/')[0].ToString() + "'", "", DataViewRowState.CurrentRows).ToTable();
+            
+            if (dtCustomer.Rows.Count > 0)
+            {
+                retval = (txtCustomerName.Text.Split('/'))[txtCustomerName.Text.Split('/').Length - 1];
+
+                DataTable dtCompany = objCustomer.GetCustomerAllDataByCustomerId(Session["CompId"].ToString(), Session["BrandId"].ToString(), retval);
+                if (dtCompany.Rows.Count > 0)
+                {
+
+                }
+                else
+                {
+                    retval = "";
+                }
+            }
+            else
+            {
+                retval = "";
+            }
+        }
+        else
+        {
+            retval = "";
+        }
+        return retval;
+    }
+    protected void txtCustomerName_TextChanged(object sender, EventArgs e)
+    {
+        string strCustomerId = string.Empty;
+        if (txtCustomerName.Text != "")
+        {
+            strCustomerId = GetCustomerId();
+            if (strCustomerId != "" && strCustomerId != "0")
+            {
+                System.Web.UI.ScriptManager.GetCurrent(this).SetFocus(ddlApplication);
+            }
+            else
+            {
+                DisplayMessage("Select In Suggestions Only");
+                txtCustomerName.Text = "";
+                System.Web.UI.ScriptManager.GetCurrent(this).SetFocus(txtCustomerName);
+            }
+        }
+    }
+
+    public void Reset()
+    {
+
+
+
+        txtCustomerName.Text = "";
+        try
+        {
+            ddlApplication.SelectedIndex = 0;
+        }
+        catch
+        {
+
+        }
+        txtUserName.Text = "";
+        txtPassword.Text = "";
+        txtCompanyName.Text = "";
+
+
+
+
+
+
+
+
+        btnNew.Text = Resources.Attendance.New;
+        lblSelectedRecord.Text = "";
+        ViewState["Select"] = null;
+        editid.Value = "";
+        txtValue.Text = "";
+        ddlOption.SelectedIndex = 2;
+        ddlFieldName.SelectedIndex = 0;
+
+
+
+    }
+
+
+}

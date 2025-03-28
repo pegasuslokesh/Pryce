@@ -1,0 +1,42 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ERPMaster_Old.master" AutoEventWireup="true" CodeFile="PieChart.aspx.cs" Inherits="PieChart" %>
+
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"  
+    Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %> 
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+<div style="width:40%">
+<asp:chart id="Chart1" runat="server"
+             Height="300px" Width="400px">
+  <titles>
+    <asp:Title ShadowOffset="3" Name="Title1" />
+  </titles>
+  <legends>
+    <asp:Legend Alignment="Center" Docking="Bottom"
+                IsTextAutoFit="False" Name="Default"
+                LegendStyle="Row" />
+  </legends>
+  <series>
+    <asp:Series Name="Default" />
+  </series>
+  <chartareas>
+    <asp:ChartArea Name="ChartArea1"
+                     BorderWidth="0" />
+  </chartareas>
+</asp:chart>
+
+
+    <asp:Chart ID="Chart2" runat="server">
+        <Series>
+            <asp:Series Name="Series1">
+            </asp:Series>
+        </Series>
+        <ChartAreas>
+            <asp:ChartArea Name="ChartArea1">
+            </asp:ChartArea>
+        </ChartAreas>
+    </asp:Chart>
+
+</div>
+
+</asp:Content>
+

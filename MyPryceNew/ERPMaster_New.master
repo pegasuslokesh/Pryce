@@ -1,0 +1,196 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ERPMaster_New.master.cs"
+    Inherits="ERPMaster_New" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pryce New Entry</title>
+    <link href="CSS_New/bootstrap.css" rel="stylesheet" />
+    <link href="CSS_New/side-bar.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="CSS_New/font-awesome.css" rel="stylesheet" />
+    <link href="CSS_New/font-awesome.min.css" rel="stylesheet" />
+    <link href="CSS_New/custom.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <script src="JS_New/Bootap.js" type="text/javascript"></script>
+    <script src="JS_New/bootstrap.min.js" type="text/javascript"></script>
+   <%-- <link rel="SHORTCUT ICON" href="Images/favicon.ico" />--%>
+    <link href="CSS/InvStyle.css" rel="stylesheet" type="text/css" />
+    <%--<link href="CSS/location_setup.css" rel="stylesheet" type="text/css" />--%>
+</head>
+<body id="body1" runat="server">
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="SM1" runat="server" EnablePageMethods="true">
+    </asp:ScriptManager>
+    <asp:UpdatePanel ID="upnlAcc" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div>
+                <div id="wrapper">
+                    <div>
+                        <asp:Literal ID="LitImage" runat="server"></asp:Literal></div>
+                    <nav class="navbar navbar-default top-navbar" role="navigation">
+                         <div class="navbar-header">
+                
+  	<div style="color:#333; font-size:14px; vertical-align:middle; margin-top:25px; margin-left:15px;">
+    <span><asp:ImageButton ID="lnkDes" runat="server" ImageUrl="~/Images/detail.png" /></span>
+         <span>
+         <asp:Label ID="lblCompany" runat="server" Text="<%$ Resources:Attendance,Company %>" />
+          : <asp:Label ID="lblCompany1" Font-Size="12px" runat="server" />
+          </span> | 
+          <span> 
+           <asp:Label ID="lblBrand" runat="server" Text="<%$ Resources:Attendance,Brand %>"/>
+           : <asp:Label ID="lblBrand1" Font-Size="12px" runat="server" />
+           </span> | 
+           <span>
+             <asp:Label ID="lblLocation" runat="server" Text="<%$ Resources:Attendance,Location %>"
+             Font-Size="12px " Font-Bold="False" Font-Names="Verdana" /> : <asp:Label ID="lblLocation1" Font-Size="12px" runat="server" />
+           </span> | 
+           <span> 
+           <asp:Label ID="Label1" runat="server" Text="<%$ Resources:Attendance,Language %>" /> : <asp:Label ID="lblLanguage" Font-Size="12px" runat="server" /> </span>
+         	| <span>  <asp:Label  runat="server" 
+                                                    ID="lblWelcome" Text="<%$ Resources:Attendance,Welcome %>" /> : <asp:LinkButton ID="lnkUserName" runat="server" Font-Bold="false" Font-Size="12px"
+                                                    Font-Names="Verdana" Text="Admin" CausesValidation="False" PostBackUrl="~/MasterSetUp/ChangePassword.aspx" /></span> | <span>   <asp:LinkButton ID="lnkMailBox" runat="server" Visible="false" Font-Bold="false"
+                                                    Font-Size="12px" Font-Names="Verdana" Text="<%$ Resources:Attendance,Mail Box %>"
+                                                    CausesValidation="False" PostBackUrl="~/EmailSystem/Mailbox.aspx" /></span>
+                </div>
+            </div>
+                         <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                  <%--  <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i>--%>
+                        <asp:ImageButton runat="server" ID="imgbtnBLD" ImageUrl="~/Images/pin.png" OnClick="Bld_onClick"
+                        ToolTip="Change Credentials" Height="22px" Width="22px" />                        
+                        <%--</i> 
+                    </a>--%>
+                </li>
+                
+                <li class="dropdown">
+                  <%--  <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">--%>
+                   <%-- <i>--%>
+                   <asp:ImageButton ID="btnlogout" runat="server" ImageUrl="~/Images/logout.png" CausesValidation="False"
+                    ToolTip="LogOut" OnClick="btnlogout_Click" Height="22px" Width="22px" />
+                 <%--   </i>
+                    </a>--%>
+                </li>
+                
+                <li class="dropdown" style="margin-right:15px;">
+                    
+                        <asp:ImageButton ID="ImgHome" runat="server" ImageUrl="~/Images/home.png" CausesValidation="False"
+                        ToolTip="Pegasus:Home" OnClick="ImgHome_Click" Height="22px" Width="22px" />
+                      <%--  </i> 
+                    </a>--%>
+                </li>
+            </ul>
+                    </nav>
+                    <nav class="navbar-default navbar-side" role="navigation">
+                <div class="nav-side-menu">
+                   <div class="brand">Pryce</div>
+               <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+                        <div class="menu-list">  
+                        
+                        
+                        	<ul id="menu-content" class="menu-content collapse out">                         
+               <table>
+               <tr>
+               <td  id="tdpnlaccordian" runat="server">
+              <asp:Panel ID="pnlaccordian" runat="server">
+                 <cc1:Accordion ID="acrDynamic" runat="server" SelectedIndex="0" CssClass="accordion"
+                   HeaderCssClass="accordionHeader" HeaderSelectedCssClass="accordionHeaderSelected"
+                     ContentCssClass="accordionContent">
+                 </cc1:Accordion>
+              </asp:Panel>
+               </td>
+               </tr>
+               </table>
+             </ul>
+     	                    </div>
+	                    </div>
+                    </nav>
+                    <div id="page-wrapper">
+                        <div id="page-inner">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                            <footer>                            
+                              <nav class="navbar navbar-default top-navbar" role="navigation">
+                                <div class="navbar-header">
+                
+  	<div style="color:#333; font-size:14px; vertical-align:middle; margin-top:25px; margin-left:15px;">
+    <span><asp:Label ID="lblCurrency" runat="server" Text="<%$ Resources:Attendance,Currency %>" />:
+    <asp:Label ID="txtCurrency"  runat="server" />
+                                                                    </span>
+         <span>  <asp:Label ID="lblDataTime" runat="server" Text="DateTime" /> :  <asp:Label ID="txtDatetime" Font-Size="12px" runat="server" Font-Bold="true" Font-Names="Verdana"></asp:Label></span>
+         | <span>
+           <asp:Label ID="Label6" runat="server" Text="Financial Year" />
+           :<asp:Label ID="lblFinancialyear" runat="server" />
+
+         </span>
+                                                     
+                </div>
+            </div>
+                              </nav>                              
+				                <center>
+                                <p>Copyright &copy; 2016 <a href="http://www.pegasustech.net" target="_blank">Pegasus Technologies</a> All right reserved.</p>
+                                </center>
+				           </footer>
+                        </div>
+                        <!-- /. PAGE INNER  -->
+                    </div>
+                    <!-- /. PAGE WRAPPER  -->
+                </div>
+                <!-- /. WRAPPER  -->
+                <div id="divpanel" style="display: none; width: 95%;">
+                    <asp:Panel ID="PopupMenu1" Width="100%" runat="server">
+                        <table border="1" cellpadding="0" cellspacing="0" bordercolor="#c6c6c6">
+                            <tr>
+                                <td>
+                                    <table width="100%" cellspacing="0" bgcolor="#F9F9F9">
+                                        <tr>
+                                            <td colspan="2" align="left" valign="top">
+                                                <asp:Panel ID="pnl" runat="server" Width="100%" ScrollBars="Auto">
+                                                    <asp:DataList ID="dtModuellist" runat="server" RepeatColumns="5" RepeatDirection="Horizontal"
+                                                        CellSpacing="5">
+                                                        <ItemTemplate>
+                                                            <table>
+                                                                <tr>
+                                                                    <td class='ModuleListIcon' width="219px">
+                                                                        <asp:LinkButton ID="lnk" runat="server" CommandArgument='<%#Eval("ParentId") %>'
+                                                                            Width="219px" OnCommand="lnkEditCommand" CommandName='<%#Eval("ParentDashBoard_Url") %>'
+                                                                            Font-Underline="false">
+                                                                            <table width="100%">
+                                                                                <tr>
+                                                                                    <td width="28px">
+                                                                                        <asp:Literal ID="lit" runat="server" Text='<%#Eval("ParentModuleImage") %>'></asp:Literal>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <asp:Label ID="lblmodulename" runat="server" Text='<%#Eval("ParentModuleName") %>'
+                                                                                            CssClass="FrmTitle"></asp:Label>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </asp:LinkButton>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </ItemTemplate>
+                                                    </asp:DataList>
+                                                </asp:Panel>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+                </div>
+                <cc1:HoverMenuExtender ID="hme3" runat="Server" TargetControlID="lnkDes" PopupControlID="PopupMenu1"
+                    HoverCssClass="popupHover" PopupPosition="Center" OffsetX="0" OffsetY="0" PopDelay="50" />
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    </form>
+</body>
+</html>

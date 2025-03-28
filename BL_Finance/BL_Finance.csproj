@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{96051113-A5B7-4FD9-8791-1791604DED68}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BL_Finance</RootNamespace>
+    <AssemblyName>BL_Finance</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accounts\Ac_AccountMaster.cs" />
+    <Compile Include="Accounts\Ac_Ageing_Detail.cs" />
+    <Compile Include="Accounts\Ac_CashFlow_Detail.cs" />
+    <Compile Include="Accounts\Ac_CashFlow_Header.cs" />
+    <Compile Include="Accounts\Ac_ChartOfAccount.cs" />
+    <Compile Include="Accounts\Ac_CostOfCenter.cs" />
+    <Compile Include="Accounts\Ac_EmailLog.cs" />
+    <Compile Include="Accounts\Ac_Groups.cs" />
+    <Compile Include="Accounts\Ac_Ledger.cs" />
+    <Compile Include="Accounts\Ac_Nature_Accounts.cs" />
+    <Compile Include="Accounts\Ac_Parameter_Location.cs" />
+    <Compile Include="Accounts\Ac_Reconcile_Detail.cs" />
+    <Compile Include="Accounts\Ac_Reconcile_Header.cs" />
+    <Compile Include="Accounts\Ac_SubChartOfAccount.cs" />
+    <Compile Include="Accounts\Ac_Voucher_Detail.cs" />
+    <Compile Include="Accounts\Ac_Voucher_Header.cs" />
+    <Compile Include="Bank\ChequeReport.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BL_General\BL_General.csproj">
+      <Project>{9bd685f2-fd81-4ae6-beae-6dbc6a64bd89}</Project>
+      <Name>BL_General</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DA\DA.csproj">
+      <Project>{7a2dd982-7517-48c5-934f-423249336e66}</Project>
+      <Name>DA</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

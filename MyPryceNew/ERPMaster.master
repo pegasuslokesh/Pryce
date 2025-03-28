@@ -1,0 +1,1019 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ERPMaster.master.cs" Inherits="ERPMaster" %>
+
+<%@ Register Src="~/WebUserControl/ProjectBugs.ascx" TagPrefix="Bug" TagName="ProjectBugs1" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<%--<input type=*text* onkeypress=*OnKey_Search(event)* name=*q* class=*form-control search-menu-box* placeholder=*Search...*>--%>
+<!DOCTYPE html>
+<html>
+<head id="Head1" runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%--<title>AdminLTE 2 | Dashboard</title>--%>
+    <link rel="SHORTCUT ICON" href="Images/favicon.ico" />
+    <link href="./Bootstrap_Files/Additional/Ajax_Tab.css" rel="stylesheet" type="text/css" />
+    <link href="CSS/controlsCss.css" rel="stylesheet" />
+    <link href="./Bootstrap_Files/Additional/Button_Style.css" rel="stylesheet" type="text/css" />
+    <link href="./Bootstrap_Files/Additional/Popup_Style.css" rel="stylesheet" type="text/css" />
+    <link href="CSS/InvStyle.css" rel="stylesheet" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- DataTable Jquery  -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <%--<script src="../Bootstrap_Files/Additional/jquery-1.8.2.min.js"></script>
+    <script src="../Bootstrap_Files/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <link href="./Bootstrap_Files/Additional/jquery.dataTables.css" rel="stylesheet" />
+    <script src="../Bootstrap_Files/Additional/jquery.dataTables.min.js"></script>--%>
+
+    <%--<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>--%>
+    <%--<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />    --%>
+    <%--<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>--%>
+
+
+    <!-- DataTable Jquery  -->
+    <%--<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>--%>
+    <%--<script src="../Bootstrap_Files/plugins/jQuery/jquery-2.2.3.min.js"></script>--%>
+    <%--<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>--%>
+    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
+    <%--<script src="../Scripts/jquery-3.3.1.js"></script>--%>
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"> </script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+    <!-- Bootstrap 3.3.7 -->
+    <%--<link rel="stylesheet" href="./Bootstrap_Files/bootstrap/css/bootstrap.min.css">--%>
+    <!-- Font Awesome -->
+    <link href="Bootstrap_Files/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css"
+        rel="stylesheet" type="text/css" />
+
+    <!-- Ionicons -->
+    <link href="Bootstrap_Files/ionicons-2.0.1/ionicons-2.0.1/css/ionicons.min.css" rel="stylesheet"
+        type="text/css" />
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="./Bootstrap_Files/plugins/daterangepicker/daterangepicker.css">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="./Bootstrap_Files/plugins/datepicker/datepicker3.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="./Bootstrap_Files/plugins/iCheck/all.css">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="./Bootstrap_Files/plugins/colorpicker/bootstrap-colorpicker.min.css">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="./Bootstrap_Files/plugins/timepicker/bootstrap-timepicker.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="./Bootstrap_Files/plugins/select2/select2.min.css">
+    <!-- Theme style -->
+    <%--<link rel="stylesheet" href="./Bootstrap_Files/dist/css/AdminLTE.min.css">--%>
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="./Bootstrap_Files/dist/css/skins/_all-skins.min.css">
+
+    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--%>
+
+
+    <%-- <script>
+        $(document).ready(function () {
+            if (window.location.href.indexOf('/') >= 0) {
+                alert(window.location.href.split('/')[0]);
+                window.location.href.split('/')[0];
+                window.location.reload(true);
+            }
+            if (window.location.href.indexOf('#') >= 0) {
+                alert(window.location.href.split('#')[0]);
+                window.location.href.split('#')[0];
+                window.location.reload(true);
+            }
+        });
+    </script>--%>
+
+
+    <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+    <%@ Register Src="~/WebUserControl/Reminder.ascx" TagPrefix="uc1" TagName="Reminder1" %>
+
+    <%--<link rel="stylesheet" href="./BootStrap_Files/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./BootStrap_Files/dist/css/AdminLTE.min.css"/>--%>
+    <style>
+        .slimScrollBar {
+            background: none repeat scroll 0 0 #3C8DBC !important;
+            border-radius: 0;
+            display: none;
+            height: 702.936px;
+            position: absolute;
+            right: 1px;
+            top: 145px;
+            width: 10px !important;
+            z-index: 99;
+            opacity: 0.7 !important;
+        }
+
+
+        /*#modalLicence .modal-content {*/
+            /*background-image: url('..//Images//licence-info.svg');*/
+            /*background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+        }
+
+        #modalLicence .modal-dialog {
+            height: 100%;
+           
+        }*/
+
+        #tbllicence {
+            border-collapse: collapse;
+            width: 50%;
+            border: 2px solid black;
+        }
+
+            #tbllicence td,
+            #tbllicence th {
+                border: 1px solid black;
+            }
+    </style>
+    <script>
+        //define your time in second
+        var c = 300;
+        var t;
+        timedCount();
+        function timedCount() {
+            if (c == 0) {
+                refreshNotifications();
+                c = 300;
+            }
+            c = c - 1;
+            t = setTimeout(function () {
+                timedCount()
+            },
+			1000);
+        }
+        function refreshNotifications() {
+            $.ajax({
+                type: "POST",
+                url: "../pryceService.asmx/Get_Notification",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var response = response.d;
+                    if (response[0] == "0") {
+                        document.getElementById('li_reminder_count').innerHTML = "";
+                    }
+                    else {
+                        document.getElementById('li_reminder_count').innerHTML = response[0];
+                    }
+                    if (response[1] == "0") {
+                        document.getElementById('li_notification_count').innerHTML = "";
+                    }
+                    else {
+                        document.getElementById('li_notification_count').innerHTML = response[1];
+                    }
+                    if (response[2] == "0") {
+                        document.getElementById('li_setup_pending_count').innerHTML = "";
+                        document.getElementById('Li_Setup_Pendings').style.display = 'none';
+                    }
+                    else {
+                        //document.getElementById('li_setup_pending_count').innerHTML = response[2];
+                        document.getElementById('Li_Setup_Pendings').style.display = 'block';
+                    }
+
+                },
+                failure: function (response) {
+                    alert(response);
+                }
+            });
+        }
+
+        function resetPosition1() {
+
+        }
+        function initRpt(s) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var createFrameElement = s.printHelper.createFrameElement;
+
+            s.printHelper.createFrameElement = function (name) {
+                var frameElement = createFrameElement.call(this, name);
+                if (isChrome) {
+                    frameElement.addEventListener("load", function (e) {
+                        if (frameElement.contentDocument.contentType !== "text/html")
+                            frameElement.contentWindow.print();
+                    });
+                }
+                return frameElement;
+            }
+        }
+    </script>
+    <asp:Literal ID="Ltr_Change_CSS" runat="server"></asp:Literal>
+    <asp:ContentPlaceHolder ID="Head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+
+<body id="body1" runat="server" class="hold-transition skin-blue sidebar-mini fixed">
+    <%--<body id="body1" runat="server" class="sidebar-mini wysihtml5-supported skin-blue-light">--%>
+    <form id="Main_Form" runat="server" enctype="multipart/form-data">
+
+
+        <asp:ScriptManager ID="SM1" runat="server" EnablePartialRendering="true" EnablePageMethods="true" AsyncPostBackTimeout="36000">
+        </asp:ScriptManager>
+
+        <div id="snackbar" align="center">Saved Successfully</div>
+
+
+        <div class="wrapper">
+            <%--<div class="wrapper" style="height:auto;">--%>
+            <header class="main-header">
+                <!-- Logo -->
+                <a href="../Dashboard/AttendanceDashboard.aspx" class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini">
+                        <img style="width: 25px;" src="../Images/favicon.ico" alt="" /></span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg">
+                        <img src="../Images/pryceLogo.png" style="width: 115px; margin-top: -5px;" alt="" /></span>
+                </a>
+                <!-- Header Navbar: style can be found in header.less  -->
+                <nav class="navbar navbar-static-top">
+                    <!-- Sidebar toggle button-->
+                    <a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                    <asp:UpdatePanel ID="Update_Notification" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <label id="lblExpiryDate" style="padding-top: 14px; color: white;" runat="server">Expiry :</label><label id="txtExpiryDate" style="padding-top: 14px; color: white;" name="txtExpiryDate" runat="server"></label>
+                            &nbsp;
+                            <label style="padding-top: 14px; color: white;" id="CurrentDateTime" runat="server">DateTime :</label><label id="txtDateTimeNow" style="padding-top: 14px; color: white;" name="txtDateTimeNow" runat="server"></label>
+                            <div class="navbar-custom-menu">
+                                <ul class="nav navbar-nav">
+                                    <div>
+                                    </div>
+                                    <li style="padding-top: 14px;">
+
+                                        <asp:DropDownList ID="ddlLocationList" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlLocationList_SelectedIndexChanged" Style="height: 35px; margin-top: -6px; width: 320px;">
+                                        </asp:DropDownList>
+                                    </li>
+
+
+                                    <li id="Li_Setup_Pendings" class="dropdown notifications-menu" style="display: none;"><a onclick="showAppSetupPendings(); return false;" class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer" title="Application Setup Issue">
+                                        <img alt="" src="../Images/exclamation-red.gif" /><span id="li_setup_pending_count" class="label label-warning"></span></a>
+                                        <ul id="setup_pendings_span" class="dropdown-menu">
+                                        </ul>
+                                    </li>
+                                    <li id="Li_Bug_data" class="dropdown notifications-menu" runat="server"><a onclick="setDefaultName(); return false;" class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer" title="Add Bugs"><i class="fa fa-bug"></i></a>
+                                    </li>
+
+                                    <li id="Li_Reminder_Menu" class="dropdown notifications-menu"><a href="#" onclick="Read_Reminder(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-clock-o"></i><span id="li_reminder_count" class="label label-warning"></span></a>
+                                        <ul id="Reminder_Span" class="dropdown-menu">
+                                        </ul>
+
+                                    </li>
+                                    <!-- Messages: style can be found in dropdown.less-->
+                                    <li id="Li_Notification_Menu" class="dropdown messages-menu"><a id="A_Dropdown" href="#" onclick="Read_Notification(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="far fa-bell"></i><span id="li_notification_count" class="label label-warning"></span></a>
+                                        <ul id="Notification_Span" class="dropdown-menu">
+                                        </ul>
+
+                                    </li>
+                                    <!-- Notifications: style can be found in dropdown.less -->
+                                    <li class="dropdown notifications-menu">
+                                        <%--<a href="" class="dropdown-toggle" data-toggle="dropdown">              
+                <i class="fa fa-envelope-o"></i>
+              <span class="label label-warning">10</span>
+            </a>--%>
+                                        <ul class="dropdown-menu">
+                                            <li class="header">You have 10 notifications</li>
+                                            <li>
+                                                <!-- inner menu: contains the actual data -->
+                                                <ul class="menu">
+                                                    <li style="font-weight: 500">
+                                                        <a href="">
+                                                            <i class="fa fa-users text-aqua"></i>5 new members joined today
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            <i class="fa fa-warning text-yellow"></i>Very long description here that may not fit into the
+                      page and may cause design problems
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            <i class="fa fa-users text-red"></i>5 new members joined
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            <i class="fa fa-shopping-cart text-green"></i>25 sales made
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            <i class="fa fa-user text-red"></i>You changed your username
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="footer"><a href="">View all</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Tasks: style can be found in dropdown.less -->
+                                    <li class="dropdown tasks-menu">
+                                        <%--<a href="" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-flag-o"></i>
+              <span class="label label-danger">9</span>
+            </a>--%>
+                                        <ul class="dropdown-menu">
+                                            <li class="header">You have 9 tasks</li>
+                                            <li>
+                                                <!-- inner menu: contains the actual data -->
+                                                <ul class="menu">
+                                                    <li>
+                                                        <!-- Task item -->
+                                                        <a href="">
+                                                            <h3>Design some buttons
+                        <small class="pull-right">20%</small>
+                                                            </h3>
+                                                            <div class="progress xs">
+                                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                                    <span class="sr-only">20% Complete</span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <!-- end task item -->
+                                                    <li>
+                                                        <!-- Task item -->
+                                                        <a href="">
+                                                            <h3>Create a nice theme
+                        <small class="pull-right">40%</small>
+                                                            </h3>
+                                                            <div class="progress xs">
+                                                                <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                                    <span class="sr-only">40% Complete</span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <!-- end task item -->
+                                                    <li>
+                                                        <!-- Task item -->
+                                                        <a href="">
+                                                            <h3>Some task I need to do
+                        <small class="pull-right">60%</small>
+                                                            </h3>
+                                                            <div class="progress xs">
+                                                                <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                                    <span class="sr-only">60% Complete</span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <!-- end task item -->
+                                                    <li>
+                                                        <!-- Task item -->
+                                                        <a href="">
+                                                            <h3>Make beautiful transitions
+                        <small class="pull-right">80%</small>
+                                                            </h3>
+                                                            <div class="progress xs">
+                                                                <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                                    <span class="sr-only">80% Complete</span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <!-- end task item -->
+                                                </ul>
+                                            </li>
+                                            <li class="footer">
+                                                <%--<a href = ""  > See All Messages</a>--%>
+                                                <asp:UpdatePanel ID="Update_View_Button" runat="server">
+                                                    <ContentTemplate>
+                                                        <%--<a id="Btn_More_Record" runat="server" onserverclick="Btn_More_Record_ServerClick" href="" class="btn btn-default btn-flat">Sign Out</a>
+                                                        <a id="Btn_More_Reminder_Record" runat="server" onserverclick="Btn_More_Reminder_Record_ServerClick" href="" class="btn btn-default btn-flat">Sign Out</a>
+                                                        <a id="Btn_Read_Notification" runat="server" onserverclick="Btn_Read_Notification_Click" href="" class="btn btn-default btn-flat">Sign Out</a>
+                                                        <a id="Btn_Read_Reminder_Notification" runat="server" onserverclick="Btn_Read_Reminder_Notification_Click" href="" class="btn btn-default btn-flat">Sign Out</a>--%>
+
+                                                        <%--<asp:Button ID="Btn_More_Record" runat="server" OnClick="Btn_More_Record_ServerClick" Text="View" />
+                 <asp:Button ID="Btn_Read_Notification" runat="server" OnClick="Btn_Read_Notification_Click" Text="Read" />--%>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- User Account: style can be found in dropdown.less -->
+                                    <li class="dropdown user user-menu">
+                                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                            <asp:Literal ID="Ltr_Emp_Name" runat="server"></asp:Literal>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <!-- User image -->
+                                            <li></li>
+                                            <asp:Literal ID="Ltr_Emp_Details" runat="server"></asp:Literal>
+
+                                            <!-- Menu Body -->
+                                            <li style="display: none;" class="user-body">
+                                                <div class="row">
+                                                    <div class="col-xs-4 text-center">
+                                                        <a href="">Followers</a>
+                                                    </div>
+                                                    <div class="col-xs-4 text-center">
+                                                        <a href="">Sales</a>
+                                                    </div>
+                                                    <div class="col-xs-4 text-center">
+                                                        <a href="">Friends</a>
+                                                    </div>
+                                                </div>
+                                                <!-- /.row -->
+                                            </li>
+                                            <!-- Menu Footer-->
+                                            <li class="user-footer" style="background-color: #343433;">
+                                                <div class="pull-left">
+                                                    <a href="../MasterSetUp/ChangePassword.aspx" class="btn btn-default btn-flat">Change Password</a>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <a id="Btn_signout" runat="server" onserverclick="btn_log_Out_Click" href="" class="btn btn-default btn-flat">Sign Out</a>
+                                                    <%--<asp:Button ID="Btn_Signout" class="btn btn-default btn-flat" runat="server" Text="Sign out" OnClick="btn_log_Out_Click" />                  --%>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- Control Sidebar Toggle Button -->
+                                    <li>
+                                        <a href="" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="Update_Notification">
+                        <ProgressTemplate>
+                            <div class="modal_Progress">
+                                <div class="center_Progress">
+                                    <img alt="" src="../Images/ajax-loader2.gif" style="vertical-align: middle; background-color: White; border-radius: 10px;" />
+                                </div>
+                            </div>
+                        </ProgressTemplate>
+                    </asp:UpdateProgress>
+                </nav>
+            </header>
+            <!-- Left side column. contains the logo and sidebar -->
+            <asp:UpdatePanel ID="Update_Menu_List" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <asp:Literal ID="Menu_Items" runat="server"></asp:Literal>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+
+                    <asp:ContentPlaceHolder ID="HeaderContent" runat="server" ClientIDMode="Static">
+                    </asp:ContentPlaceHolder>
+
+                </section>
+                <!-- Main content -->
+                <section class="content">
+
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+
+                </section>
+                <!-- Main content -->
+            </div>
+            <!-- /.content-wrapper -->
+            <asp:ContentPlaceHolder ID="FooterContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <footer class="main-footer">
+                <asp:Literal ID="Ltr_Footer_Content" runat="server"></asp:Literal>
+            </footer>
+
+            <aside class="control-sidebar control-sidebar-dark">
+                <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                    <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="control-sidebar-home-tab">
+                        <%--<div class="tab-pane" id="control-sidebar-stats-tab">Location Details</div>--%>
+                        <asp:UpdatePanel ID="Update_Credential" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="tab-pane active" id="control-sidebar-settings-tab">
+                                    <h3 class="control-sidebar-heading">
+                                        <asp:Label ID="Label7" runat="server" class="control-sidebar-heading" Text="<%$ Resources:Attendance,Information :%>"></asp:Label></h3>
+                                    <div class="form-group">
+                                        <asp:Label ID="Label1" runat="server" class="control-sidebar-subheading" Text="<%$ Resources:Attendance,Company : %>"></asp:Label>
+                                        <p>
+                                            <asp:Label ID="Lbl_Company_name" runat="server"></asp:Label>
+                                        </p>
+                                    </div>
+                                    <div class="form-group" runat="server">
+                                        <asp:Label ID="Label3" class="control-sidebar-subheading" Text="<%$ Resources:Attendance,Brand :%>" runat="server"></asp:Label>
+                                        <p>
+                                            <asp:Label ID="Lbl_Brand" runat="server"></asp:Label>
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <asp:Label ID="Label2" class="control-sidebar-subheading" ToolTip="<%$ Resources:Attendance,Location%>" Text="<%$ Resources:Attendance,Login Parameter%>" runat="server"></asp:Label>
+                                        <p>
+                                            <asp:Label ID="Lbl_Location" runat="server"></asp:Label>
+                                        </p>
+                                    </div>
+                                    <div class="form-group" runat="server" id="Div_Fyc" visible="false">
+                                        <asp:Label ID="Label4" class="control-sidebar-subheading" Text="<%$ Resources:Attendance,Financial Year :%>" runat="server"></asp:Label>
+                                        <p>
+                                            <asp:Label ID="Lbl_F_Year" runat="server"></asp:Label>
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <asp:LinkButton ID="lnkLicenceDetail" runat="server" ToolTip="Show Licence Detail" OnClientClick="fnShowModalLicenceUser(); return false" Text="Licence Details"></asp:LinkButton>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <asp:Label ID="Label5" class="control-sidebar-subheading" Text="<%$ Resources:Attendance,Language :%>" runat="server"></asp:Label>
+                                        <p>
+                                            <asp:Label ID="Lbl_Language" Text="<%$ Resources:Attendance,Language %>" runat="server"></asp:Label>
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label ID="Label6" class="control-sidebar-subheading" Text="<%$ Resources:Attendance,Currency :%>" runat="server"></asp:Label>
+                                        <p>
+                                            <asp:Label ID="Lbl_Currency" runat="server"></asp:Label>
+                                        </p>
+                                    </div>
+                                    <div class="form-group" runat="server" id="Div_Active_User" visible="false">
+                                        <asp:LinkButton ID="lnkTotalActiveUser" runat="server" ToolTip="Get Active user List" OnClick="lnkTotalActiveUser_Click" Text="Total Active Users"></asp:LinkButton>
+                                        <p>
+                                            <asp:Label ID="lblTotalUser" runat="server"></asp:Label>
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <a href="../MasterSetup/Home.aspx" class="btn btn-default btn-flat">
+                                            <asp:Label ID="Label8" ForeColor="Black" class="control-sidebar-subheading" ToolTip="<%$ Resources:Attendance,Change Login Parameter%>" Text="<%$ Resources:Attendance,Login Parameter%>" runat="server"></asp:Label></a>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+
+                        <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="Update_Credential">
+                            <ProgressTemplate>
+                                <div class="modal_Progress">
+                                    <div class="center_Progress">
+                                        <img alt="" src="../Images/ajax-loader2.gif" style="vertical-align: middle; background-color: White; border-radius: 10px;" />
+                                    </div>
+                                </div>
+                            </ProgressTemplate>
+                        </asp:UpdateProgress>
+                    </div>
+                </div>
+            </aside>
+            <div class="control-sidebar-bg">
+            </div>
+        </div>
+        <div id="loading" style="display: none;" class="modal_Progress">
+            <div class="center_Progress">
+                <img alt="" src="../Images/ajax-loader2.gif" style="vertical-align: middle; background-color: White;" />
+            </div>
+        </div>
+        <asp:UpdatePanel ID="Update_timer" runat="server">
+            <ContentTemplate>
+                <%--<asp:Timer ID="Timer2" runat="server" OnTick="Timer2_Tick" Interval="5000">
+                </asp:Timer>--%>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
+        <div class="modal fade" id="BugsData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="col-md-6">
+                            <h4>New Bug</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <Bug:ProjectBugs1 runat="server" ID="bugData" />
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="modal fade" id="modalLicence" tabindex="-1" role="dialog" aria-labelledby="myLicence" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="col-md-6">
+                            <h5>Licence Details</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        </div>
+                    </div>
+                    <div class="modal-body" style="overflow: auto">
+                        <div class="row">
+                            <table id="tbllicence" >
+                                <tbody>
+                                    <tr>
+                                        <td>Company Name:</td>
+                                        <td colspan="2">
+                                            <asp:Label ID="txtcompanyname" runat="server"></asp:Label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country:</td>
+                                        <td colspan="2">
+                                            <asp:Label ID="txtCountry" runat="server"></asp:Label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Registration Code:</td>
+                                        <td colspan="2">
+                                            <asp:Label ID="txtRegistrationCode" runat="server"></asp:Label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Licence Key:</td>
+                                        <td colspan="2">
+                                            <asp:Label ID="txtLicenceKey" runat="server"></asp:Label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Expiry Date:</td>
+                                        <td colspan="2">
+                                            <asp:Label ID="lbExpiryDate" runat="server"></asp:Label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email ID:</td>
+                                        <td colspan="2">
+                                            <asp:Label ID="lblEmailID" runat="server"></asp:Label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>App Mode:</td>
+                                        <td>
+                                            <asp:Label ID="lblAppMode" runat="server"></asp:Label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Product Code:</td>
+                                        <td colspan="2">
+                                            <asp:Label ID="lblProductCode" runat="server"></asp:Label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>No of Device:</td>
+                                        <td colspan="2">
+                                            <asp:Label ID="txtDevice" runat="server"></asp:Label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Users:</td>
+                                        <td colspan="2">
+                                            <asp:Label ID="lblUsers" runat="server"></asp:Label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Employees:</td>
+                                        <td colspan="2">
+                                            <asp:Label ID="lblEmployees" runat="server"></asp:Label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+       </div>
+        <div class="modal fade" id="modalActiveUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="col-md-6">
+                            <h4>Active Users</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        </div>
+                    </div>
+                    <div class="modal-body" style="overflow: auto">
+                        <div class="col-md-12" style="overflow: auto">
+                            <asp:UpdatePanel ID="upActiveUser" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:GridView ID="gvActiveUsers" runat="server" CssClass="table table-responsive table-bordered" Width="100%">
+                                        <PagerStyle CssClass="pagination-ys" />
+                                    </asp:GridView>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal modal-warning fade" id="modalAppConfigStatus">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Application Configuration Status</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div style="overflow: auto; max-height: 270px;">
+                            <asp:Repeater ID="reptAppSetupStatus" runat="server">
+                                <HeaderTemplate>
+                                    <table class="table no-margin">
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="lblSetupStatus" runat="server" Text='<%# Eval("setupStatus") %>' />
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                                <FooterTemplate>
+                                    </table>
+                                </FooterTemplate>
+                            </asp:Repeater>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+
+    <asp:Literal ID="Ltr_AfterLoadScript" runat="server"></asp:Literal>
+    <!-- jQuery 2.2.3 -->
+    <%--<script src="../Bootstrap_Files/plugins/jQuery/jquery-2.2.3.min.js"></script>--%>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="../Bootstrap_Files/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Select2 -->
+    <script src="../Bootstrap_Files/plugins/select2/select2.full.min.js"></script>
+    <!-- InputMask -->
+    <script src="../Bootstrap_Files/plugins/inputmask/jquery.inputmask.js"></script>
+    <%--<script src="../Bootstrap_Files/plugins/inputmask/jquery.inputmask.date.extensions.js"></script>--%>
+    <script src="../Bootstrap_Files/plugins/inputmask/jquery.inputmask.extensions.js"></script>
+    <!-- date-range-picker -->
+    <%--<script src="Bootstrap_Files/Additional/moment.min.js" type="text/javascript"></script>--%>
+
+    <%--<script src="../Bootstrap_Files/plugins/daterangepicker/daterangepicker.js"></script>--%>
+    <!-- bootstrap datepicker -->
+    <script src="../Bootstrap_Files/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <!-- bootstrap color picker -->
+    <script src="../Bootstrap_Files/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+    <!-- bootstrap time picker -->
+    <script src="../Bootstrap_Files/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <!-- SlimScroll 1.3.0 -->
+    <script src="../Bootstrap_Files/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- iCheck 1.0.1 -->
+    <script src="../Bootstrap_Files/plugins/iCheck/icheck.min.js"></script>
+    <!-- FastClick -->
+    <script src="../Bootstrap_Files/plugins/fastclick/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <%--<script src="Bootstrap_Files/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>--%>
+    <script src="../Bootstrap_Files/dist/js/app.min.js"></script>
+    <%--<script src="../Bootstrap_Files/plugins/fullcalendar/fullcalendar.min.js"></script>--%>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../Bootstrap_Files/dist/js/demo.js"></script>
+    <!-- Page script -->
+    <%--<script src="Bootstrap_Files/Additional/bootstrap-notify.js"></script>
+    <script src="Bootstrap_Files/Additional/bootstrap-notify.min.js"></script>
+    <script src="Bootstrap_Files/Additional/bootstrap-notify.min.js"></script>--%>
+    <script>
+        //--------------------  For search Menu item content -------------------- 
+        $(".search-menu-box").on('input', function () {
+            var filter = $(this).val();
+            $(".sidebar-menu > li").each(function () {
+                if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        });
+        //--------------------  End search Menu item content -------------------- 
+
+
+        ////-------------------- For Active menu content --------------------
+        //var url = window.location;
+        //// for sidebar menu entirely but not cover treeview
+        //$('ul.sidebar-menu a').filter(function () {
+        //    return this.href == url;
+        //}).parent().addClass('active');
+        //// for treeview
+        //$('ul.treeview-menu a').filter(function () {
+        //    return this.href == url;
+        //}).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active');
+        ////-------------------- End Active menu content --------------------
+
+
+        //-------------------- For Active menu content --------------------
+        $(document).ready(function () {
+            var url = window.location;
+            var element = $('ul.sidebar-menu a').filter(function () {
+                return this.href == url || url.href.indexOf(this.href) == 0;
+            });
+            $(element).parentsUntil('ul.sidebar-menu', 'li').addClass('active');
+        });
+        //-------------------- End Active menu content --------------------
+
+
+        //-------------------- Change Conten-wrapper height -------------------- 
+
+        //$(document).ready(function () {
+        //    var originalWidth = 900;
+        //    function resize() {
+        //        this._originalHeight = this._originalHeight || $(this).height();
+        //        var bodyWidth = $('.content-wrapper').height();
+        //        //$(this).css("height", $('menu').height() + 60);
+        //        $(this).css("min-height", $('menu').height() + 60);
+        //    }
+
+        //    $(".content-wrapper").each(resize);
+        //    $(document).resize(function () {
+        //        $(".content-wrapper").each(resize);
+        //    });
+        //});
+        //-------------------- End Change Conten-wrapper height -------------------- 
+
+        //function View_More() {
+        //    Read_Notification('10');
+        //}
+
+
+        //function View_More_Reminder() {
+        //     Read_Reminder('10');
+
+        //}
+
+        function fnShowModalLicenceUser() {
+            $('#modalLicence').modal('show');
+        }
+
+
+        function Read_Notification(recCount) {
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: "../pryceService.asmx/Read_Notification",
+                data: "{'recCount':'" + recCount + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    debugger;
+                    var response = response.d;
+                    //alert(response);
+                    document.getElementById('Notification_Span').innerHTML = response;
+                    if ($("#Li_Notification_Menu").addClass("dropdown messages-menu open") == "dropdown messages-menu") {
+                        $("#Li_Notification_Menu").addClass("dropdown messages-menu open");
+                    }
+                },
+                error: function (err) {
+                    debugger;
+                    alert(err.message);
+
+                },
+                failure: function (response) {
+                    debugger;
+                    alert(response);
+                }
+            });
+
+        }
+        function Read_Reminder(recCount) {
+            $.ajax({
+                type: "POST",
+                url: "../pryceService.asmx/Read_Reminder",
+                data: "{'recCount':'" + recCount + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var response = response.d;
+                    document.getElementById('Reminder_Span').innerHTML = response;
+                    if ($("#Li_Reminder_Menu").addClass("dropdown messages-menu open") == "dropdown messages-menu") {
+                        $("#Li_Reminder_Menu").addClass("dropdown messages-menu open");
+                    }
+                },
+                failure: function (response) {
+                    alert(response);
+                }
+            });
+
+        }
+        function setDefaultName() {
+            $('#BugsData').modal('show');
+            setDefaultEmpName();
+        }
+
+        function showAppSetupPendings() {
+            $.ajax({
+                type: "POST",
+                url: "../pryceService.asmx/Read_Setup_Pendings",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var response = response.d;
+                    document.getElementById('setup_pendings_span').innerHTML = response;
+                    if ($("#Li_Setup_Pendings").addClass("dropdown messages-menu open") == "dropdown messages-menu") {
+                        $("#Li_Setup_Pendings").addClass("dropdown messages-menu open");
+                    }
+                },
+                failure: function (response) {
+                    alert(response);
+                }
+            });
+        }
+        function setDefaultEmpName() {
+            $.ajax({
+                url: '../WebServices/employee.asmx/getDefaultUserName',
+                method: 'post',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    document.getElementById('txtAssignedBy').value = data.d;
+                    var empId = document.getElementById('hdnAssignById');
+                    validateEmployeeNSetValue(document.getElementById('txtAssignedBy'), empId);
+                }
+            });
+        }
+    </script>
+    <script>
+        debugger;
+        var sessionTimeoutWarning = "<%= Session.Timeout - 2 %>";
+        var sessionTimeout = "<%= Session.Timeout %>";
+        var sTimeout = parseInt(sessionTimeoutWarning) * 60 * 1000;
+        setTimeout('SessionWarning()', sTimeout);
+
+        function SessionWarning() {
+            var message = "Your session will expire in " + (parseInt(sessionTimeout) - parseInt(sessionTimeoutWarning)) + " mins! Please Save the data before the session expires or do you want to extend ?";
+
+            var time1 = new Date().getTime();
+            if (confirm(message)) {
+                var time2 = new Date().getTime();
+                var dif = time2 - time1;
+                if (dif >= 120000) {
+                    SessionLogout();
+                    return;
+                }
+                <%= Session.Timeout += 30 %>
+                window.location.reload();
+            }
+            else {
+                setTimeout('SessionLogout()', 1000 * 60 * 2);
+            }
+        }
+        function SessionLogout() {
+            alert("Session is out now");
+            window.location.href = "../erplogin.aspx";
+        }
+
+        function fnShowModalActiveUser() {
+            $('#modalActiveUser').modal('show');
+        }
+
+    </script>
+
+    <script src="../Script/employee.js"></script>
+
+    <asp:ContentPlaceHolder ID="AfterLoadScriptContent" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>
+

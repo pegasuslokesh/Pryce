@@ -1,0 +1,317 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using PegasusDataAccess;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+//using Microsoft.SqlServer.Management.Common;
+//using Microsoft.SqlServer.Management.Smo;
+using System.Web.Services;
+
+
+public partial class DatabaseUtility_ExecuteSqlScript : System.Web.UI.Page
+{
+    DataAccessClass daclass = null;
+    DataTable dt = new DataTable();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        daclass = new DataAccessClass(Session["DBConnection"].ToString());
+    }
+
+    public bool ExecuteCommand(string sql)
+    {
+
+        bool Result = false;
+        string strcon = Session["DBConnection"].ToString();
+
+        SqlConnection conn = new SqlConnection(strcon);
+
+        try
+        {
+
+
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(sql, conn);
+
+
+            Server server = new Server(new ServerConnection(conn));
+            int i = server.ConnectionContext.ExecuteNonQuery(sql);
+
+            if (i < 0)
+            {
+                i = 0;
+            }
+
+            lblerror.ForeColor = System.Drawing.ColorTranslator.FromHtml("#000000");
+            lblerror.Text = "Command Executed Successfully and " + i.ToString() + " Row affected";
+
+            conn.Close();
+
+        }
+        catch (Exception ex)
+        {
+            conn.Close();
+            lblerror.ForeColor = System.Drawing.ColorTranslator.FromHtml("#ff0000");
+            lblerror.Text = ex.ToString();
+
+        }
+
+        return Result;
+
+
+    }
+    protected void btnexecute_OnClick(object sender, EventArgs e)
+    {
+        string strconn = Session["DBConnection"].ToString();
+        if (txtScript.Text == "")
+        {
+            lblerror.Text = "Enter Sql Statement";
+            txtScript.Focus();
+            return;
+        }
+
+        try
+        {
+            SqlConnection conn = new SqlConnection(strconn);
+            conn.Open();
+            SqlDataAdapter da = new SqlDataAdapter(txtScript.Text, conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            conn.Close();
+            lblerror.Text = "";
+
+
+            DataTable dtdatalist = new DataTable();
+
+            dtdatalist.Columns.Add("Count");
+
+
+            for (int i = 0; i < ds.Tables.Count; i++)
+            {
+                DataRow dr = dtdatalist.NewRow();
+
+                dr[0] = ds.Tables[i].Rows.Count.ToString();
+
+
+                dtdatalist.Rows.Add(dr);
+
+            }
+
+
+            if (ds.Tables.Count > 0)
+            {
+                dtlistsql.DataSource = dtdatalist;
+                dtlistsql.DataBind();
+
+                foreach (DataListItem item in dtlistsql.Items)
+                {
+
+                    GridView gvRecordlist = (GridView)item.FindControl("gvRecord");
+                    gvRecordlist.DataSource = ds.Tables[item.ItemIndex];
+                    gvRecordlist.DataBind();
+
+                }
+            }
+            else
+            {
+                dtlistsql.DataSource = null;
+                dtlistsql.DataBind();
+                ExecuteCommand(txtScript.Text);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            lblerror.ForeColor = System.Drawing.ColorTranslator.FromHtml("#ff0000");
+            lblerror.Text = ex.ToString();
+
+
+        }
+        txtScript.Focus();
+
+    }
+    protected void btnselect_OnClick(object sender, EventArgs e)
+    {
+
+
+
+
+        string strconn = Session["DBConnection"].ToString();
+        if (txtScript.Text == "")
+        {
+
+            lblerror.Text = "Enter Sql Statement";
+            txtScript.Focus();
+            return;
+        }
+
+        try
+        {
+            SqlConnection conn = new SqlConnection(strconn);
+            conn.Open();
+            SqlDataAdapter da = new SqlDataAdapter(txtScript.Text, conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            conn.Close();
+            lblerror.Text = "";
+
+            DataTable dtdatalist = new DataTable();
+            dtdatalist.Columns.Add("Count");
+
+            for (int i = 0; i < ds.Tables.Count; i++)
+            {
+                DataRow dr = dtdatalist.NewRow();
+                dr[0] = ds.Tables[i].Rows.Count.ToString();
+                dtdatalist.Rows.Add(dr);
+            }
+
+            if (ds.Tables.Count > 0)
+            {
+                dtlistsql.DataSource = dtdatalist;
+                dtlistsql.DataBind();
+
+                foreach (DataListItem item in dtlistsql.Items)
+                {
+                    GridView gvRecordlist = (GridView)item.FindControl("gvRecord");
+                    gvRecordlist.DataSource = ds.Tables[item.ItemIndex];
+                    gvRecordlist.DataBind();
+                }
+            }
+            else
+            {
+
+                ExecuteCommand(txtScript.Text);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            lblerror.ForeColor = System.Drawing.ColorTranslator.FromHtml("#ff0000");
+            lblerror.Text = ex.ToString();
+
+
+        }
+
+    }
+    protected void btnNewQuery_OnClick(object sender, EventArgs e)
+    {
+        txtScript.Text = "";
+        dtlistsql.DataSource = null;
+        dtlistsql.DataBind();
+        lblerror.Text = "";
+        txtScript.Focus();
+        lblerror.ForeColor = System.Drawing.ColorTranslator.FromHtml("#ff0000");
+        Session["tablename"] = null;
+    }
+    protected void btnBackup_OnClick(object sender, EventArgs e)
+    {
+        string strconn = Session["DBConnection"].ToString();
+        SqlConnection conn = new SqlConnection(strconn);
+        string Databasename = conn.Database;
+        string Path = Server.MapPath("~/DatabaseBackup");
+
+        string sql = "Backup Database " + Databasename + " to Disk='" + Path + "\\" + DateTime.Now.ToString("ddMMyyyy_HHmmss") + ".Bak'";
+
+        try
+        {
+            ExecuteCommand(sql);
+
+            lblerror.Text = "Datbase backup is stored on path " + Path + "\\" + DateTime.Now.ToString("ddMMyyyy_HHmmss") + ".Bak";
+        }
+        catch (Exception ex)
+        {
+
+            lblerror.Text = ex.ToString();
+
+        }
+    }
+    public void DisplayMessage(string str,string color="orange")
+    {
+        ScriptManager.RegisterStartupScript(this, GetType(), "", "showAlert('" + str + "','"+color+"','white');", true);
+
+    }
+    [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+
+    public static string[] GetobjectList(string prefixText, int count, string contextKey)
+    {
+        DataAccessClass da = new DataAccessClass(HttpContext.Current.Session["DBConnection"].ToString());
+        DataTable DtEmail = new DataTable();
+        string sql = "";
+        //sql = "select name from sys.objects where name like '%" + prefixText + "%'";
+
+        sql = "select name from sys.objects where type='u'";
+        try
+        {
+            DtEmail = da.return_DataTable(sql);
+        }
+        catch
+        {
+
+        }
+
+        if (HttpContext.Current.Session["tablename"] != null)
+        {
+            sql = "SELECT COLUMN_NAME as name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME ='" + HttpContext.Current.Session["tablename"].ToString() + "'";
+            DataTable dtcolumn = new DataTable();
+            try
+            {
+                dtcolumn = da.return_DataTable(sql);
+            }
+            catch
+            {
+            }
+
+            if (dtcolumn.Rows.Count > 0)
+            {
+                DtEmail.Merge(dtcolumn);
+                HttpContext.Current.Session["dtcolumnCopy"] = dtcolumn;
+            }
+            else
+            {
+                DataTable dtcopy = (DataTable)HttpContext.Current.Session["dtcolumnCopy"];
+
+                if (dtcopy != null)
+                {
+                    DtEmail.Merge(dtcopy);
+                }
+            }
+        }
+
+        try
+        {
+            DtEmail = new DataView(DtEmail, "name like '%" + prefixText + "%'", "", DataViewRowState.CurrentRows).ToTable();
+        }
+        catch
+        {
+        }
+
+        string[] txt = new string[DtEmail.Rows.Count];
+
+        if (DtEmail.Rows.Count > 0)
+        {
+            for (int i = 0; i < DtEmail.Rows.Count; i++)
+            {
+                txt[i] += DtEmail.Rows[i]["Name"].ToString();
+            }
+
+        }
+
+        return txt;
+    }
+    [WebMethod]
+    public static string MyMethod(string name)
+    {
+
+
+        HttpContext.Current.Session["tablename"] = name;
+
+        return "Hello " + name;
+    }
+
+
+
+}

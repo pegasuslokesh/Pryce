@@ -1,0 +1,59 @@
+﻿.btnLocation
+{
+    height: 35px;
+    background-image: url('../../Images/btnLocation.png' );
+}
+.btnLocation:Hover
+{
+    height: 35px;
+    background-image: url('../../Images/btnLocationBlue.png' );
+    color: #ffffff;
+}
+.btnPush
+{
+    background-image: url('../../Images/Push.png' );
+    width: 20px;
+    height: 20px;
+}
+.btnPush:hover
+{
+    background-image: url('../../Images/PushBlue.png' );
+    width: 20px;
+    height: 20px;
+}
+.btnPushAll
+{
+    background-image: url('../../Images/PushAll.png' );
+    width: 20px;
+    height: 20px;
+}
+.btnPushAll:hover
+{
+    background-image: url('../../Images/PushAllBlue.png' );
+    width: 20px;
+    height: 20px;
+}
+.btnPull
+{
+    background-image: url('../../Images/Pull.png' );
+    width: 20px;
+    height: 20px;
+}
+.btnPull:hover
+{
+    background-image: url('../../Images/PullBlue.png' );
+    width: 20px;
+    height: 20px;
+}
+.btnPullAll
+{
+    background-image: url('../../Images/PullAll.png' );
+    width: 20px;
+    height: 20px;
+}
+.btnPullAll:hover
+{
+    background-image: url('../../Images/PullAllBlue.png' );
+    width: 20px;
+    height: 20px;
+}

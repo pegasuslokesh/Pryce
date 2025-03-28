@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9BD685F2-FD81-4AE6-BEAE-6DBC6A64BD89}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BL_General</RootNamespace>
+    <AssemblyName>BL_General</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accounts\Ac_Finance_Year_Info.cs" />
+    <Compile Include="Accounts\Ac_FinancialYear_Closing_Detail.cs" />
+    <Compile Include="Accounts\Ac_FinancialYear_Detail.cs" />
+    <Compile Include="Accounts\Ac_ParameterMaster.cs" />
+    <Compile Include="arraylist.cs" />
+    <Compile Include="Arraylist_2.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Customer\Set_CustomerMaster_AuthorizedPerson_Detail.cs" />
+    <Compile Include="Customer\Set_CustomerMaster_BankReferences.cs" />
+    <Compile Include="Customer\Set_CustomerMaster_CompanyInfo.cs" />
+    <Compile Include="Customer\Set_CustomerMaster_CreditParameter.cs" />
+    <Compile Include="Customer\Set_CustomerMaster_SponserDetail.cs" />
+    <Compile Include="Customer\Set_CustomerMaster_TradeReferences.cs" />
+    <Compile Include="ITSetUp\Check_Page_Permission.cs" />
+    <Compile Include="ITSetUp\IPAddress.cs" />
+    <Compile Include="ITSetUp\IT_ApplicationMaster.cs" />
+    <Compile Include="ITSetUp\IT_Application_Customer.cs" />
+    <Compile Include="ITSetUp\IT_ModuleMaster.cs" />
+    <Compile Include="ITSetUp\IT_ObjectEntry.cs" />
+    <Compile Include="Master\BrandMaster.cs" />
+    <Compile Include="Master\CityMaster.cs" />
+    <Compile Include="Master\CompanyMaster.cs" />
+    <Compile Include="Master\ContactNoMaster.cs" />
+    <Compile Include="Master\Contact_BankDetail.cs" />
+    <Compile Include="Master\Contact_PriceList.cs" />
+    <Compile Include="Master\Country_Currency.cs" />
+    <Compile Include="Master\DepartmentMaster.cs" />
+    <Compile Include="Master\DesignationMaster.cs" />
+    <Compile Include="Master\EmployeeInformation.cs" />
+    <Compile Include="Master\EmployeeMaster.cs" />
+    <Compile Include="Master\EmployeeParameter.cs" />
+    <Compile Include="Master\Ems_ContactMaster.cs" />
+    <Compile Include="Master\HolidayMaster.cs" />
+    <Compile Include="Master\IT_App_Op_Permission.cs" />
+    <Compile Include="Master\IT_Object_Table.cs" />
+    <Compile Include="Master\LeaveMaster.cs" />
+    <Compile Include="Master\LeaveMaster_deduction.cs" />
+    <Compile Include="Master\LocationMaster.cs" />
+    <Compile Include="Master\ModuleMaster.cs" />
+    <Compile Include="Master\NationalityMaster.cs" />
+    <Compile Include="Master\ObjectMaster.cs" />
+    <Compile Include="Master\QualificationMaster.cs" />
+    <Compile Include="Master\ReligionMaster.cs" />
+    <Compile Include="Master\RoleDataPermission.cs" />
+    <Compile Include="Master\RoleMaster.cs" />
+    <Compile Include="Master\RolePermission.cs" />
+    <Compile Include="Master\Set_AddressCategory.cs" />
+    <Compile Include="Master\Set_ApplicationParameter.cs" />
+    <Compile Include="Master\Set_ApprovalMaster.cs" />
+    <Compile Include="Master\Set_Approval_Employee.cs" />
+    <Compile Include="Master\Set_BankMaster.cs" />
+    <Compile Include="Master\Set_Bank_Info.cs" />
+    <Compile Include="Master\Set_EmployeeGroupMaster.cs" />
+    <Compile Include="Master\Set_EmployeeResources.cs" />
+    <Compile Include="Master\Set_Employee_Holiday.cs" />
+    <Compile Include="Master\Set_Emp_SalaryIncrement.cs" />
+    <Compile Include="Master\Set_Group_Employee.cs" />
+    <Compile Include="Master\Set_Holiday_Group.cs" />
+    <Compile Include="Master\Set_Location_Department.cs" />
+    <Compile Include="Master\Set_Payment_Mode_Master.cs" />
+    <Compile Include="Master\set_PrinterMaster.cs" />
+    <Compile Include="Master\Set_UserReminder.cs" />
+    <Compile Include="Master\StateMaster.cs" />
+    <Compile Include="Master\UserDataPermission.cs" />
+    <Compile Include="Master\UserDetail.cs" />
+    <Compile Include="Master\UserMaster.cs" />
+    <Compile Include="Master\UserPermission.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendMailSms.cs" />
+    <Compile Include="SystemLog.cs" />
+    <Compile Include="System\CountryMaster.cs" />
+    <Compile Include="System\CurrencyMaster.cs" />
+    <Compile Include="System\Doc_ModuleMaster.cs" />
+    <Compile Include="System\Doc_ObjectEntry.cs" />
+    <Compile Include="System\MerchantMaster.cs" />
+    <Compile Include="System\NotificationMaster.cs" />
+    <Compile Include="System\ProductTaxMaster.cs" />
+    <Compile Include="System\Set_AddressChild.cs" />
+    <Compile Include="System\Set_AddressMaster.cs" />
+    <Compile Include="System\Set_CustomerMaster.cs" />
+    <Compile Include="System\Set_CustomerSupplier_Logo.cs" />
+    <Compile Include="System\Set_DocNumber.cs" />
+    <Compile Include="System\Set_Suppliers.cs" />
+    <Compile Include="System\Set_Vacancies_Master.cs" />
+    <Compile Include="System\SkillMaster.cs" />
+    <Compile Include="System\SystemParameter.cs" />
+    <Compile Include="System\Sys_AreaMaster.cs" />
+    <Compile Include="System\Sys_LocationType_Master.cs" />
+    <Compile Include="System\TaxMaster.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DA\DA.csproj">
+      <Project>{7a2dd982-7517-48c5-934f-423249336e66}</Project>
+      <Name>DA</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

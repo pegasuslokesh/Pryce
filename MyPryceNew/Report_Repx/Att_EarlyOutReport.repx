@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="14.1.8.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="Att_EarlyOutReport" DataSource="#Ref-0" DataMember="sp_Att_AttendanceRegister_Report" Font="Times New Roman, 9.75pt" Version="14.1" PageHeight="1100" PageWidth="850" Margins="38, 41, 0, 0">
+  <Bands>
+    <Item1 Ref="2" ControlType="DetailBand" Name="Detail" KeepTogether="true" TextAlignment="TopLeft" Padding="0,0,0,0,100" HeightF="16.66667">
+      <Controls>
+        <Item1 Ref="3" Name="xrTable2" ControlType="XRTable" LocationFloat="0, 0" Font="Times New Roman, 8pt" Borders="Left, Right, Bottom" SizeF="771.0002,16.66667">
+          <Rows>
+            <Item1 Ref="4" ControlType="XRTableRow" Name="xrTableRow2" Weight="1">
+              <Cells>
+                <Item1 Ref="5" Name="xrTableCell5" ControlType="XRTableCell" TextAlignment="TopCenter" Text="xrTableCell5" Weight="0.80411509113927382">
+                  <DataBindings>
+                    <Item1 Ref="6" PropertyName="Text" DataMember="sp_Att_AttendanceRegister_Report.Att_Date" />
+                  </DataBindings>
+                  <StylePriority Ref="7" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="8" Name="xrTableCell8" ControlType="XRTableCell" TextAlignment="TopCenter" Text="xrTableCell8" Weight="1.3165655695967893">
+                  <DataBindings>
+                    <Item1 Ref="9" PropertyName="Text" DataMember="sp_Att_AttendanceRegister_Report.Shift_Name" />
+                  </DataBindings>
+                  <StylePriority Ref="10" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="11" Name="xrTableCell22" ControlType="XRTableCell" TextAlignment="TopCenter" Text="xrTableCell22" Weight="1.4305688626599635">
+                  <DataBindings>
+                    <Item1 Ref="12" PropertyName="Text" DataMember="sp_Att_AttendanceRegister_Report.TimeTable_Name" />
+                  </DataBindings>
+                  <StylePriority Ref="13" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="14" Name="xrTableCell10" ControlType="XRTableCell" TextAlignment="TopCenter" Text="xrTableCell10" Weight="1.206878034177747">
+                  <DataBindings>
+                    <Item1 Ref="15" PropertyName="Text" DataMember="sp_Att_AttendanceRegister_Report.OffDuty_Time" />
+                  </DataBindings>
+                  <StylePriority Ref="16" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="17" Name="xrTableCell11" ControlType="XRTableCell" TextAlignment="TopCenter" Text="xrTableCell11" Weight="1.0110372938043972">
+                  <DataBindings>
+                    <Item1 Ref="18" PropertyName="Text" DataMember="sp_Att_AttendanceRegister_Report.Out_Time" />
+                  </DataBindings>
+                  <StylePriority Ref="19" UseTextAlignment="false" />
+                </Item5>
+                <Item6 Ref="20" Name="xrTableCell12" ControlType="XRTableCell" TextAlignment="TopCenter" Weight="1.010834919753614">
+                  <DataBindings>
+                    <Item1 Ref="21" PropertyName="Text" DataMember="sp_Att_AttendanceRegister_Report.EarlyMin_hhmm" />
+                  </DataBindings>
+                  <StylePriority Ref="22" UseTextAlignment="false" />
+                </Item6>
+                <Item7 Ref="23" Name="xrTableCell24" ControlType="XRTableCell" TextAlignment="TopCenter" Weight="0.9300018681750658">
+                  <DataBindings>
+                    <Item1 Ref="24" PropertyName="Text" DataMember="sp_Att_AttendanceRegister_Report.Early_Relaxation_Min_hhmm" />
+                  </DataBindings>
+                  <StylePriority Ref="25" UseTextAlignment="false" />
+                </Item7>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="26" UseFont="false" UseBorders="false" />
+        </Item1>
+      </Controls>
+    </Item1>
+    <Item2 Ref="27" ControlType="TopMarginBand" Name="TopMargin" Padding="0,0,0,0,100" TextAlignment="TopLeft" HeightF="0" />
+    <Item3 Ref="28" ControlType="BottomMarginBand" Name="BottomMargin" Padding="0,0,0,0,100" TextAlignment="TopLeft" HeightF="0" />
+    <Item4 Ref="29" ControlType="PageFooterBand" Name="PageFooter" HeightF="23">
+      <Controls>
+        <Item1 Ref="30" ControlType="XRPageInfo" Name="xrPageInfo2" SizeF="680.6249,23" LocationFloat="0, 0" Padding="2,2,0,0,100" TextAlignment="TopRight" Format="Page{0}">
+          <StylePriority Ref="31" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+    </Item4>
+    <Item5 Ref="32" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="153.625">
+      <Controls>
+        <Item1 Ref="33" Name="xrLabel9" ControlType="XRLabel" SizeF="91.95319,15.70834" LocationFloat="0, 0" Font="Times New Roman, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="None" Text="Created By:">
+          <StylePriority Ref="34" UseFont="false" UseBorders="false" />
+        </Item1>
+        <Item2 Ref="35" Name="xrLabel10" ControlType="XRLabel" SizeF="186.4217,15.70834" LocationFloat="91.95319, 0" TextAlignment="TopLeft" Font="Times New Roman, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="None" Text="xrLabel10">
+          <StylePriority Ref="36" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="37" ControlType="XRPageInfo" Name="xrPageInfo3" PageInfo="DateTime" SizeF="219.1666,15.70834" Borders="None" LocationFloat="458.8334, 0" Padding="2,2,0,0,100" Format="{0:dddd, MMMM dd, yyyy h:mm tt}">
+          <StylePriority Ref="38" UseBorders="false" />
+        </Item3>
+        <Item4 Ref="39" ControlType="XRPanel" Name="xrPanel1" SizeF="771,137.9167" LocationFloat="0, 15.70833" Borders="Left, Top, Right">
+          <StylePriority Ref="40" UseBorders="false" />
+          <Controls>
+            <Item1 Ref="41" Name="xrTable6" ControlType="XRTable" LocationFloat="2, 50.04168" SizeF="767,25">
+              <Rows>
+                <Item1 Ref="42" ControlType="XRTableRow" Name="xrTableRow9" Weight="1">
+                  <Cells>
+                    <Item1 Ref="43" Name="xrTableCell55" ControlType="XRTableCell" Font="Times New Roman, 8pt, style=Bold" Borders="None" Weight="1.1588356568605398">
+                      <StylePriority Ref="44" UseFont="false" UseBorders="false" />
+                    </Item1>
+                    <Item2 Ref="45" Name="xrTableCell56" ControlType="XRTableCell" Font="Times New Roman, 8pt" Borders="None" Weight="1.9350826399339747">
+                      <StylePriority Ref="46" UseFont="false" UseBorders="false" />
+                    </Item2>
+                    <Item3 Ref="47" Name="xrTableCell57" ControlType="XRTableCell" Font="Times New Roman, 8pt, style=Bold" Borders="None" Weight="1.4552673092583675">
+                      <StylePriority Ref="48" UseFont="false" UseBorders="false" />
+                    </Item3>
+                    <Item4 Ref="49" Name="xrTableCell58" ControlType="XRTableCell" Font="Times New Roman, 8pt" Borders="None" Text="xrTableCell40" Weight="2.0579267466443776">
+                      <StylePriority Ref="50" UseFont="false" UseBorders="false" />
+                    </Item4>
+                    <Item5 Ref="51" Name="xrTableCell59" ControlType="XRTableCell" Font="Times New Roman, 8pt, style=Bold" Borders="None" Weight="0.75009024870887431">
+                      <StylePriority Ref="52" UseFont="false" UseBorders="false" />
+                    </Item5>
+                    <Item6 Ref="53" Name="xrTableCell60" ControlType="XRTableCell" Font="Times New Roman, 8pt" Borders="None" Weight="2.5237902145523821">
+                      <StylePriority Ref="54" UseFont="false" UseBorders="false" />
+                    </Item6>
+                  </Cells>
+                </Item1>
+              </Rows>
+            </Item1>
+            <Item2 Ref="55" Name="xrTable7" ControlType="XRTable" LocationFloat="4, 75.04168" SizeF="238.1616,24.08334">
+              <Rows>
+                <Item1 Ref="56" ControlType="XRTableRow" Name="xrTableRow8" Weight="1">
+                  <Cells>
+                    <Item1 Ref="57" Name="xrTableCell53" ControlType="XRTableCell" Font="Times New Roman, 8pt, style=Bold" Borders="None" Text="n" Weight="1.7838433845751718">
+                      <StylePriority Ref="58" UseFont="false" UseBorders="false" />
+                    </Item1>
+                    <Item2 Ref="59" Name="xrTableCell54" ControlType="XRTableCell" Font="Times New Roman, 8pt" Borders="None" Weight="3.0464860210533224">
+                      <StylePriority Ref="60" UseFont="false" UseBorders="false" />
+                    </Item2>
+                  </Cells>
+                </Item1>
+              </Rows>
+            </Item2>
+            <Item3 Ref="61" Name="xrCompAddress" ControlType="XRLabel" SizeF="353.125,22.04167" LocationFloat="4.000003, 28.00001" Font="Times New Roman, 9.75pt, style=Bold" Padding="2,2,0,0,100" Borders="None" Text="xrCompAddress">
+              <StylePriority Ref="62" UseFont="false" UseBorders="false" />
+            </Item3>
+            <Item4 Ref="63" Name="xrTitle" ControlType="XRLabel" SizeF="450.1771,16" LocationFloat="122.9167, 121.9167" TextAlignment="TopCenter" Font="Times New Roman, 9.75pt, style=Bold" Padding="2,2,0,0,100" Borders="None" Text="xrTitle">
+              <StylePriority Ref="64" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item4>
+            <Item5 Ref="65" Name="xrPictureBox1" ControlType="XRPictureBox" SizeF="96.0835,45.04167" Borders="None" LocationFloat="672.9164, 2.999998" Sizing="StretchImage">
+              <StylePriority Ref="66" UseBorders="false" />
+            </Item5>
+            <Item6 Ref="67" Name="xrCompName" ControlType="XRLabel" SizeF="353.125,23" LocationFloat="2, 2" Font="Times New Roman, 9.75pt, style=Bold" Padding="2,2,0,0,100" Borders="None" Text="xrCompName">
+              <StylePriority Ref="68" UseFont="false" UseBorders="false" />
+            </Item6>
+          </Controls>
+        </Item4>
+      </Controls>
+    </Item5>
+    <Item6 Ref="69" ControlType="PageHeaderBand" Name="PageHeader" HeightF="14.99999">
+      <Controls>
+        <Item1 Ref="70" Name="xrTable1" ControlType="XRTable" LocationFloat="0, 0" Font="Times New Roman, 8pt, style=Bold" Borders="All" SizeF="771.0001,14.99999">
+          <Rows>
+            <Item1 Ref="71" ControlType="XRTableRow" Name="xrTableRow1" Borders="Left, Right, Bottom" Weight="1">
+              <Cells>
+                <Item1 Ref="72" Name="xrTableCell7" ControlType="XRTableCell" Borders="All" Weight="0.69929311195796351">
+                  <StylePriority Ref="73" UseBorders="false" />
+                </Item1>
+                <Item2 Ref="74" Name="xrTableCell1" ControlType="XRTableCell" Borders="All" Weight="1.144941666395819">
+                  <StylePriority Ref="75" UseBorders="false" />
+                </Item2>
+                <Item3 Ref="76" Name="xrTableCell21" ControlType="XRTableCell" Borders="All" Text="xrTableCell21" Weight="1.2440848349655604">
+                  <StylePriority Ref="77" UseBorders="false" />
+                </Item3>
+                <Item4 Ref="78" Name="xrTableCell2" ControlType="XRTableCell" Borders="All" Weight="1.0495531157116167">
+                  <StylePriority Ref="79" UseBorders="false" />
+                </Item4>
+                <Item5 Ref="80" Name="xrTableCell4" ControlType="XRTableCell" Borders="All" Weight="0.87924158990782608">
+                  <StylePriority Ref="81" UseBorders="false" />
+                </Item5>
+                <Item6 Ref="82" Name="xrTableCell6" ControlType="XRTableCell" Borders="All" Weight="0.87906559150023278">
+                  <StylePriority Ref="83" UseBorders="false" />
+                </Item6>
+                <Item7 Ref="84" Name="xrTableCell23" ControlType="XRTableCell" TextAlignment="TopCenter" Borders="All" Text="Relaxation Hour" Weight="0.80876849439799681">
+                  <StylePriority Ref="85" UseBorders="false" UseTextAlignment="false" />
+                </Item7>
+              </Cells>
+              <StylePriority Ref="86" UseBorders="false" />
+            </Item1>
+          </Rows>
+          <StylePriority Ref="87" UseFont="false" UseBorders="false" />
+        </Item1>
+      </Controls>
+    </Item6>
+    <Item7 Ref="88" ControlType="GroupFooterBand" Name="GroupFooter1" HeightF="16.04166">
+      <Controls>
+        <Item1 Ref="89" Name="xrTable5" ControlType="XRTable" LocationFloat="0, 0" Font="Times New Roman, 8pt" Borders="Left, Right, Bottom" SizeF="357.125,16.04166">
+          <Rows>
+            <Item1 Ref="90" ControlType="XRTableRow" Name="xrTableRow5" Weight="1">
+              <Cells>
+                <Item1 Ref="91" Name="xrTableCell3" ControlType="XRTableCell" TextAlignment="TopRight" Font="Times New Roman, 8pt, style=Bold" Borders="Left, Right, Bottom" Weight="1.1808362979665954">
+                  <StylePriority Ref="92" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="93" Name="xrTableCell20" ControlType="XRTableCell" TextAlignment="TopCenter" Font="Times New Roman, 8pt, style=Bold" Borders="Left, Right, Bottom" Weight="0.80770486279095222">
+                  <DataBindings>
+                    <Item1 Ref="94" PropertyName="Text" DataMember="sp_Att_AttendanceRegister_Report.EarlyOutcount" />
+                  </DataBindings>
+                  <StylePriority Ref="95" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="96" UseFont="false" UseBorders="false" />
+        </Item1>
+        <Item2 Ref="97" Name="xrTable4" ControlType="XRTable" LocationFloat="357.1249, 0" Font="Times New Roman, 8pt" Borders="Right, Bottom" SizeF="413.8751,16.04166">
+          <Rows>
+            <Item1 Ref="98" ControlType="XRTableRow" Name="xrTableRow4" Weight="1">
+              <Cells>
+                <Item1 Ref="99" Name="xrTableCell9" ControlType="XRTableCell" Font="Times New Roman, 8pt, style=Bold" Borders="Right, Bottom" Weight="0.66277389708965262">
+                  <StylePriority Ref="100" UseFont="false" UseBorders="false" />
+                </Item1>
+                <Item2 Ref="101" Name="xrTableCell19" ControlType="XRTableCell" TextAlignment="TopCenter" Font="Times New Roman, 8pt, style=Bold" Borders="Left, Right, Bottom" Weight="1.1290485924493119">
+                  <DataBindings>
+                    <Item1 Ref="102" PropertyName="Text" DataMember="sp_Att_AttendanceRegister_Report.SumEarlyMin_hhmm" />
+                  </DataBindings>
+                  <StylePriority Ref="103" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="104" Name="xrTableCell25" ControlType="XRTableCell" TextAlignment="TopCenter" Font="Times New Roman, 8pt, style=Bold" Weight="0.51932773576280111">
+                  <DataBindings>
+                    <Item1 Ref="105" PropertyName="Text" DataMember="sp_Att_AttendanceRegister_Report.SumEarly_Relaxation_Min_hhmm" />
+                  </DataBindings>
+                  <StylePriority Ref="106" UseFont="false" UseTextAlignment="false" />
+                  <Summary Ref="107" Func="Custom" />
+                </Item3>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="108" UseFont="false" UseBorders="false" />
+        </Item2>
+      </Controls>
+    </Item7>
+    <Item8 Ref="109" ControlType="GroupHeaderBand" Name="GroupHeader1" HeightF="15.625">
+      <Controls>
+        <Item1 Ref="110" Name="xrTable3" ControlType="XRTable" LocationFloat="0, 0" Font="Times New Roman, 8pt, style=Bold" Borders="Left, Right, Bottom" SizeF="771.0001,15.625">
+          <Rows>
+            <Item1 Ref="111" ControlType="XRTableRow" Name="xrTableRow3" Weight="1">
+              <Cells>
+                <Item1 Ref="112" Name="xrTableCell13" ControlType="XRTableCell" Weight="0.3645834350585937" />
+                <Item2 Ref="113" Name="xrTableCell14" ControlType="XRTableCell" TextAlignment="TopCenter" Font="Times New Roman, 9.75pt, style=Bold" Text=":" Weight="0.13541648864746092">
+                  <StylePriority Ref="114" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="115" Name="xrTableCell16" ControlType="XRTableCell" Text="xrTableCell16" Weight="0.96875007629394538">
+                  <DataBindings>
+                    <Item1 Ref="116" PropertyName="Text" DataMember="sp_Att_AttendanceRegister_Report.Emp_Code" />
+                  </DataBindings>
+                </Item3>
+                <Item4 Ref="117" Name="xrTableCell17" ControlType="XRTableCell" Weight="0.49263153076171884" />
+                <Item5 Ref="118" Name="xrTableCell18" ControlType="XRTableCell" TextAlignment="TopCenter" Font="Times New Roman, 9.75pt, style=Bold" Text=":" Weight="0.15929840087890612">
+                  <StylePriority Ref="119" UseFont="false" UseTextAlignment="false" />
+                </Item5>
+                <Item6 Ref="120" Name="xrTableCell15" ControlType="XRTableCell" Text="xrTableCell15" Weight="5.5893205949901628">
+                  <DataBindings>
+                    <Item1 Ref="121" PropertyName="Text" DataMember="sp_Att_AttendanceRegister_Report.Emp_Name" />
+                  </DataBindings>
+                </Item6>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="122" UseFont="false" UseBorders="false" />
+        </Item1>
+      </Controls>
+      <GroupFields>
+        <Item1 Ref="123" FieldName="Emp_Id" />
+      </GroupFields>
+    </Item8>
+  </Bands>
+  <ObjectStorage>
+    <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v14.1" Ref="0" Content="~Xtra#NULL" Type="AttendanceDataSet" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

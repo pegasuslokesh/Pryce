@@ -1,0 +1,24 @@
+@charset "utf-8";
+/* Pryce Arabic */
+
+#page-wrapper2 {
+    padding: 15px 15px;
+    min-height: 600px;
+    background: #FFFFFF;
+   
+}
+
+
+@media(min-width:768px) {
+     #page-wrapper2{
+               	margin: 0 265px 0 0;
+        		padding: 15px 30px;
+        		min-height: 800px;
+    			}
+	
+    .navbar-side {
+        z-index: 1;
+        position: absolute;
+        width: 260px;
+    }
+	

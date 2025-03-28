@@ -1,0 +1,119 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Demo.aspx.cs" Inherits="Lic_Demo" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>TimeMan Enterprises</title>
+<style>
+body{ background:#fff;}
+#header{ background:#666666;width:1000px;height:40px;}
+#main{width:1000px;height:auto; margin-left:130px;}
+#back{width:1000px;height:auto; margin-left:130px;}  
+.left_cln{ width:550px; background:#00CCFF; height:420px; float:left;}
+.right_cln{ width:400px; background:#f0f0f0; height:400px; float:left;}
+#footer{ background:#666666;width:1000px;height:40px;}
+.box_pad{margin-top:50px; margin-bottom:50px; margin-left:270px;}
+.main_box{ width:800px; height:400px; background:#fff;}
+.main_box_back{background:#f0f0f0; width:1000px;}
+h2{ font:Arial, Helvetica, sans-serif; size:18px; color:#FFFFFF; margin:30px;}
+
+#send {
+   width: 120px;
+   height: 30px;
+   background-color: #666666;
+   
+   
+   text-align:center;
+   float:left;
+   padding-top:8px;
+   border-radius: 5px;
+  
+}
+
+#send a {text-decoration:none;color:white;}
+
+#send:hover {
+   background-color: #000;
+   cursor:pointer;
+   
+}
+
+</style>
+</head>
+<body>
+<form id="form1" runat="server">
+   <div id="main">
+    	<div id="header"></div>
+    	
+    	<div class="box_pad" id="dvError" runat="server">
+    				<div class="main_box">
+   	<div class="left_cln">
+    <h2>Error</h2>
+            <div>
+             <asp:Image ID="img" runat="server" ImageUrl="~/Images/add.png" />
+            </div>
+            </div>
+            </div></div>
+    	
+    	
+    			<div class="box_pad" id="dvForm" runat="server">
+    				<div class="main_box">
+   	<div class="left_cln">
+    <h2>CONTACT NOW</h2>
+            <div>
+            <asp:TextBox ID="txtCompanyName" runat="server" placeholder="Company Name" style="margin-left:50px; width:300px; height:30px;  "></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+            ErrorMessage="Enter Company Name" ControlToValidate="txtCompanyName"></asp:RequiredFieldValidator>
+                   </div>
+      <br />
+            
+             <div>
+             <asp:TextBox ID="txtName" runat="server" placeholder="Name" style="margin-left:50px; width:300px; height:30px; "></asp:TextBox>
+     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+            ErrorMessage="Enter Name" ControlToValidate="txtName"></asp:RequiredFieldValidator>
+  </div>
+       <br />
+            
+             <div>
+     <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" style="margin-left:50px; width:300px; height:30px; "></asp:TextBox>
+     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+            ErrorMessage="Enter Email" ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+            ControlToValidate="txtEmail" ErrorMessage="Enter Valid Email" 
+            ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+    </div>
+      <br />
+      
+             <div><asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true"  placeholder="Country" style="margin-left:50px; width:300px; height:30px; border-radius: 10px; "
+            onselectedindexchanged="ddlCountry_SelectedIndexChanged" ></asp:DropDownList>
+            </div>
+            <br />
+            <div>
+   <asp:TextBox ID="txtCountryCode" runat="server" placeholder="Country Code" style="margin-left:50px; width:50px; height:30px; border-radius: 10px; "></asp:TextBox>
+    <asp:TextBox ID="txtMobileNo" runat="server" placeholder="Mobile No." style="margin-left:1px; width:238px; height:30px; border-radius: 10px; "></asp:TextBox>
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+            ErrorMessage="Enter Mobile No" ControlToValidate="txtMobileNo"></asp:RequiredFieldValidator>
+    </div><br />
+       	<div id="send" style="margin-left:50px;"><asp:Button ID="btnSave" runat="server" Text="Save" onclick="btnSave_Click"/></div>       
+      
+   </div>
+    </div>
+    </div>
+  
+    
+    <div class="box_pad" id="dvActivate" runat="server">
+    				<div class="main_box">
+   	<div class="left_cln">
+    <h2>Activate</h2>
+            <div>
+            <asp:Button ID="btnActive" runat="server" Text="Activate" onclick="btnActive_Click" style="margin-left:220px; margin-top:100px; width:70px; height:25px;" />
+            </div>
+            </div>
+            </div></div>
+    <div id="footer"></div>
+    </div>
+    </form>
+</body>
+</html>

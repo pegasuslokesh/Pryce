@@ -1,0 +1,183 @@
+﻿using System;
+using System.Data;
+using PegasusLicCommon;
+
+
+public partial class Lic_Demo : System.Web.UI.Page
+{
+    CountryMaster objCountry = null;
+    PegasusLicCommon.PegasusLic objLic = new PegasusLic();
+    SystemParameter ObjSysParam = null;
+    Set_ApplicationParameter objAppParam = null;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        
+        if (!IsPostBack)
+        {
+            objCountry = new CountryMaster(Session["DBConnection"].ToString());
+            ObjSysParam = new SystemParameter(Session["DBConnection"].ToString());
+            objAppParam = new Set_ApplicationParameter(Session["DBConnection"].ToString());
+            HidePanel();
+            DataTable dt = objLic.CheckInquiryDetail_Table(Settings.Project_Id, "1", Settings.GetCode(1), Settings.GetCode(2), Settings.GetCode(3), Settings.GetCode(4));
+            if (dt.Rows.Count > 0)
+            {
+                if (dt.Rows[0][0].ToString() == "Insert")
+                {
+                    DataTable dtCountry = objLic.GetCountryMaster_Table();
+                    ddlCountry.DataValueField = "Country_Id";
+                    ddlCountry.DataTextField = "Country_Name";
+                    ddlCountry.DataSource = dtCountry;
+                    ddlCountry.DataBind();
+
+                    ViewState["dtCountry"] = dtCountry;
+                    dvForm.Visible = true;
+                }
+                else if (dt.Rows[0][0].ToString() == "Error")
+                {
+
+                    Response.Redirect("Error.aspx");
+                }
+                else
+                {
+                    dvActivate.Visible = true;
+                }
+            }
+            else
+            {
+                Response.Redirect("Error.aspx");
+            }
+        }
+    }
+  
+    public void HidePanel()
+    {
+        dvActivate.Visible = false;
+        dvForm.Visible = false;
+        dvError.Visible = false;
+    }
+
+
+    protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            if (ddlCountry.SelectedValue != "0")
+            {
+                DataTable dtTemp = (DataTable)ViewState["dtCountry"];
+                dtTemp = new DataView(dtTemp, "Country_Id='" + ddlCountry.SelectedValue + "'", "", DataViewRowState.CurrentRows).ToTable();
+                if (dtTemp.Rows.Count > 0)
+                {
+                    txtCountryCode.Text = dtTemp.Rows[0][2].ToString();
+                }
+                else
+                {
+                    txtCountryCode.Text = "0";
+                }
+            }
+        }
+        catch (Exception Ex)
+        {
+            txtCountryCode.Text = "0";
+        }
+    }
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            DataTable dt = objLic.ContactInfo_Table(txtCompanyName.Text, txtName.Text, txtEmail.Text, txtMobileNo.Text, ddlCountry.SelectedValue);
+            if (Convert.ToInt16(dt.Rows[0][0].ToString()) > 0)
+            {
+                string strContactId = dt.Rows[0][0].ToString();
+
+                DataTable dtInquiryInfo = objLic.SaveInquiryDetail_Table(strContactId, Settings.Project_Id, "1", Settings.GetCode(1), Settings.GetCode(2), Settings.GetCode(3), Settings.GetCode(4));
+
+                if (dtInquiryInfo.Rows.Count > 0)
+                {
+                    if (dtInquiryInfo.Columns.Count < 2)
+                    {
+                        Response.Redirect("Error.aspx");
+                    }
+                    else
+                    {
+                        // Save Data in App_Settings  
+                        // Then Redirect on Login
+                        int res = Save_App_Settings(dtInquiryInfo);
+                        if (res > 0)
+                        {
+                            Response.Redirect("ERPLogin.aspx",false);
+                        }
+                        else
+                        {
+                            Response.Redirect("Error.aspx",false);
+                        }
+                       
+                    }
+
+                }
+                else
+                {
+                    Response.Redirect("Error.aspx",false);
+                }
+            }
+        }
+        catch (Exception Ex)
+        {
+            Response.Redirect("Error.aspx",false);
+        }
+    }
+    public int Save_App_Settings(DataTable dt)
+    {
+        Lic_App_Settings objLAS = new Lic_App_Settings(Session["DBConnection"].ToString());
+
+        string Installation_Type, System_Code1, System_Code2, System_Code3, System_Code4, Field1, Field2, Field3, Field4, Field5;
+        DateTime Action_Date, Expiry_Date;
+        int ReferenceID, Op_Type, Inquiry_Id, Contact_Id, Project_Id;
+
+
+        Installation_Type = "1";
+
+        System_Code1 = dt.Rows[0]["System_Code1"].ToString();
+        System_Code2 = dt.Rows[0]["System_Code2"].ToString();
+        System_Code3 = dt.Rows[0]["System_Code3"].ToString();
+        System_Code4 = dt.Rows[0]["System_Code4"].ToString();
+
+        Inquiry_Id = Convert.ToInt16(dt.Rows[0]["Inquiry_Id"].ToString());
+        Contact_Id = Convert.ToInt16(dt.Rows[0]["Contact_Id"].ToString());
+        Project_Id = Convert.ToInt16(dt.Rows[0]["Project_Id"].ToString());
+
+        Action_Date = Convert.ToDateTime(dt.Rows[0]["Action_Date"].ToString());
+        Expiry_Date = Convert.ToDateTime(dt.Rows[0]["Expiry_Date"].ToString());
+
+        Op_Type = 1;
+        ReferenceID = 0;
+
+        Field1 = "";
+        Field2 = "";
+        Field3 = "";
+        Field4 = "";
+        Field5 = "";
+       // objLAS.App_Settings_CRUD(Inquiry_Id.ToString(), Contact_Id.ToString(), Project_Id.ToString(), Installation_Type, System_Code1, System_Code2, System_Code3, System_Code4, Field1, Field2, Field3, Field4, Field5, Action_Date.ToString(), Expiry_Date.ToString(), "2");
+
+       int res = objLAS.App_Settings_CRUD(Inquiry_Id.ToString (), Contact_Id.ToString (), Project_Id.ToString (), Installation_Type, System_Code1, System_Code2, System_Code3, System_Code4, Field1, Field2, Field3, Field4, Field5, Action_Date.ToString(), Expiry_Date.ToString(), Op_Type.ToString());
+       return res;
+       
+    }
+
+
+    protected void btnActive_Click(object sender, EventArgs e)
+    {
+        DataTable dt = objLic.CheckInquiryDetail_Table(Settings.Project_Id, "1", Settings.GetCode(1), Settings.GetCode(2), Settings.GetCode(3), Settings.GetCode(4));
+        int res = Save_App_Settings(dt);
+        if (res > 0)
+        {
+
+            int b = ObjSysParam.UpdateSysParameterMaster("1", "Application_Id",Settings.Project_Id, "True", "Superadmin", DateTime.Now.ToString());
+            Response.Redirect("ERPLogin.aspx",false);
+        }
+        else
+        {
+            Response.Redirect("Error.aspx",false);
+        }
+                       
+    }
+}

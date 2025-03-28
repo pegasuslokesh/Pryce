@@ -1,0 +1,366 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ERPMaster.master" AutoEventWireup="true"
+    CodeFile="Databaseutility.aspx.cs" Inherits="DatabaseUtility_Databaseutility" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="HeaderContent" runat="Server">
+    <h1>
+        <i class="fa fa-database"></i>&nbsp;&nbsp;
+        <asp:Label ID="lblHeader" runat="server" Text="<%$ Resources:Attendance,Database Utility Setup%>"></asp:Label>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>
+            <asp:Label ID="Label6" runat="server" Text="<%$ Resources:Attendance,IT Security%>"></asp:Label></a></li>
+        <li><a href="#"><i class="fa fa-dashboard"></i>
+            <asp:Label ID="Label10" runat="server" Text="<%$ Resources:Attendance,IT Security%>"></asp:Label></a></li>
+        <li class="active">
+            <asp:Label ID="Label5" runat="server" Text="<%$ Resources:Attendance,Database%>"></asp:Label></li>
+    </ol>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="Server">
+    <asp:UpdatePanel ID="Update_Button" runat="server">
+        <ContentTemplate>
+            <asp:Button ID="Btn_Restore" Style="display: none;" runat="server" OnClick="btnRestore_Click" Text="Restore" />
+            <asp:Button ID="Btn_Backup" Style="display: none;" runat="server" OnClick="btnBackup_Click" Text="Backup" />
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+
+
+    <div id="myTab" class="nav-tabs-custom">
+        <ul class="nav nav-tabs pull-right bg-blue-gradient">
+            <li class="active"><a  href="#Client_Database" data-toggle="tab">
+                <i class="fa fa-wrench"></i>&nbsp;&nbsp;
+                <asp:Label ID="Label8" runat="server" Text="Client Database Initialize"></asp:Label></a></li>
+
+
+
+            <li id="li_DBUpdate" runat="server" visible="false"><a href="#Update" data-toggle="tab">
+                <i class="fas fa-redo"></i>&nbsp;&nbsp;
+                <asp:Label ID="Label13" runat="server" Text="<%$ Resources:Attendance,Update & Initialize Database %>"></asp:Label></a></li>
+            <li id="li_DBbakup" runat="server"><a onclick="Li_Tab_Backup_Restore()" href="#Backup" data-toggle="tab">
+                <i class="fa fa-wrench"></i>&nbsp;&nbsp;
+                <asp:Label ID="Label2" runat="server" Text="Maintanance"></asp:Label></a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane " id="Backup">
+                <asp:UpdatePanel ID="Update_Backup" runat="server">
+                    <ContentTemplate>
+                        <div class="row">
+                            <div class="col-md-6" runat="server">
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Backup Database</h3>
+                                    </div>
+                                    <div role="form">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <asp:Label ID="Lbl_File_Name" runat="server" Text="<%$ Resources:Attendance,File Name %>"
+                                                    for="txtFileName"></asp:Label>
+                                                <a style="color: Red">*</a>
+                                                <asp:RequiredFieldValidator EnableClientScript="true" Style="float: right;" runat="server" ID="RequiredFieldValidator3" ValidationGroup="txtFileName"
+                                                    Display="Dynamic" SetFocusOnError="true" ControlToValidate="txtFileName" ErrorMessage="<%$ Resources:Attendance,Enter File Name %>"></asp:RequiredFieldValidator>
+                                                <asp:TextBox ID="txtFileName" runat="server" class="form-control"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="box-footer" style="text-align: center;">
+                                            <asp:Button ID="btnsave" class="btn btn-primary" ValidationGroup="txtFileName" runat="server" OnClick="btnBackupDb_Click"
+                                                Text="Backup" />
+                                            <asp:Button ID="btnreset" class="btn btn-primary" runat="server" OnClick="btnreset_Click"
+                                                Text="<%$ Resources:Attendance,Reset%>" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" runat="server">
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Restore Database</h3>
+                                    </div>
+                                    <div role="form">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                               <%-- <asp:Label ID="Label4" runat="server" Text="<%$ Resources:Attendance,Select Back Up File %>"
+                                                    for="ddlFileName"></asp:Label>
+                                                <a style="color: Red">*</a>
+                                                <asp:RequiredFieldValidator EnableClientScript="true" Style="float: right;" runat="server" ID="RequiredFieldValidator1" ValidationGroup="ddlFileName" Display="Dynamic"
+                                                    SetFocusOnError="true" ControlToValidate="ddlFileName" InitialValue="--Select--" ErrorMessage="<%$ Resources:Attendance,Select Back Up File %>" />
+                                                <asp:DropDownList ID="ddlFileName" class="form-control" runat="server" />--%>
+                                            </div>
+                                        </div>
+                                        <div class="box-footer" style="text-align: center;">
+                                            <asp:Button ID="btnRestoreDB" class="btn btn-primary" ValidationGroup="ddlFileName" runat="server" OnClick="btnRestoreDB_Click"
+                                                Text="Restore" />
+                                            <asp:Button ID="btnResetdb" class="btn btn-primary" runat="server" OnClick="btnreset_Click1"
+                                                Text="<%$ Resources:Attendance,Reset%>" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12" id="Div_DB_Maintanance" runat="server">
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Database Maintanance</h3>
+                                    </div>
+                                    <div role="form">
+                                        <div class="box-body">
+                                            <div class="form-group">
+
+                                                <div class="col-md-6">
+
+                                                    <asp:Label ID="Label3" runat="server" Text="Data Clean Till"
+                                                        for="txtFileName"></asp:Label>
+
+                                                    <asp:TextBox ID="txtTransdate" runat="server" CssClass="form-control" />
+                                                    <cc1:CalendarExtender ID="Calender" runat="server" TargetControlID="txtTransdate" Format="dd-MMM-yyyy" />
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <asp:Label ID="Label7" runat="server" Text="Table List"
+                                                        for="txtFileName"></asp:Label>
+                                                    <asp:CheckBoxList ID="ListTableList" runat="server"
+                                                        SelectionMode="Multiple" CssClass="list" Font-Names="Trebuchet MS" RepeatDirection="Horizontal" RepeatColumns="2" CellSpacing="2" CellPadding="2"
+                                                        Font-Size="Small" Width="100%" Height="100px" ForeColor="Gray" Font-Bold="true">
+                                                    </asp:CheckBoxList>
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="box-footer" style="text-align: center;">
+                                            <asp:Button ID="btnTableBackup" class="btn btn-primary" ValidationGroup="txtFileName" runat="server" OnClick="btnTableBackup_Click"
+                                                Text="Clean" />
+                                            <asp:Button ID="btnTableReset" class="btn btn-primary" runat="server" OnClick="btnTableReset_Click"
+                                                Text="<%$ Resources:Attendance,Reset%>" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+            <div class="tab-pane" id="Update">
+                <asp:UpdatePanel ID="Update_Update" runat="server">
+                    <ContentTemplate>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Initialize Database</h3>
+                                    </div>
+                                    <div role="form">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <asp:Label ID="Label1" runat="server" Text="<%$ Resources:Attendance,Select Script File %>"
+                                                    for="dpDbInitialize"></asp:Label>
+                                                <a style="color: Red">*</a>
+                                                <asp:RequiredFieldValidator EnableClientScript="true" Style="float: right;" runat="server" ID="RequiredFieldValidator2" ValidationGroup="dpDbInitialize" Display="Dynamic"
+                                                    SetFocusOnError="true" ControlToValidate="dpDbInitialize" InitialValue="0" ErrorMessage="<%$ Resources:Attendance,Select Script File %>" />
+                                                <asp:DropDownList ID="dpDbInitialize" runat="server" class="form-control">
+                                                    <%-- <asp:ListItem Selected="True" Text="--Select--" Value="0"></asp:ListItem>--%>
+                                                    <asp:ListItem Text="Intialize Database" Value="1"></asp:ListItem>
+                                                    <%--<asp:ListItem Text="Blank Script with Master Database" Value="2"></asp:ListItem>
+                                                    <asp:ListItem Text="Blank Script" Value="3"></asp:ListItem>
+                                                    <asp:ListItem Text="Initialize TimeMan & HR Module" Value="4"></asp:ListItem>
+                                                    <asp:ListItem Text="Initialize Inventory Module" Value="5"></asp:ListItem>--%>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="box-footer" style="text-align: center;">
+                                            <asp:Button ID="btnIntializeDB" class="btn btn-primary" ValidationGroup="dpDbInitialize" runat="server" OnClick="btnIntializeDb_Click"
+                                                Text="<%$ Resources:Attendance,Initialize Database%>" />
+                                            <cc1:ConfirmButtonExtender ID="ConfirmButtonExtender1" runat="server" TargetControlID="btnIntializeDB"
+                                                ConfirmText="Are you sure to Initialize Database?">
+                                            </cc1:ConfirmButtonExtender>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Update Database Script</h3>
+                                    </div>
+                                    <div role="form">
+                                        <div class="box-body" style="text-align: center; height: 150px;">
+                                            <div class="form-group" style="margin-top: 30px;">
+                                                <asp:CheckBox ID="chkupdateALLDB" runat="server" Text="Update all database" Visible="false" />
+                                                <asp:Button ID="btnRunScript" class="btn btn-primary" runat="server" OnClick="btnRunScript_Click" OnClientClick="Confirm()"
+                                                    Text="<%$ Resources:Attendance,Update Database Script %>" />
+                                                <cc1:ConfirmButtonExtender ID="confirm1" runat="server" ConfirmText="Are you sure to update database ?"
+                                                    TargetControlID="btnRunScript">
+                                                </cc1:ConfirmButtonExtender>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+            <div class="tab-pane active" id="Client_Database">
+                <asp:UpdatePanel ID="Client_Database_Initialize" runat="server">
+                    <ContentTemplate>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title" >Client Database Initialize </h3>
+
+                                    </div>
+                                    <div role="form">
+                                        <div class="box-body" style="text-align: center; height: 150px;">
+                                            <div class="form-group" style="margin-top: 30px;">
+                                                <asp:Button ID="btnClientDatabase" runat="server" OnClick="btnClientDatabase_Click" Text="Initialize Database" CssClass="btn btn-primary" />
+                                            <cc1:ConfirmButtonExtender ID="ConfirmButtonExtender4" runat="server" TargetControlID="btnClientDatabase"
+                                                ConfirmText="Are you sure you want to initialize your database? If you click 'OK,' the application will log out after initialization. ">
+                                               
+                                            </cc1:ConfirmButtonExtender>
+                                                <br />
+                                                &nbsp;&nbsp;   <br />
+                                                 &nbsp;&nbsp;
+                                                 <p style="color:red"><b>Note:</b>After initialize the database successfully, the application will log out.</p>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-md-6">
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Client Database Restore</h3>
+                                    </div>
+                                    <div role="form">
+                                        <div class="box-body" style="text-align:center;height:150px;">
+                                             <asp:Label ID="Label4" runat="server" Text="<%$ Resources:Attendance,Select Back Up File %>"
+                                                    for="ddlFileName"></asp:Label>
+                                                <a style="color: Red">*</a>
+                                                <asp:RequiredFieldValidator EnableClientScript="true" Style="float: right;" runat="server" ID="RequiredFieldValidator1" ValidationGroup="ddlFileName" Display="Dynamic"
+                                                    SetFocusOnError="true" ControlToValidate="ddlFileName" InitialValue="--Select--" ErrorMessage="<%$ Resources:Attendance,Select Back Up File %>" />
+                                                <asp:DropDownList ID="ddlFileName" class="form-control" runat="server" />
+                                            <br />
+                                            <asp:Button ID="btnRestore" ValidationGroup="ddlFileName" runat="server"  Text="Restore Database" OnClick="btnRestoreDB_Click" CssClass="btn btn-primary" />
+                                             <cc1:ConfirmButtonExtender ID="ConfirmButtonExtender5" runat="server" TargetControlID="btnRestore"
+                                                ConfirmText="Are you sure you want to restore your database? If you click 'OK,' the application will log out after restore selected database. ">
+                                               
+                                            </cc1:ConfirmButtonExtender>
+                                            <p style="color:red"><b>Note:</b>After restoring the database successfully, the application will log out.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Client Database Backup</h3>
+                                    </div>
+                                    <div role="form">
+                                        <div class="box-body" style="text-align: center; height: 150px; margin-top: 20px; padding-top: 40px;">
+                                            <asp:Button ID="btnClientDB_Backup" CssClass="btn btn-primary" runat="server" Text="Database Backup" OnClick="btnBackupDb_Click" />
+                                            <cc1:ConfirmButtonExtender ID="ConfirmButtonExtender2" runat="server" TargetControlID="btnClientDB_Backup"
+                                                ConfirmText="Are you sure you want to back up the database?">
+                                            </cc1:ConfirmButtonExtender>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Transaction Initialize</h3>
+                                    </div>
+                                    <div role="form">
+                                        <div class="box-body" style="text-align:center; height:150px; margin-top:20px; padding-top:40px;">
+                                            <asp:Button ID="btnClientTransaction" Text="Transaction Clear" runat="server" CssClass="btn btn-primary" OnClick="btnClientTransaction_Click" />
+                                             <cc1:ConfirmButtonExtender ID="ConfirmButtonExtender3" runat="server" TargetControlID="btnClientTransaction"
+                                                ConfirmText="Are you sure you want to Clear up the Transaction?">
+                                            </cc1:ConfirmButtonExtender>
+                                            <br />&nbsp;                                          
+                                             <p style="color:red"><b>Note:</b>If you click on this button, the transaction will be cleared, and your stock will be zero.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+             
+            </div>
+               <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="Client_Database_Initialize">
+                    <ProgressTemplate>
+                        <div class="modal_Progress">
+                            <div class="center_Progress">
+                                <img alt="" src="../Images/ajax-loader2.gif" style="vertical-align: middle; background-color: White; border-radius: 10px;" />
+                            </div>
+                        </div>
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+        </div>
+    </div>
+
+    <asp:UpdateProgress ID="UpdateProgress3" runat="server" AssociatedUpdatePanelID="Update_Button">
+        <ProgressTemplate>
+            <div class="modal_Progress">
+                <div class="center_Progress">
+                    <img alt="" src="../Images/ajax-loader2.gif" style="vertical-align: middle; background-color: White; border-radius: 10px;" />
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="Update_Backup">
+        <ProgressTemplate>
+            <div class="modal_Progress">
+                <div class="center_Progress">
+                    <img alt="" src="../Images/ajax-loader2.gif" style="vertical-align: middle; background-color: White; border-radius: 10px;" />
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
+    <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="Update_Update">
+        <ProgressTemplate>
+            <div class="modal_Progress">
+                <div class="center_Progress">
+                    <img alt="" src="../Images/ajax-loader2.gif" style="vertical-align: middle; background-color: White; border-radius: 10px;" />
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+  
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="FooterContent" runat="Server">
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="AfterLoadScriptContent" runat="Server">
+    <script src="../Script/common.js"></script>
+    <script type="text/javascript">
+        function Confirm() {
+            var confirm_value = document.createElement("INPUT");
+            confirm_value.type = "hidden";
+            confirm_value.name = "confirm_value";
+            if (confirm("Do you want to database backup before update ?")) {
+                confirm_value.value = "Yes";
+            } else {
+                confirm_value.value = "No";
+            }
+            document.forms[0].appendChild(confirm_value);
+
+        }
+
+        function Li_Tab_Backup_Restore() {
+            document.getElementById('<%= Btn_Restore.ClientID %>').click();
+            document.getElementById('<%= Btn_Backup.ClientID %>').click();
+        }
+
+
+    </script>
+</asp:Content>

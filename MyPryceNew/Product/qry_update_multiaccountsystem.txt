@@ -1,0 +1,222 @@
+--backup
+update ac_voucher_detail set field5=other_account_no
+update ac_subchartofaccount set field5=other_account_no
+--Needs to remove foreign_key constraion form ac_ageing_detail table (FK_Ac_Ageing_Detail_Ems_ContactMaster)
+update ac_ageing_detail set field5=other_account_no
+update Ac_FinancialYear_Closing_Detail set field5=other_account_no
+update Ac_Reconcile_Header set field5=other_account_no
+truncate table Ac_AccountMaster
+
+Before run this query need to ask neeraj sir for document no for account_master
+Need to set document number - for customer and supplier account master (need to insert rows in dbo.Doc_ObjectEntry table)
+
+---------------------Start 2,4 ---------------
+-------start customer---------
+insert into Ac_AccountMaster([Ref_Type]
+      ,[Ref_Id]
+      ,[Account_No]
+      ,[Currency_Id]
+      ,[Field1]
+      ,[Field2]
+      ,[Field3]
+      ,[Field4]
+      ,[Field5]
+      ,[Is_Active]
+      ,[CreatedBy]
+      ,[CreatedDate]
+      ,[ModifiedBy]
+      ,[ModifiedDate])
+      
+     select 'Customer' as Ref_Type,ab.Other_Account_No as Ref_id,'CAC-' + cast((select COUNT(*) from Ac_AccountMaster) + (ROW_NUMBER() OVER(ORDER BY other_account_no ASC)) as varchar) as account_no,
+  '80' as currency_id,'2,4' as field1,'' as field2,'' as field3, 'false' as field4,GETDATE() as field5,'true' as Is_Active, 
+  'Superadmin' CreatedBy,GETDATE() as CreatedDate,'Superadmin' as ModifiedBy,GETDATE() as ModifiedDate from 
+(select distinct other_account_no from ac_voucher_detail where account_no=7 and other_account_no>0 and location_id in (2,4)
+union
+select distinct other_account_no from Ac_SubChartOfAccount where AccTransId=7 and other_account_no>0 and location_id in (2,4))ab order by Other_Account_No asc
+
+update ac_voucher_detail set ac_voucher_detail.other_account_no = new_account.trans_id from ac_voucher_detail inner join (select * from ac_accountmaster where ref_type='Customer' and field1='2,4')new_account on new_account.ref_id=ac_voucher_detail.other_account_no where ac_voucher_detail.account_no=7 and ac_voucher_detail.other_account_no>0 and ac_voucher_detail.location_id in (2,4)
+update ac_subChartOfAccount set ac_subChartOfAccount.other_account_no = new_account.trans_id from ac_subChartOfAccount inner join (select * from ac_accountmaster where ref_type='Customer' and field1='2,4')new_account on new_account.ref_id=ac_subChartOfAccount.other_account_no where ac_subChartOfAccount.acctransid=7 and ac_subChartOfAccount.other_account_no>0 and ac_subChartOfAccount.location_id in (2,4)
+update Ac_Ageing_Detail set Ac_Ageing_Detail.other_account_no = new_account.trans_id from Ac_Ageing_Detail inner join (select * from ac_accountmaster where ref_type='Customer' and field1='2,4')new_account on new_account.ref_id=Ac_Ageing_Detail.other_account_no where Ac_Ageing_Detail.account_no=7 and Ac_Ageing_Detail.other_account_no>0 and Ac_Ageing_Detail.location_id in (2,4)
+update Ac_FinancialYear_Closing_Detail set Ac_FinancialYear_Closing_Detail.other_account_no = new_account.trans_id from Ac_FinancialYear_Closing_Detail inner join (select * from ac_accountmaster where ref_type='Customer' and field1='2,4')new_account on new_account.ref_id=Ac_FinancialYear_Closing_Detail.other_account_no where Ac_FinancialYear_Closing_Detail.account_no=7 and Ac_FinancialYear_Closing_Detail.other_account_no>0 and Ac_FinancialYear_Closing_Detail.location_id in (2,4)
+update Ac_Reconcile_Header set Ac_Reconcile_Header.other_account_no = new_account.trans_id from Ac_Reconcile_Header inner join (select * from ac_accountmaster where ref_type='Customer' and field1='2,4')new_account on new_account.ref_id=Ac_Reconcile_Header.other_account_no where Ac_Reconcile_Header.account_no=7 and Ac_Reconcile_Header.other_account_no>0 and Ac_Reconcile_Header.location_id in (2,4)
+-------End customer---------
+
+-------Start supplier---------
+insert into Ac_AccountMaster([Ref_Type]
+      ,[Ref_Id]
+      ,[Account_No]
+      ,[Currency_Id]
+      ,[Field1]
+      ,[Field2]
+      ,[Field3]
+      ,[Field4]
+      ,[Field5]
+      ,[Is_Active]
+      ,[CreatedBy]
+      ,[CreatedDate]
+      ,[ModifiedBy]
+      ,[ModifiedDate])
+      
+      select 'Supplier' as Ref_Type,ab.Other_Account_No as Ref_id,'CAS-' + cast((select COUNT(*) from Ac_AccountMaster) + (ROW_NUMBER() OVER(ORDER BY other_account_no ASC)) as varchar) as account_no,
+  '80' as currency_id,'2,4' as field1,'' as field2,'' as field3, 'false' as field4,GETDATE() as field5,'true' as Is_Active, 
+  'Superadmin' CreatedBy,GETDATE() as CreatedDate,'Superadmin' as ModifiedBy,GETDATE() as ModifiedDate from 
+(select distinct other_account_no from ac_voucher_detail where account_no=28 and other_account_no>0 and location_id in (2,4)
+union
+select distinct other_account_no from Ac_SubChartOfAccount where AccTransId=28 and other_account_no>0 and location_id in (2,4))ab order by Other_Account_No asc
+
+
+update ac_voucher_detail set ac_voucher_detail.other_account_no = new_account.trans_id from ac_voucher_detail inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='2,4')new_account on new_account.ref_id=ac_voucher_detail.other_account_no where ac_voucher_detail.account_no=28 and ac_voucher_detail.other_account_no>0 and ac_voucher_detail.location_id in (2,4)
+update ac_subChartOfAccount set ac_subChartOfAccount.other_account_no = new_account.trans_id from ac_subChartOfAccount inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='2,4')new_account on new_account.ref_id=ac_subChartOfAccount.other_account_no where ac_subChartOfAccount.acctransid=28 and ac_subChartOfAccount.other_account_no>0 and ac_subChartOfAccount.location_id in (2,4)
+update Ac_Ageing_Detail set Ac_Ageing_Detail.other_account_no = new_account.trans_id from Ac_Ageing_Detail inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='2,4')new_account on new_account.ref_id=Ac_Ageing_Detail.other_account_no where Ac_Ageing_Detail.account_no=28 and Ac_Ageing_Detail.other_account_no>0 and Ac_Ageing_Detail.location_id in (2,4)
+update Ac_FinancialYear_Closing_Detail set Ac_FinancialYear_Closing_Detail.other_account_no = new_account.trans_id from Ac_FinancialYear_Closing_Detail inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='2,4')new_account on new_account.ref_id=Ac_FinancialYear_Closing_Detail.other_account_no where Ac_FinancialYear_Closing_Detail.account_no=28 and Ac_FinancialYear_Closing_Detail.other_account_no>0 and Ac_FinancialYear_Closing_Detail.location_id in (2,4)
+update Ac_Reconcile_Header set Ac_Reconcile_Header.other_account_no = new_account.trans_id from Ac_Reconcile_Header inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='2,4')new_account on new_account.ref_id=Ac_Reconcile_Header.other_account_no where Ac_Reconcile_Header.account_no=28 and Ac_Reconcile_Header.other_account_no>0 and Ac_Reconcile_Header.location_id in (2,4)
+-------End supplier-----------
+
+
+---------------------End 2,4 ---------------
+
+---------------------Start 6 ---------------
+---------Start Customer-----------
+insert into Ac_AccountMaster([Ref_Type]
+      ,[Ref_Id]
+      ,[Account_No]
+      ,[Currency_Id]
+      ,[Field1]
+      ,[Field2]
+      ,[Field3]
+      ,[Field4]
+      ,[Field5]
+      ,[Is_Active]
+      ,[CreatedBy]
+      ,[CreatedDate]
+      ,[ModifiedBy]
+      ,[ModifiedDate])
+      
+     select 'Customer' as Ref_Type,ab.Other_Account_No as Ref_id,'CAC-' + cast((select COUNT(*) from Ac_AccountMaster) + (ROW_NUMBER() OVER(ORDER BY other_account_no ASC)) as varchar) as account_no,
+  '1' as currency_id,'6' as field1,'' as field2,'' as field3, 'false' as field4,GETDATE() as field5,'true' as Is_Active, 
+  'Superadmin' CreatedBy,GETDATE() as CreatedDate,'Superadmin' as ModifiedBy,GETDATE() as ModifiedDate from 
+(select distinct other_account_no from ac_voucher_detail where account_no=7 and other_account_no>0 and location_id in (6)
+union
+select distinct other_account_no from Ac_SubChartOfAccount where AccTransId=7 and other_account_no>0 and location_id in (6))ab order by Other_Account_No asc
+
+update ac_voucher_detail set ac_voucher_detail.other_account_no = new_account.trans_id from ac_voucher_detail inner join (select * from ac_accountmaster where ref_type='Customer' and field1='6')new_account on new_account.ref_id=ac_voucher_detail.other_account_no where ac_voucher_detail.account_no=7 and ac_voucher_detail.other_account_no>0 and ac_voucher_detail.location_id in (6)
+update ac_subChartOfAccount set ac_subChartOfAccount.other_account_no = new_account.trans_id from ac_subChartOfAccount inner join (select * from ac_accountmaster where ref_type='Customer' and field1='6')new_account on new_account.ref_id=ac_subChartOfAccount.other_account_no where ac_subChartOfAccount.acctransid=7 and ac_subChartOfAccount.other_account_no>0 and ac_subChartOfAccount.location_id in (6)
+update Ac_Ageing_Detail set Ac_Ageing_Detail.other_account_no = new_account.trans_id from Ac_Ageing_Detail inner join (select * from ac_accountmaster where ref_type='Customer' and field1='6')new_account on new_account.ref_id=Ac_Ageing_Detail.other_account_no where Ac_Ageing_Detail.account_no=7 and Ac_Ageing_Detail.other_account_no>0 and Ac_Ageing_Detail.location_id in (6)
+update Ac_FinancialYear_Closing_Detail set Ac_FinancialYear_Closing_Detail.other_account_no = new_account.trans_id from Ac_FinancialYear_Closing_Detail inner join (select * from ac_accountmaster where ref_type='Customer' and field1='6')new_account on new_account.ref_id=Ac_FinancialYear_Closing_Detail.other_account_no where Ac_FinancialYear_Closing_Detail.account_no=7 and Ac_FinancialYear_Closing_Detail.other_account_no>0 and Ac_FinancialYear_Closing_Detail.location_id in (6)
+update Ac_Reconcile_Header set Ac_Reconcile_Header.other_account_no = new_account.trans_id from Ac_Reconcile_Header inner join (select * from ac_accountmaster where ref_type='Customer' and field1='6')new_account on new_account.ref_id=Ac_Reconcile_Header.other_account_no where Ac_Reconcile_Header.account_no=7 and Ac_Reconcile_Header.other_account_no>0 and Ac_Reconcile_Header.location_id in (6)
+---------End Customer-------------
+
+---------Start Supplier-----------
+insert into Ac_AccountMaster([Ref_Type]
+      ,[Ref_Id]
+      ,[Account_No]
+      ,[Currency_Id]
+      ,[Field1]
+      ,[Field2]
+      ,[Field3]
+      ,[Field4]
+      ,[Field5]
+      ,[Is_Active]
+      ,[CreatedBy]
+      ,[CreatedDate]
+      ,[ModifiedBy]
+      ,[ModifiedDate])
+      
+      select 'Supplier' as Ref_Type,ab.Other_Account_No as Ref_id,'CAS-' + cast((select COUNT(*) from Ac_AccountMaster) + 1 as varchar) as account_no,
+  '1' as currency_id,'6' as field1,'' as field2,'' as field3, 'false' as field4,GETDATE() as field5,'true' as Is_Active, 
+  'Superadmin' CreatedBy,GETDATE() as CreatedDate,'Superadmin' as ModifiedBy,GETDATE() as ModifiedDate from 
+(select distinct other_account_no from ac_voucher_detail where account_no=28 and other_account_no>0 and location_id in (6)
+union
+select distinct other_account_no from Ac_SubChartOfAccount where AccTransId=28 and other_account_no>0 and location_id in (6))ab order by Other_Account_No asc
+
+
+update ac_voucher_detail set ac_voucher_detail.other_account_no = new_account.trans_id from ac_voucher_detail inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='6')new_account on new_account.ref_id=ac_voucher_detail.other_account_no where ac_voucher_detail.account_no=28 and ac_voucher_detail.other_account_no>0 and ac_voucher_detail.location_id in (6)
+update ac_subChartOfAccount set ac_subChartOfAccount.other_account_no = new_account.trans_id from ac_subChartOfAccount inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='6')new_account on new_account.ref_id=ac_subChartOfAccount.other_account_no where ac_subChartOfAccount.acctransid=28 and ac_subChartOfAccount.other_account_no>0 and ac_subChartOfAccount.location_id in (6)
+update Ac_Ageing_Detail set Ac_Ageing_Detail.other_account_no = new_account.trans_id from Ac_Ageing_Detail inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='6')new_account on new_account.ref_id=Ac_Ageing_Detail.other_account_no where Ac_Ageing_Detail.account_no=28 and Ac_Ageing_Detail.other_account_no>0 and Ac_Ageing_Detail.location_id in (6)
+update Ac_FinancialYear_Closing_Detail set Ac_FinancialYear_Closing_Detail.other_account_no = new_account.trans_id from Ac_FinancialYear_Closing_Detail inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='6')new_account on new_account.ref_id=Ac_FinancialYear_Closing_Detail.other_account_no where Ac_FinancialYear_Closing_Detail.account_no=28 and Ac_FinancialYear_Closing_Detail.other_account_no>0 and Ac_FinancialYear_Closing_Detail.location_id in (6)
+update Ac_Reconcile_Header set Ac_Reconcile_Header.other_account_no = new_account.trans_id from Ac_Reconcile_Header inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='6')new_account on new_account.ref_id=Ac_Reconcile_Header.other_account_no where Ac_Reconcile_Header.account_no=28 and Ac_Reconcile_Header.other_account_no>0 and Ac_Reconcile_Header.location_id in (6)
+---------End Supplier-------------
+---------------------End 6------------------
+
+---------------------Start 7,8 ---------------
+---------Start Customer-----------
+insert into Ac_AccountMaster([Ref_Type]
+      ,[Ref_Id]
+      ,[Account_No]
+      ,[Currency_Id]
+      ,[Field1]
+      ,[Field2]
+      ,[Field3]
+      ,[Field4]
+      ,[Field5]
+      ,[Is_Active]
+      ,[CreatedBy]
+      ,[CreatedDate]
+      ,[ModifiedBy]
+      ,[ModifiedDate])
+      
+     select 'Customer' as Ref_Type,ab.Other_Account_No as Ref_id,'CAC-' + cast((select COUNT(*) from Ac_AccountMaster) + (ROW_NUMBER() OVER(ORDER BY other_account_no ASC)) as varchar) as account_no,
+  '67' as currency_id,'7,8' as field1,'' as field2,'' as field3, 'false' as field4,GETDATE() as field5,'true' as Is_Active, 
+  'Superadmin' CreatedBy,GETDATE() as CreatedDate,'Superadmin' as ModifiedBy,GETDATE() as ModifiedDate from 
+(select distinct other_account_no from ac_voucher_detail where account_no=7 and other_account_no>0 and location_id in (7,8)
+union
+select distinct other_account_no from Ac_SubChartOfAccount where AccTransId=7 and other_account_no>0 and location_id in (7,8))ab order by Other_Account_No asc
+
+update ac_voucher_detail set ac_voucher_detail.other_account_no = new_account.trans_id from ac_voucher_detail inner join (select * from ac_accountmaster where ref_type='Customer' and field1='7,8')new_account on new_account.ref_id=ac_voucher_detail.other_account_no where ac_voucher_detail.account_no=7 and ac_voucher_detail.other_account_no>0 and ac_voucher_detail.location_id in (7,8)
+update ac_subChartOfAccount set ac_subChartOfAccount.other_account_no = new_account.trans_id from ac_subChartOfAccount inner join (select * from ac_accountmaster where ref_type='Customer' and field1='7,8')new_account on new_account.ref_id=ac_subChartOfAccount.other_account_no where ac_subChartOfAccount.acctransid=7 and ac_subChartOfAccount.other_account_no>0 and ac_subChartOfAccount.location_id in (7,8)
+update Ac_Ageing_Detail set Ac_Ageing_Detail.other_account_no = new_account.trans_id from Ac_Ageing_Detail inner join (select * from ac_accountmaster where ref_type='Customer' and field1='7,8')new_account on new_account.ref_id=Ac_Ageing_Detail.other_account_no where Ac_Ageing_Detail.account_no=7 and Ac_Ageing_Detail.other_account_no>0 and Ac_Ageing_Detail.location_id in (7,8)
+update Ac_FinancialYear_Closing_Detail set Ac_FinancialYear_Closing_Detail.other_account_no = new_account.trans_id from Ac_FinancialYear_Closing_Detail inner join (select * from ac_accountmaster where ref_type='Customer' and field1='7,8')new_account on new_account.ref_id=Ac_FinancialYear_Closing_Detail.other_account_no where Ac_FinancialYear_Closing_Detail.account_no=7 and Ac_FinancialYear_Closing_Detail.other_account_no>0 and Ac_FinancialYear_Closing_Detail.location_id in (7,8)
+update Ac_Reconcile_Header set Ac_Reconcile_Header.other_account_no = new_account.trans_id from Ac_Reconcile_Header inner join (select * from ac_accountmaster where ref_type='Customer' and field1='7,8')new_account on new_account.ref_id=Ac_Reconcile_Header.other_account_no where Ac_Reconcile_Header.account_no=7 and Ac_Reconcile_Header.other_account_no>0 and Ac_Reconcile_Header.location_id in (7,8)
+---------End Customer-------------
+
+---------Start Supplier-----------
+insert into Ac_AccountMaster([Ref_Type]
+      ,[Ref_Id]
+      ,[Account_No]
+      ,[Currency_Id]
+      ,[Field1]
+      ,[Field2]
+      ,[Field3]
+      ,[Field4]
+      ,[Field5]
+      ,[Is_Active]
+      ,[CreatedBy]
+      ,[CreatedDate]
+      ,[ModifiedBy]
+      ,[ModifiedDate])
+      
+      select 'Supplier' as Ref_Type,ab.Other_Account_No as Ref_id,'CAS-' + cast((select COUNT(*) from Ac_AccountMaster) + (ROW_NUMBER() OVER(ORDER BY other_account_no ASC)) as varchar) as account_no,
+  '67' as currency_id,'7,8' as field1,'' as field2,'' as field3, 'false' as field4,GETDATE() as field5,'true' as Is_Active, 
+  'Superadmin' CreatedBy,GETDATE() as CreatedDate,'Superadmin' as ModifiedBy,GETDATE() as ModifiedDate from 
+(select distinct other_account_no from ac_voucher_detail where account_no=28 and other_account_no>0 and location_id in (7,8)
+union
+select distinct other_account_no from Ac_SubChartOfAccount where AccTransId=28 and other_account_no>0 and location_id in (7,8))ab order by Other_Account_No asc
+
+
+update ac_voucher_detail set ac_voucher_detail.other_account_no = new_account.trans_id from ac_voucher_detail inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='7,8')new_account on new_account.ref_id=ac_voucher_detail.other_account_no where ac_voucher_detail.account_no=28 and ac_voucher_detail.other_account_no>0 and ac_voucher_detail.location_id in (7,8)
+update ac_subChartOfAccount set ac_subChartOfAccount.other_account_no = new_account.trans_id from ac_subChartOfAccount inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='7,8')new_account on new_account.ref_id=ac_subChartOfAccount.other_account_no where ac_subChartOfAccount.acctransid=28 and ac_subChartOfAccount.other_account_no>0 and ac_subChartOfAccount.location_id in (7,8)
+update Ac_Ageing_Detail set Ac_Ageing_Detail.other_account_no = new_account.trans_id from Ac_Ageing_Detail inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='7,8')new_account on new_account.ref_id=Ac_Ageing_Detail.other_account_no where Ac_Ageing_Detail.account_no=28 and Ac_Ageing_Detail.other_account_no>0 and Ac_Ageing_Detail.location_id in (7,8)
+update Ac_FinancialYear_Closing_Detail set Ac_FinancialYear_Closing_Detail.other_account_no = new_account.trans_id from Ac_FinancialYear_Closing_Detail inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='7,8')new_account on new_account.ref_id=Ac_FinancialYear_Closing_Detail.other_account_no where Ac_FinancialYear_Closing_Detail.account_no=28 and Ac_FinancialYear_Closing_Detail.other_account_no>0 and Ac_FinancialYear_Closing_Detail.location_id in (7,8)
+update Ac_Reconcile_Header set Ac_Reconcile_Header.other_account_no = new_account.trans_id from Ac_Reconcile_Header inner join (select * from ac_accountmaster where ref_type='Supplier' and field1='7,8')new_account on new_account.ref_id=Ac_Reconcile_Header.other_account_no where Ac_Reconcile_Header.account_no=28 and Ac_Reconcile_Header.other_account_no>0 and Ac_Reconcile_Header.location_id in (7,8)
+---------End Supplier-------------
+---------------------End 7,8------------------
+
+
+--------Udate credit parametr table we are assuming all existing credit parameters for kuwait customer ----------------------------
+update dbo.Set_CustomerMaster_CreditParameter set Field3 = Ac_AccountMaster.Trans_Id from Set_CustomerMaster_CreditParameter inner join ac_accountMaster on ac_accountMaster.Ref_Id=Set_CustomerMaster_CreditParameter.Customer_Id where Ac_AccountMaster.field1='2,4' and Set_CustomerMaster_CreditParameter.Field2='C' and Ac_AccountMaster.Ref_Type='Customer'
+update dbo.Set_CustomerMaster_CreditParameter set Field3 = Ac_AccountMaster.Trans_Id from Set_CustomerMaster_CreditParameter inner join ac_accountMaster on ac_accountMaster.Ref_Id=Set_CustomerMaster_CreditParameter.Customer_Id where Ac_AccountMaster.field1='2,4' and Set_CustomerMaster_CreditParameter.Field2='S' and Ac_AccountMaster.Ref_Type='Supplier'
+
+update Set_CustomerMaster_CreditParameter set Set_CustomerMaster_CreditParameter.field4 = set_customermaster.field5 from Set_CustomerMaster_CreditParameter inner join set_customermaster on set_customermaster.Customer_Id=Set_CustomerMaster_CreditParameter.Customer_Id where set_customermaster.brand_id=2 and set_customermaster.field4='true' and Set_CustomerMaster_CreditParameter.Field3<>'' and Set_CustomerMaster_CreditParameter.Field2='C'
+update Set_CustomerMaster_CreditParameter set Set_CustomerMaster_CreditParameter.field4 = Set_Suppliers.field5 from Set_CustomerMaster_CreditParameter inner join Set_Suppliers on Set_Suppliers.Supplier_Id=Set_CustomerMaster_CreditParameter.Customer_Id where Set_Suppliers.brand_id=2 and Set_Suppliers.field4='true' and Set_CustomerMaster_CreditParameter.Field3<>'' and Set_CustomerMaster_CreditParameter.Field2='S'
+
+update Set_Approval_Transaction set Set_Approval_Transaction.Ref_Id= Set_CustomerMaster_CreditParameter.Field3 from Set_Approval_Transaction inner join Set_CustomerMaster_CreditParameter on Set_CustomerMaster_CreditParameter.Customer_Id=Set_Approval_Transaction.Ref_Id where Approval_Id=14 and Set_CustomerMaster_CreditParameter.Field3<>'' and Set_CustomerMaster_CreditParameter.field2='C'
+update Set_Approval_Transaction set Set_Approval_Transaction.Ref_Id= Set_CustomerMaster_CreditParameter.Field3 from Set_Approval_Transaction inner join Set_CustomerMaster_CreditParameter on Set_CustomerMaster_CreditParameter.Customer_Id=Set_Approval_Transaction.Ref_Id where Approval_Id=16 and Set_CustomerMaster_CreditParameter.Field3<>'' and Set_CustomerMaster_CreditParameter.field2='S'
+-------------------------end---------------------------------
+
+------After verification need blank backup fields
+update ac_voucher_detail set field5=''
+update ac_subchartofaccount set field5=''
+--Needs to add foreign_key constraion form ac_accoutmaster table 
+update ac_ageing_detail set field5=''
+update Ac_FinancialYear_Closing_Detail set field5=''
+

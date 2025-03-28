@@ -1,0 +1,154 @@
+<asp:LinkButton ID="lnkCustomerAccountMaster" Text='<%# Eval("CustomerName") %>' runat="server" CommandArgument='<%# Eval("Customer_Id") %>'
+                                                                OnCommand="lnkCustomerAccountMaster_Command" ToolTip="Account Master" />
+
+----database update hind----------------------------------------------
+DECLARE @customerAc_id int
+	DECLARE @supplierAc_id int
+	DECLARE @employeeAc_id int
+	DECLARE @vechicleAc_id int
+	DECLARE @employeeLoanAc_id int
+	set @customerAc_id=(SELECT top 1 Param_Value FROM Ac_Parameter where Company_Id=@Company_Id and Param_Name='Payment Vouchers' and IsActive='true')
+	set @supplierAc_id=(SELECT top 1 Param_Value FROM Ac_Parameter where Company_Id=@Company_Id and Param_Name='Receive Vouchers' and IsActive='true')
+	set @employeeAc_id= (SELECT top 1 Param_Value FROM Ac_Parameter where Company_Id=@Company_Id and Param_Name='Employee Account' and IsActive='true')
+	set @vechicleAc_id=(SELECT top 1 Param_Value FROM Ac_Parameter where Company_Id=@Company_Id and Param_Name='Vehicle Account' and IsActive='true')
+	set @employeeLoanAc_id=(SELECT top 1 Param_Value FROM Ac_Parameter where Company_Id=@Company_Id and Param_Name='Employee Loan Account' and IsActive='true')
+	
+	( case when Ac_FinancialYear_Closing_Detail.Account_No=@customerAc_id or Ac_FinancialYear_Closing_Detail.Account_No=@supplierAc_id then
+		Ems_ContactMaster.Name + '(' +  Sys_CurrencyMaster.Currency_Name + ')'
+		when Ac_FinancialYear_Closing_Detail.Account_No=@employeeAc_id or Ac_FinancialYear_Closing_Detail.Account_No=@employeeLoanAc_id then
+		Set_EmployeeMaster.Emp_Name
+		when Ac_FinancialYear_Closing_Detail.Account_No=@vechicleAc_id then
+		Prj_VehicleMaster.Vehicle_No
+		else '' end ) as ContactName,
+		
+		
+		 left join Ac_AccountMaster
+  on Ac_AccountMaster.Trans_Id=Ac_FinancialYear_Closing_Detail.other_account_no
+  left join Sys_CurrencyMaster
+  on Sys_CurrencyMaster.Currency_ID=Ac_AccountMaster.Currency_Id  
+  LEFT JOIN Ems_ContactMaster
+    ON Ems_ContactMaster.Trans_Id=Ac_AccountMaster.Ref_Id
+  Left join Set_EmployeeMaster
+  on Set_EmployeeMaster.Email_Id = Ac_FinancialYear_Closing_Detail.other_account_no
+  left join Prj_VehicleMaster 
+  on Prj_VehicleMaster.Vehicle_Id=Ac_FinancialYear_Closing_Detail.Other_Account_No 
+	
+
+dbo.Ems_ContactMaster.Name + '(' + Sys_CurrencyMaster.Currency_Name + ')' as Name,
+ 
+ Inner join ac_accountMaster
+on ac_accountMaster.trans_id=Ac_Voucher_Detail.Other_Account_No
+inner join Sys_CurrencyMaster
+on Sys_CurrencyMaster.Currency_ID=Ac_AccountMaster.Currency_Id
+    INNER JOIN dbo.Ems_ContactMaster
+      ON dbo.Ems_ContactMaster.Trans_Id=ac_accountMaster.ref_id
+
+-------------------------end------------------------------------------------
+																
+---------Get customer name in case of edit and view---------------------
+ DataTable _dtTemp = objAcAccountMaster.GetAc_AccountMasterByTransId(other_account_no);
+ txtSupplierName.Text = _dtTemp.Rows.Count > 0 ? _dtTemp.Rows[0]["Name"].ToString() + "/" + _dtTemp.Rows[0]["Trans_Id"].ToString() : "";
+ _dtTemp.Dispose();
+----------------------------end-----------------------------------------																
+																
+---------Get completion List customer ----------------
+Ac_ParameterMaster objAcParamMaster = new Ac_ParameterMaster();
+        DataTable dtCon = objAcParamMaster.GetCustomerAsPerSearchText(HttpContext.Current.Session["CompId"].ToString(), prefixText);
+        string[] filterlist = new string[dtCon.Rows.Count];
+        if (dtCon.Rows.Count > 0)
+        {
+            for (int i = 0; i < dtCon.Rows.Count; i++)
+            {
+                filterlist[i] = dtCon.Rows[i]["Name"].ToString() + "/" + dtCon.Rows[i]["Trans_id"].ToString();
+            }
+        }
+        return filterlist;
+-------------------------------------------------------------		
+-------Get customer TExt change event-------------------------
+  try
+        {
+            int otherAccountId = 0;
+            int.TryParse(txtCustomerName.Text.Split('/')[1].ToString(), out otherAccountId);
+            if (otherAccountId > 0)
+            {
+                DataTable dt = objAcAccountMaster.GetAc_AccountMasterByTransId(otherAccountId.ToString());
+                if (dt.Rows.Count > 0)
+                {
+                    if (dt.Rows[0]["Name"].ToString().ToUpper() == txtCustomerName.Text.Trim().Split('/')[0].ToString().ToUpper())
+                    {
+                        Session["CustomerAccountId"] = Ac_ParameterMaster.GetCustomerAccountNo(Session["CompId"].ToString());
+                        return;
+                    }
+
+                }
+            }
+        }
+        catch
+        {
+
+        }
+        DisplayMessage("Customer is not valid");
+        txtCustomerName.Text = "";
+        txtCustomerName.Focus();
+-------------------------------------------------------------------------------------------		
+
+
+
+
+
+---------Get completion List Supplier --------------------------
+Ac_ParameterMaster objAcParamMaster = new Ac_ParameterMaster();
+        DataTable dtCon = objAcParamMaster.GetSupplierAsPerSearchText(HttpContext.Current.Session["CompId"].ToString(), prefixText);
+        string[] filterlist = new string[dtCon.Rows.Count];
+        if (dtCon.Rows.Count > 0)
+        {
+            for (int i = 0; i < dtCon.Rows.Count; i++)
+            {
+                filterlist[i] = dtCon.Rows[i]["Name"].ToString() + "/" + dtCon.Rows[i]["Trans_id"].ToString();
+            }
+        }
+        return filterlist;
+----------------------------------------------------------------
+--------Supplier text change event------------------------------
+  try
+        {
+            int otherAccountId = 0;
+            int.TryParse(txtSupplierName.Text.Split('/')[1].ToString(), out otherAccountId);
+            if (otherAccountId > 0)
+            {
+                DataTable dt = objAcAccountMaster.GetAc_AccountMasterByTransId(otherAccountId.ToString());
+                if (dt.Rows.Count > 0)
+                {
+                    if (dt.Rows[0]["Name"].ToString().ToUpper() == txtSupplierName.Text.Trim().Split('/')[0].ToString().ToUpper())
+                    {
+                        Session["SupplierAccountId"] = Ac_ParameterMaster.GetSupplierAccountNo(Session["CompId"].ToString());
+                        return;
+                    }
+
+                }
+            }
+        }
+        catch
+        { }
+        DisplayMessage("Supplier is not valid");
+        txtSupplierName.Text = "";
+        txtSupplierName.Focus();
+----------------------------------------------------------------		
+
+---------------------- check currency validation ----------------------
+            try
+            {
+                if (hdnAccountNo.Value == Ac_ParameterMaster.GetSupplierAccountNo(Session["CompId"].ToString()) || hdnAccountNo.Value == Ac_ParameterMaster.GetCustomerAccountNo(Session["CompId"].ToString()))
+                {
+                    string strOtherAccountId = txtSupplierName.Text != "" ? txtSupplierName.Text.Split('/')[1].ToString() : txtCustomerName.Text.Split('/')[1].ToString();
+                    DataTable _dtTemp = objAcAccountMaster.GetAc_AccountMasterByTransId(strOtherAccountId);
+                    if (_dtTemp.Rows[0]["Currency_Id"].ToString() != hdnCurrencyId.Value)
+                    {
+                        DisplayMessage("Account Currency and voucher currency should same");
+                        return;
+                    }
+                    _dtTemp.Dispose();
+                }
+            }
+            catch { }
+-----------------------------end--------------------------------------------

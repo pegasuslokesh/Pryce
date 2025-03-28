@@ -1,0 +1,541 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+using System.IO;
+using Device_SDK;
+using System.Data.SqlClient;
+
+public partial class Android_DeviceMaster : BasePage
+{
+    #region defind Class Object
+    Common cmn = new Common();
+    SystemParameter objSys = new SystemParameter();
+    Set_EmployeeGroup_Master objEmpGroup = new Set_EmployeeGroup_Master();
+    Set_Group_Employee objGroupEmp = new Set_Group_Employee();
+    EmployeeMaster objEmp = new EmployeeMaster();
+    And_DeviceMaster objDevice = new And_DeviceMaster(); 
+    Att_ShiftDescription objShiftDesc = new Att_ShiftDescription();
+     Ser_UserTransfer objSer = new Ser_UserTransfer();
+    Att_ScheduleMaster objSch = new Att_ScheduleMaster();
+    UserMaster objUser = new UserMaster();
+    And_Device_Group objDeviceGroup = new And_Device_Group();
+    Set_ApplicationParameter objAppParam = new Set_ApplicationParameter();
+    #endregion
+    string connetionString = null;
+    SqlConnection cnn;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            dvProductList.Visible = false;
+            dvPnl2.Visible = false;
+            dvCustomer.Visible = false;
+        }
+    }
+
+    #region AllPageCode
+  
+    #endregion
+
+    #region System defind Funcation
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+       
+
+    }
+
+   
+   
+   
+    protected void btnNew_Click(object sender, EventArgs e)
+    {
+        pnlMenuNew.BackColor = System.Drawing.ColorTranslator.FromHtml("#ccddee");
+
+        PnlList.Visible = false;
+        PnlNewEdit.Visible = true;
+        PnlBin.Visible = false;
+    }
+   
+
+    protected void btnRefresh_Click(object sender, ImageClickEventArgs e)
+    {
+       // FillGrid();
+       // FillGridBin();
+    }
+
+    protected void btnbind_Click(object sender, ImageClickEventArgs e)
+    {
+        
+
+
+    }
+    protected void btnbinbind_Click(object sender, ImageClickEventArgs e)
+    {
+       
+    }
+
+ 
+    
+    protected void btnbinRefresh_Click(object sender, ImageClickEventArgs e)
+    {
+        //FillGrid();
+       // FillGridBin();
+
+    }
+
+  
+    protected void gvDeviceBin_OnSorting(object sender, GridViewSortEventArgs e)
+    {
+        HDFSortbin.Value = HDFSortbin.Value == "ASC" ? "DESC" : "ASC";
+        DataTable dt = new DataTable();
+        dt = objDevice.GetAndroidDeviceMasterInactive(Session["CompId"].ToString());
+        DataView dv = new DataView(dt);
+        string Query = "" + e.SortExpression + " " + HDFSortbin.Value + "";
+        dv.Sort = Query;
+        dt = dv.ToTable();
+        Session["dtbinFilter"] = dt;
+
+    }
+    protected void ImgbtnSelectAll_Clickary(object sender, ImageClickEventArgs e)
+    {
+
+        
+
+    }
+
+    protected void chkgvEmpSelectAll_CheckedChanged(object sender, EventArgs e)
+    {
+        
+    }
+    protected void chkgvEmpSelect_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
+            
+    protected void chkgvSelectAll_CheckedChanged(object sender, EventArgs e)
+    {
+    }
+        
+    protected void chkgvSelect_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnarybind_Click1(object sender, ImageClickEventArgs e)
+    {
+       
+
+    }
+    protected void lbxGroupSal_SelectedIndexChanged(object sender, EventArgs e)
+    {
+    }
+
+
+    protected void btnCustomer_Click(object sender, EventArgs e)
+         {
+             int b = objDevice.InsertCustomerSettings(ViewState["Customer_Id"].ToString(), ddltableView.SelectedItem.Text, ddlCustomerCode.SelectedItem.Text, ddlCustomerName.SelectedItem.Text, ddlCustomerPurchase.SelectedItem.Text);
+             dvPnl1.Visible = true;
+             dvCustomer.Visible = false;
+             RefreshAll();
+             dvPnl2.Visible = false;
+             ViewState["Customer_Id"] = "";
+         }
+
+    private void RefreshAll()
+    {
+        txtServerName.Text = "";
+        txtDataBaseName.Text = "";
+        txtUserName.Text = "";
+        txtPassword.Text = "";
+    }
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        int b = 0;      
+
+        if (txtServerName.Text == "")
+        {
+            DisplayMessage("Enter Server Name");
+            txtServerName.Focus();
+            return;
+        }
+        if (txtDataBaseName.Text == "")
+        {
+            DisplayMessage("Enter DataBase Name");
+            txtDataBaseName.Focus();
+            return;
+        }
+        if (txtUserName.Text == "")
+        {
+            DisplayMessage("Enter User Name");
+            txtUserName.Focus();
+            return;
+        }
+        if (txtPassword.Text == "")
+        {
+            DisplayMessage("Enter Password");
+            txtPassword.Focus();
+            return;
+        } 
+
+        if (editid.Value == "")
+        {
+            b = objDevice.InsertClientDBSettings("1", txtServerName.Text, txtDataBaseName.Text, txtUserName.Text, txtPassword.Text);
+            if (b != 0)
+            {
+                ViewState["Customer_Id"] = "1";
+                dvPnl1.Visible = false;
+                dvPnl2.Visible = true;
+                editid.Value = b.ToString();
+                 DisplayMessage("Record Saved");
+               // pnlEmpDevice.Visible = true;
+                PnlNewEdit.Visible = true;
+
+            }
+            else
+            {
+                DisplayMessage("Record Not Saved");
+            }
+        }
+        else
+        {
+            b = objDevice.InsertClientDBSettings("1", txtServerName.Text, txtDataBaseName.Text, txtUserName.Text, txtPassword.Text);
+          
+            if (b != 0)
+            {
+                dvPnl2.Visible = true;
+                dvPnl1.Visible = false;
+                //btnList_Click(null, null);
+                DisplayMessage("Record Updated");
+                //Reset();
+                //FillGrid();
+                pnlEmpDevice.Visible = true;
+                PnlNewEdit.Visible = true;
+            }
+            else
+            {
+                DisplayMessage("Record Not Updated");
+            }
+
+        }
+    }
+
+
+
+    protected void btnSaveTable_Click(object sender, EventArgs e)
+    {
+        if (ddltableView.SelectedIndex == 0)
+        {
+            DisplayMessage("Slelect Table/View From List");
+            return;
+        }
+        int b = objDevice.InsertProductSettings(ViewState["Customer_Id"].ToString(), ddltableView.SelectedItem.Text, ddlProductCode.SelectedItem.Text, ddlProductName.SelectedItem.Text, ddlProductPrice.SelectedItem.Text, ddlProductDescription.SelectedItem.Text);
+        ViewState["TableName"] = ddltableView.SelectedItem.Text;        
+        dvCustomer.Visible = true;
+        dvProductList.Visible = false;
+        dvPnl2.Visible = true;
+    }
+    protected void btnGo_Click(object sender, EventArgs e)
+    {
+        if (ddltableView.SelectedIndex == -1)
+        {
+            DisplayMessage("DataBase Connection has not Established Properly");
+            return;
+        }
+
+        if (ddltableView.SelectedIndex == 0)
+        {
+            ddlProductCode.DataSource = null;
+            ddlProductCode.DataBind();
+            ddlProductName.DataSource = null;
+            ddlProductName.DataBind();
+            ddlProductPrice.DataSource = null;
+            ddlProductPrice.DataBind();
+            ddlProductDescription.DataSource = null;
+            ddlProductDescription.DataBind();
+            DisplayMessage("Select Table/View");
+            return;
+        }
+        DataTable schema = new DataTable();
+        string TableName = ddltableView.SelectedItem.Text;
+
+        connetionString = ViewState["strConnectionstr"].ToString();
+        cnn = new SqlConnection(connetionString);
+
+        SqlDataAdapter da=new SqlDataAdapter("SELECT [name] AS [Column Name]FROM syscolumns WHERE id = (SELECT id FROM sysobjects WHERE (type = 'V' or type ='U' )AND [Name] = '" + TableName + "')",cnn);
+        DataTable dt=new DataTable();
+        da.Fill(dt);
+
+        ddlProductCode.DataSource = dt;
+        ddlProductCode.DataTextField = "Column Name";
+        ddlProductCode.DataBind();
+        ddlProductCode.Items.Insert(0, new ListItem("--Select--", "0"));
+
+        ddlProductName.DataSource = dt;
+        ddlProductName.DataTextField = "Column Name";
+        ddlProductName.DataBind();
+        ddlProductName.Items.Insert(0, new ListItem("--Select--", "0"));
+
+        ddlProductPrice.DataSource = dt;
+        ddlProductPrice.DataTextField = "Column Name";
+        ddlProductPrice.DataBind();
+        ddlProductPrice.Items.Insert(0, new ListItem("--Select--", "0"));
+
+        ddlProductDescription.DataSource = dt;
+        ddlProductDescription.DataTextField = "Column Name";
+        ddlProductDescription.DataBind();
+        ddlProductDescription.Items.Insert(0, new ListItem("--Select--", "0"));
+
+        ddlCustomerCode.DataSource = dt;
+        ddlCustomerCode.DataTextField = "Column Name";
+        ddlCustomerCode.DataBind();
+        ddlCustomerCode.Items.Insert(0, new ListItem("--Select--", "0"));
+
+        ddlCustomerName.DataSource = dt;
+        ddlCustomerName.DataTextField = "Column Name";
+        ddlCustomerName.DataBind();
+        ddlCustomerName.Items.Insert(0, new ListItem("--Select--", "0"));
+
+        ddlCustomerPurchase.DataSource = dt;
+        ddlCustomerPurchase.DataTextField = "Column Name";
+        ddlCustomerPurchase.DataBind();
+        ddlCustomerPurchase.Items.Insert(0, new ListItem("--Select--", "0"));
+
+
+
+
+
+        
+    }
+    protected void rbnTableView_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        
+        int i = rbnTableView.SelectedIndex;
+        
+        connetionString = "Data Source=" + txtServerName.Text + ";User ID=" + txtUserName.Text + ";Password=" + txtPassword.Text + ";database='" + txtDataBaseName.Text + "'";
+        ViewState["strConnectionstr"] = connetionString;
+        cnn = new SqlConnection(connetionString);
+        try
+        {
+            cnn.Open();
+
+        }
+        catch (Exception ex)
+        {
+            return;
+        }
+
+        if (i == 0)
+        {
+
+            dvProductList.Visible = true;
+            DataTable TableList = cnn.GetSchema("Tables");
+            //
+            ddltableView.DataSource = TableList;
+            ddltableView.DataTextField = "TABLE_NAME";
+            //ddltableView.DataValueField = "TABLE_ID";
+            ddltableView.DataBind();
+            ddltableView.Items.Insert(0, new ListItem("--Select--", "0"));
+
+        }
+        else
+        {
+            // View 
+
+            DataTable TableList = cnn.GetSchema("Views");
+            //
+            ddltableView.DataSource = TableList;
+            ddltableView.DataTextField = "TABLE_NAME";
+            //ddltableView.DataValueField = "TABLE_ID";
+            ddltableView.DataBind();
+            ddltableView.Items.Insert(0, new ListItem("--Select--", "0"));
+        }
+        
+    }
+    protected void lnkConnect_Click(object sender, ImageClickEventArgs e)
+    {
+
+
+               int errorcode = 0;
+        int index = ((GridViewRow)((ImageButton)sender).Parent.Parent).RowIndex;
+        string port = gvDevice.DataKeys[index]["Port"].ToString();
+        string IP = gvDevice.DataKeys[index]["IP_Address"].ToString();
+        string DeviceId = gvDevice.DataKeys[index]["Device_Id"].ToString();
+
+        Device_Operation_Lan objDeviceOp = new Device_Operation_Lan();
+       
+        
+        bool b = false;
+            b = objDeviceOp.Device_Connection(IP,Convert.ToInt32(port),0);
+
+
+        if (b == true)
+        {
+           
+               DisplayMessage("Device Is Functional");          
+
+
+           
+        }
+        else
+        {
+
+
+           
+           DisplayMessage("Unable to connect the device");
+           
+           
+       }
+    }
+       
+    protected void btnEdit_Command(object sender, CommandEventArgs e)
+    {
+        editid.Value = e.CommandArgument.ToString();
+
+
+
+
+        DataTable dt = objDevice.GetAndroidDeviceMasterById(Session["CompId"].ToString(), editid.Value);
+        if (dt.Rows.Count > 0)
+        {
+           
+           
+           
+
+          
+
+           
+           
+            btnNew_Click(null, null);
+
+            btnNew.Text = Resources.Attendance.Edit;
+
+        }
+
+
+
+    }
+
+    protected void IbtnDelete_Command(object sender, CommandEventArgs e)
+    {
+      
+       
+
+
+        int b = 0;
+        b = objDevice.DeleteAndroidDeviceMaster(Session["CompId"].ToString(), e.CommandArgument.ToString(), false.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
+        if (b != 0)
+        {
+            DisplayMessage("Record Deleted");
+
+           // FillGridBin();
+            //FillGrid();
+           // Reset();
+        }
+        else
+        {
+            DisplayMessage("Record Not Deleted");
+        }
+    }
+    protected void gvDevice_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvDevice.PageIndex = e.NewPageIndex;
+
+        DataTable dt = (DataTable)Session["dtFilter_Android_Master"];
+        gvDevice.DataSource = dt;
+        gvDevice.DataBind();
+
+    }
+    protected void gvDevice_OnSorting(object sender, GridViewSortEventArgs e)
+    {
+        HDFSort.Value = HDFSort.Value == "ASC" ? "DESC" : "ASC";
+        DataTable dt = new DataTable();
+        dt = (DataTable)Session["dtFilter_Android_Master"];
+        DataView dv = new DataView(dt);
+        string Query = "" + e.SortExpression + " " + HDFSort.Value + "";
+        dv.Sort = Query;
+        dt = dv.ToTable();
+        Session["dtFilter_Android_Master"] = dt;
+        gvDevice.DataSource = dt;
+        gvDevice.DataBind();
+    }
+
+    
+   
+    protected void btnReset_Click(object sender, EventArgs e)
+    {
+        RefreshAll();
+    }
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+      //  FillGrid();
+        //FillGridBin();
+       // Reset();
+    }
+       
+
+    protected void ImgbtnSelectAll_Click(object sender, ImageClickEventArgs e)
+    {
+    }
+
+
+    protected void imgBtnRestore_Click(object sender, ImageClickEventArgs e)
+        {
+
+        }
+
+    #endregion
+
+    #region User Defined Function
+    public void DisplayMessage(string str)
+    {
+        ScriptManager.RegisterStartupScript(this, GetType(), "", "alert('" + str + "');", true);
+    }
+
+   
+   
+
+
+
+    private int GetMinuteDiff(string greatertime, string lesstime)
+    {
+
+        if (greatertime == "__:__:__" || greatertime == "")
+        {
+            return 0;
+        }
+        if (lesstime == "__:__:__" || lesstime == "")
+        {
+            return 0;
+        }
+        int retval = 0;
+        int actTimeHour = Convert.ToInt32(greatertime.Split(':')[0]);
+        int ondutyhour = Convert.ToInt32(lesstime.Split(':')[0]);
+        int actTimeMinute = Convert.ToInt32(greatertime.Split(':')[1]);
+        int ondutyMinute = Convert.ToInt32(lesstime.Split(':')[1]);
+        int totalActTimeMinute = actTimeHour * 60 + actTimeMinute;
+        int totalOnDutyTimeMinute = ondutyhour * 60 + ondutyMinute;
+        if (totalActTimeMinute - totalOnDutyTimeMinute < 0)
+        {
+            retval = 1440 + (totalActTimeMinute - totalOnDutyTimeMinute);
+        }
+        else
+        {
+            retval = (totalActTimeMinute - totalOnDutyTimeMinute);
+        }
+        return retval;
+    }
+    #endregion
+
+  
+}

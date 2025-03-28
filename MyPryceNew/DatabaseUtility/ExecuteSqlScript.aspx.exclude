@@ -1,0 +1,121 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ExecuteSqlScript.aspx.cs"
+    Inherits="DatabaseUtility_ExecuteSqlScript" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+
+
+
+<head runat="server">
+    <title></title>
+    <link href="../CSS/InvStyle.css" rel="stylesheet" type="text/css" />
+
+
+
+
+    
+
+
+
+    <script type="text/javascript" language="javascript">
+
+       function GetCode(source, eventArgs) {
+
+           var hfield = $get('<%=this.hidSelectedText.ClientID%>');
+
+           hfield.value = eventArgs.get_value();
+           var selectedtext = eventArgs.get_value();
+           PageMethods.MyMethod(selectedtext)
+         
+           var frm = document.getElementById("aspnetForm");
+
+           if (frm) {
+
+               frm.submit();
+
+           }
+
+       }
+
+       
+
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <table width="100%">
+            <tr>
+                <td>
+                    <asp:Button ID="btnexecute" runat="server" Text="Run Query (Alt+R)" OnClick="btnexecute_OnClick"
+                        CssClass="buttonCommman" AccessKey="R" Width="150px" />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <cc1:ConfirmButtonExtender ID="ConfirmBtnApproval" runat="server" TargetControlID="btnexecute"
+                        ConfirmText="Are you sure to Execute Command">
+                    </cc1:ConfirmButtonExtender>
+                    <asp:Button ID="btnselect" runat="server" Text="Select Record (Alt+S)" OnClick="btnselect_OnClick"
+                        Visible="false" CssClass="buttonCommman" Width="150px" AccessKey="s" />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:HiddenField runat="server" ID="hidSelectedText" />
+                    <asp:Button ID="btnNewQuery" runat="server" Text="New Query (Alt+N)" OnClick="btnNewQuery_OnClick"
+                        AccessKey="n" CssClass="buttonCommman" Width="150px" />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:Button ID="btnBackup" runat="server" Text="Database Backup (Alt+B)" OnClick="btnBackup_OnClick"
+                        AccessKey="B" CssClass="buttonCommman" Width="150px" />
+                </td>
+            </tr>
+            <tr>
+                <td width="100%">
+                    <asp:TextBox ID="txtScript" runat="server" TextMode="MultiLine" Height="229px" CssClass="autosuggest" Width="100%"
+                        TabIndex="0" ></asp:TextBox>
+                    <cc1:AutoCompleteExtender ID="txtMailTo_AutoCompleteExtender" runat="server" DelimiterCharacters=" "
+                        Enabled="True" CompletionInterval="100" CompletionSetCount="1" MinimumPrefixLength="1"
+                        ShowOnlyCurrentWordInCompletionListItem="true" ServiceMethod="GetobjectList" 
+                        OnClientItemSelected="GetCode" ServicePath="" TargetControlID="txtScript" UseContextKey="True"
+                        CompletionListCssClass="completionList" CompletionListItemCssClass="listItem"
+                        CompletionListHighlightedItemCssClass="itemHighlighted">
+                    </cc1:AutoCompleteExtender>
+                </td>
+            </tr>
+            <tr>
+                <td width="100%">
+                    <asp:Label ID="lblerror" runat="server" ForeColor="Red" Font-Size="15px"></asp:Label>
+                </td>
+            </tr>
+            <asp:ScriptManager ID="ScriptManager1" EnablePageMethods="true" EnablePartialRendering="true" runat="server">
+            </asp:ScriptManager>
+            <tr>
+                <td width="100%">
+                    <asp:Panel ID="pnlRecord" runat="server" Width="1328px" Height="350px" ScrollBars="Auto">
+                        <asp:DataList ID="dtlistsql" runat="server" RepeatDirection="Vertical" Width="100%">
+                            <ItemTemplate>
+                                <table>
+                                    <tr style="background-color: Black;">
+                                        <td>
+                                            <asp:Label ID="lblrecordcount" runat="server" Text="Total Record :" ForeColor="White"></asp:Label>
+                                            <asp:Label ID="lblCount" runat="server" Text='<%# Eval("Count") %>' ForeColor="White"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:GridView CssClass="table-striped table-bordered table table-hover" ID="gvRecord" runat="server" AutoGenerateColumns="true" Width="100%">
+                                            </asp:GridView>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </asp:Panel>
+                    <%--<asp:Panel ID="Panel1" runat="server" Width="994px" Height="150px" ScrollBars="Auto">
+<asp:GridView CssClass="table-striped table-bordered table table-hover" ID="gvRecord1" runat="server" AutoGenerateColumns="true" Width="100%"></asp:GridView>
+</asp:Panel>
+<asp:Panel ID="Panel2" runat="server" Width="994px" Height="150px" ScrollBars="Auto">
+<asp:GridView CssClass="table-striped table-bordered table table-hover" ID="gvRecord2" runat="server" AutoGenerateColumns="true" Width="100%"></asp:GridView>
+</asp:Panel>--%>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>

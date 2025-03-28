@@ -1,0 +1,402 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/ERPMaster_Old.master" AutoEventWireup="true"
+    CodeFile="AndroidDeviceMaster.aspx.cs" Inherits="Android_DeviceMaster" Title="Android Device Setup" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <link href="../CSS/InvStyle.css" rel="stylesheet" type="text/css" />
+   
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <Triggers>            
+            <asp:PostBackTrigger ControlID="btnNew" />           
+            <asp:PostBackTrigger ControlID="btnSave" />
+            <asp:PostBackTrigger ControlID="btnReset" />
+            <asp:PostBackTrigger ControlID="btnCancel" />
+        </Triggers>
+        <ContentTemplate>
+            <table width="100%">
+                <tr>
+                    <td>
+                        <table width="100%" cellpadding="0" cellspacing="0" bordercolor="#F0F0F0">
+                            <tr bgcolor="#90BDE9">
+                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <img src="../Images/android_device_master.png" alt="D" />
+                                            </td>
+                                            <td>
+                                                <img src="../Images/seperater.png" width="2" height="43" alt="SS" />
+                                            </td>
+                                            <td style="padding-left: 5px">
+                                                <asp:Label ID="lblHeader" runat="server" Text="<%$ Resources:Attendance,Android Device Setup %>"
+                                                    CssClass="LableHeaderTitle"></asp:Label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td align="right">
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>                                            
+                                            <td>
+                                                <asp:Panel ID="pnlMenuNew" runat="server" CssClass="a">
+                                                    <asp:Button ID="btnNew" runat="server" Text="<%$ Resources:Attendance,New %>" Width="90px"
+                                                        BorderStyle="none" BackColor="Transparent" OnClick="btnNew_Click" Style="padding-left: 30px;
+                                                        padding-top: 3px; background-image: url(  '../Images/New.png' ); background-repeat: no-repeat;
+                                                        height: 49px; background-position: 5px; font: bold 14px Trebuchet MS; color: #000000;" />
+                                                </asp:Panel>
+                                            </td>
+                                            <td>                                               
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#ccddee" colspan="4" width="100%" height="500px" valign="top">
+                                    <asp:Panel ID="PnlList" runat="server">
+                                        <asp:Panel ID="pnlSearchRecords" runat="server">
+                                            <div width="100%" style="background-image: url(../Images/bg_repeat.jpg); background-repeat: repeat;">
+                                                
+                                            </div>
+                                            <asp:HiddenField ID="HDFSort" runat="server" />
+                                        </asp:Panel>
+                                        <asp:GridView ID="gvDevice" DataKeyNames="Device_Id" PageSize="<%# PageControlCommon.GetPageSize() %>"
+                                            runat="server" AutoGenerateColumns="False" Width="100%" AllowPaging="True" AllowSorting="True"
+                                            CssClass="grid" OnPageIndexChanging="gvDevice_PageIndexChanging" OnSorting="gvDevice_OnSorting">
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="<%$ Resources:Attendance,Edit %>">
+                                                    <ItemTemplate>
+                                                        <asp:ImageButton ID="btnEdit" runat="server" CommandArgument='<%# Eval("Device_Id") %>'
+                                                            ImageUrl="~/Images/edit.png" CausesValidation="False" OnCommand="btnEdit_Command"
+                                                            Visible="false" ToolTip="<%$ Resources:Attendance,Edit %>" /></ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                    <ItemStyle CssClass="grid" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="<%$ Resources:Attendance,Delete %>">
+                                                    <ItemTemplate>
+                                                        <asp:ImageButton ID="IbtnDelete" runat="server" CausesValidation="False" CommandArgument='<%# Eval("Device_Id") %>'
+                                                            ImageUrl="~/Images/Erase.png" OnCommand="IbtnDelete_Command" Visible="false"
+                                                            ToolTip="<%$ Resources:Attendance,Delete %>" />
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                    <ItemStyle CssClass="grid" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="<%$ Resources:Attendance,Device Id %>" SortExpression="Device_Id">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblDeviceId1" runat="server" Text='<%# Eval("Device_Id") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <ItemStyle CssClass="grid" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="<%$ Resources:Attendance,Device Name %>" SortExpression="Device_Name">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lbDeviceName" runat="server" Text='<%# Eval("Device_Name") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <ItemStyle CssClass="grid" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="<%$ Resources:Attendance,Brand %>" SortExpression="Brand_Name">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblBrand2" runat="server" Text='<%# Eval("Brand_Name") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <ItemStyle CssClass="grid" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="<%$ Resources:Attendance,Location %>" SortExpression="Location_Name">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblLoc2" runat="server" Text='<%# Eval("Location_Name") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <ItemStyle CssClass="grid" />
+                                                </asp:TemplateField>
+                                            </Columns>
+                                            <AlternatingRowStyle CssClass="InvgridAltRow"></AlternatingRowStyle>
+                                            <HeaderStyle CssClass="Invgridheader" />
+                                            <PagerStyle CssClass="Invgridheader" />
+                                            <RowStyle CssClass="Invgridrow" HorizontalAlign="Center"></RowStyle>
+                                        </asp:GridView>
+                                    </asp:Panel>
+                                    <asp:Panel ID="PnlNewEdit" runat="server" DefaultButton="btnSave">
+                                    <div id="dvPnl1" runat="server">
+                                        <table width="100%" style="padding-left: 43px">
+                                            <tr>
+                                                <td width="170px" align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                    <asp:Label ID="lblServerName" runat="server" CssClass="labelComman" Text="Server Name"></asp:Label>
+                                                </td>
+                                                <td width="1px">
+                                                    :
+                                                </td>
+                                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                    <asp:TextBox ID="txtServerName" Width="250px" runat="server" CssClass="textComman" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="170px" align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                    <asp:Label ID="lblDataBaseName" runat="server" CssClass="labelComman" Text="DataBase Name"></asp:Label>
+                                                </td>
+                                                <td width="1px">
+                                                    :
+                                                </td>
+                                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                    <asp:TextBox ID="txtDataBaseName"  Width="250px" runat="server"  CssClass="textComman"/>
+                                                   
+                                                </td>
+                                            </tr>
+                                            
+                                              <tr>
+                                                <td width="170px" align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                    <asp:Label ID="lblUserName" runat="server" CssClass="labelComman" Text="User Name"></asp:Label>
+                                                </td>
+                                                <td width="1px">
+                                                    :
+                                                </td>
+                                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                    <asp:TextBox ID="txtUserName"  Width="250px" runat="server"  CssClass="textComman"/>
+                                                   
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr>
+                                                <td width="170px" align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                    <asp:Label ID="lblPassword" runat="server" CssClass="labelComman" Text="Password"></asp:Label>
+                                                </td>
+                                                <td width="1px">
+                                                    :
+                                                </td>
+                                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                    <asp:TextBox ID="txtPassword" Width="250px" runat="server"  CssClass="textComman"/>
+                                                   
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td colspan="6" align="center">
+                                                    <table style="padding-left: 8px">
+                                                        <tr>
+                                                            <td width="80px">
+                                                                <asp:Button ID="btnSave" runat="server" Text="Save"
+                                                                    CssClass="buttonCommman" ValidationGroup="a" OnClick="btnSave_Click" />
+                                                            </td>
+                                                            <td width="80px">
+                                                                <asp:Button ID="btnReset" runat="server" Text="<%$ Resources:Attendance,Reset %>"
+                                                                    CssClass="buttonCommman" CausesValidation="False" OnClick="btnReset_Click" />
+                                                            </td>
+                                                            
+                                                            
+                                                            <td width="80px">
+                                                                <asp:Button ID="btnCancel" runat="server" Text="<%$ Resources:Attendance,Cancel %>"
+                                                                    CssClass="buttonCommman" CausesValidation="False" OnClick="btnCancel_Click" />
+                                                            </td>
+                                                            
+                                                            
+                                                        </tr>
+                                                    </table>
+                                                    <asp:HiddenField ID="editid" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </div>
+                                        <div id="dvPnl2" runat="server" visible="false">
+                                        <table width="100%">
+                                            <tr>
+                                                <td width="170px" align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                    <asp:Label ID="lblTableView" runat="server" CssClass="labelComman" Text="Table/View" style="margin-left:45px;"></asp:Label>
+                                                </td>
+                                                <td width="1px">
+                                                    :
+                                                </td>
+                                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                   <asp:RadioButtonList ID="rbnTableView" runat="server" RepeatDirection="Horizontal" AutoPostBack="true" OnSelectedIndexChanged="rbnTableView_SelectedIndexChanged" style="margin-left:50px;">
+                                                   <asp:ListItem  Text="Table" Value="1"></asp:ListItem>
+                                                   <asp:ListItem  Text="View" Value="2"></asp:ListItem>
+                                                   </asp:RadioButtonList>
+                                                </td>
+                                            </tr>
+                                             <tr>
+                                                <td width="270px" align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                   <asp:DropDownList ID="ddltableView" runat="server" Width="180px" Height="25px" style="margin-left:45px;"></asp:DropDownList>
+                                                </td>
+                                                <td width="1px">
+                                                    :
+                                                </td>
+                                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                  <asp:Button ID="btnGo" runat="server" Text="Go" CssClass="buttonCommman" ValidationGroup="a" OnClick="btnGo_Click" Width="50px" Height="25px" />
+                                                </td>
+                                            </tr>                                         
+                                          
+                                        </table>
+                                        </div>
+                                        
+                                        
+                                       
+                                        <div id="dvProductList" runat="server" visible="false">
+                                          
+                                             <table width="100%" style="padding-left: 43px">
+                                             <tr>
+                                                <td width="170px" align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                   <asp:Label ID="lblProductCode" runat="server" CssClass="labelComman" Text="Product Code"></asp:Label>
+                                                </td>
+                                                <td width="1px">
+                                                    :
+                                                </td>
+                                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                  <asp:DropDownList ID="ddlProductCode" runat="server" Width="180px" Height="25px"></asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td width="170px" align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                   <asp:Label ID="lblProductName" runat="server" CssClass="labelComman" Text="Product Name"></asp:Label>
+                                                </td>
+                                                <td width="1px">
+                                                    :
+                                                </td>
+                                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                  <asp:DropDownList ID="ddlProductName" runat="server" Width="180px" Height="25px"></asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr>
+                                                <td width="170px" align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                   <asp:Label ID="lblProductPrice" runat="server" CssClass="labelComman" Text="Product Proce"></asp:Label>
+                                                </td>
+                                                <td width="1px">
+                                                    :
+                                                </td>
+                                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                  <asp:DropDownList ID="ddlProductPrice" runat="server" Width="180px"></asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr>
+                                                <td width="170px" align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                   <asp:Label ID="lblProducrDescription" runat="server" CssClass="labelComman" Text="Product Description"></asp:Label>
+                                                </td>
+                                                <td width="1px">
+                                                    :
+                                                </td>
+                                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                  <asp:DropDownList ID="ddlProductDescription" runat="server" Width="180px" Height="25px"></asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                            <td width="80px">
+                                                                <asp:Button ID="btnSaveTable" runat="server" Text="Save" style="margin-left:30px;"
+                                                                    CssClass="buttonCommman" ValidationGroup="a" OnClick="btnSaveTable_Click" />
+                                                            </td>
+                                                            <td width="80px">
+                                                                <asp:Button ID="Button2" runat="server" Text="<%$ Resources:Attendance,Reset %>" style="margin-left:-258px;"
+                                                                    CssClass="buttonCommman" CausesValidation="False" OnClick="btnReset_Click" />
+                                                            </td>
+                                                            
+                                                            
+                                                            <td width="80px">
+                                                                <asp:Button ID="Button3" runat="server" Text="<%$ Resources:Attendance,Cancel %>" style="margin-left:-352px;" Visible="false"
+                                                                    CssClass="buttonCommman" CausesValidation="False" OnClick="btnCancel_Click" />
+                                                            </td>
+                                                            
+                                                            
+                                                        </tr>
+                                             </table>
+                                            </div>
+                                       
+                                        
+                                        <div id="dvCustomer" runat="server">
+                                        <table width="100%" style="padding-left: 43px">
+                                            <tr>
+                                                <td width="170px" align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                   <asp:Label ID="lblCustomerCode" runat="server" CssClass="labelComman" Text="Customer Code"></asp:Label>
+                                                </td>
+                                                <td width="1px">
+                                                    :
+                                                </td>
+                                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                  <asp:DropDownList ID="ddlCustomerCode" runat="server" Width="180px" Height="25px"></asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td width="170px" align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                   <asp:Label ID="lblCustomerName" runat="server" CssClass="labelComman" Text="Customer Name"></asp:Label>
+                                                </td>
+                                                <td width="1px">
+                                                    :
+                                                </td>
+                                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                  <asp:DropDownList ID="ddlCustomerName" runat="server" Width="180px" Height="25px"></asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr>
+                                                <td width="170px" align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                   <asp:Label ID="lblCustomerPurchase" runat="server" CssClass="labelComman" Text="Customer Purchase"></asp:Label>
+                                                </td>
+                                                <td width="1px">
+                                                    :
+                                                </td>
+                                                <td align='<%= PageControlCommon.ChangeTDForDefaultLeft()%>'>
+                                                  <asp:DropDownList ID="ddlCustomerPurchase" runat="server" Width="180px" Height="25px"></asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            
+                                            
+                                         
+                                           
+                                            
+                                            
+                                            <tr>
+                                                <td colspan="6" align="center">
+                                                    <table style="padding-left: 8px">
+                                                        <tr>
+                                                            <td width="80px">
+                                                                <asp:Button ID="btnCustomer" runat="server" Text="Save"
+                                                                    CssClass="buttonCommman" ValidationGroup="a" OnClick="btnCustomer_Click" />
+                                                            </td>
+                                                            <td width="80px">
+                                                                <asp:Button ID="Button4" runat="server" Text="<%$ Resources:Attendance,Reset %>"
+                                                                    CssClass="buttonCommman" CausesValidation="False" OnClick="btnReset_Click" />
+                                                            </td>
+                                                            
+                                                            
+                                                            <td width="80px">
+                                                                <asp:Button ID="Button5" runat="server" Text="<%$ Resources:Attendance,Cancel %>"
+                                                                    CssClass="buttonCommman" CausesValidation="False" OnClick="btnCancel_Click" />
+                                                            </td>
+                                                            
+                                                            
+                                                        </tr>
+                                                    </table>
+                                                    <asp:HiddenField ID="HiddenField1" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </div>
+                                    </asp:Panel>
+                                    <asp:Panel ID="pnlEmpDevice" runat="server">
+                                        
+                                    </asp:Panel>
+                                    <asp:Panel ID="PnlBin" runat="server">
+                                        <asp:Panel ID="pnlbinsearch" runat="server" >
+                                            <div width="100%" style="background-image: url(../Images/bg_repeat.jpg); background-repeat: repeat;">
+                                                
+                                            </div>
+                                        </asp:Panel>
+                                        
+                                        <asp:HiddenField ID="HDFSortbin" runat="server" />
+                                    </asp:Panel>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+        <ProgressTemplate>
+            <div id="Background">
+            </div>
+            <div id="Progress">
+                <center>
+                    <img src="../Images/ajax-loader2.gif" style="vertical-align: middle" />
+                </center>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+</asp:Content>
