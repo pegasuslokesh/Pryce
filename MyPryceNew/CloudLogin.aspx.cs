@@ -39,6 +39,10 @@ public partial class CloudLogin : System.Web.UI.Page
             }
             else
             {
+
+
+
+
                 txtRegistratioCode.Text = "";
                 txtRegistratioCode.Focus();
             }
