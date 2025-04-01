@@ -47,8 +47,6 @@
 
                                     <asp:Button ID="btnCloseYear" runat="server" Text="<%$ Resources:Attendance,Close Year %>"
                                         CssClass="btn btn-success" OnClick="btnCloseYear_Click" />
-                                    <asp:Button ID="btnTestYear" runat="server" Text="Test Year"
-                                        CssClass="btn btn-success" OnClick="btnTestYear_Click" />
                                     <br />
                                 </div>
                                 <div class="col-md-12">

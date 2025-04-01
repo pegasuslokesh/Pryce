@@ -73,7 +73,7 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-
+          
             Check_Page_Permission Chk_Page_ = new Check_Page_Permission(Session["DBConnection"].ToString());
 
             if (Chk_Page_.CheckPagePermission(Session["UserId"].ToString(), "346", HttpContext.Current.Session["CompId"].ToString(), HttpContext.Current.Session["Application_Id"].ToString()).ToString() == "False")
@@ -128,7 +128,7 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
         }
         else
         {
-            DataTable dtAllPageCode = ObjComman.GetAllPagePermission(Session["UserId"].ToString(), strModuleId, "344", HttpContext.Current.Session["CompId"].ToString());
+            DataTable dtAllPageCode = ObjComman.GetAllPagePermission(Session["UserId"].ToString(), strModuleId, "344",HttpContext.Current.Session["CompId"].ToString());
             if (dtAllPageCode.Rows.Count == 0)
             {
                 Session.Abandon();
@@ -145,15 +145,12 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
         }
         //End Code
     }
-    public void DisplayMessage(string str, string color = "orange")
+    public void DisplayMessage(string str,string color="orange")
     {
-        ScriptManager.RegisterStartupScript(this, GetType(), "", "showAlert('" + str + "','" + color + "','white');", true);
+        ScriptManager.RegisterStartupScript(this, GetType(), "", "showAlert('" + str + "','"+color+"','white');", true);
     }
     protected void btnExceute_Click(object sender, EventArgs e)
     {
-        //txtFromDate.Text = "23-Dec-2015";
-        //txtToDate.Text = "31-Dec-2016";
-
         if (txtFromDate.Text == "")
         {
             DisplayMessage("You Require From Date");
@@ -168,11 +165,11 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
             return;
         }
 
-        //if (!Common.IsFinancialyearAllow(Convert.ToDateTime(txtFromDate.Text), "F", Session["DBConnection"].ToString(), HttpContext.Current.Session["FinanceTodate"].ToString(), HttpContext.Current.Session["CompId"].ToString(), HttpContext.Current.Session["FinanceYearId"].ToString(), HttpContext.Current.Session["LocId"].ToString()))
-        //{
-        //    DisplayMessage("Log In Financial year not allowing to perform this action");
-        //    return;
-        //}
+        if (!Common.IsFinancialyearAllow(Convert.ToDateTime(txtFromDate.Text), "F", Session["DBConnection"].ToString(), HttpContext.Current.Session["FinanceTodate"].ToString(), HttpContext.Current.Session["CompId"].ToString(), HttpContext.Current.Session["FinanceYearId"].ToString(), HttpContext.Current.Session["LocId"].ToString()))
+        {
+            DisplayMessage("Log In Financial year not allowing to perform this action");
+            return;
+        }
 
         string strCurrency = ObjLocation.GetLocationMasterById(Session["CompId"].ToString(), Session["LocId"].ToString()).Rows[0]["Field1"].ToString();
         string stNatureIds = "1,2";
@@ -403,7 +400,6 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
                                 dtIncome.Rows.Add(row);
                             }
                         }
-
                         if (dtExpenses.Rows.Count < dtIncome.Rows.Count)
                         {
                             //dtIncome.Rows.Count = dtExpenses.Rows.Count;
@@ -481,7 +477,49 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
                 DisplayMessage("Your Balances are not Same Please Reveiw your balances");
                 return;
             }
-        }     
+        }
+
+        //Commented Code
+        //foreach (GridViewRow gv in GVComplete.Rows)
+        //{
+        //    GridView gvIncome = (GridView)gv.FindControl("gvIncome");
+
+        //    foreach (GridViewRow gvI in gvIncome.Rows)
+        //    {
+        //        Label lblName = (Label)gvI.FindControl("lblgvGroupName");
+        //        Label lblClosingBalance = (Label)gvI.FindControl("lblgvCb");
+        //        string strCB = lblClosingBalance.Text.Trim().Replace("<b>", "").Trim();
+
+        //        if (lblName.Text == "<b>Difference</b>")
+        //        {
+        //            double closingbalance = Convert.ToDouble(strCB);
+        //            if (closingbalance != 0)
+        //            {
+        //                DisplayMessage("You have Diffrence Value So You Cant Close It");
+        //                return;
+        //            }
+        //        }
+        //    }
+
+        //    GridView gvExpenses = (GridView)gv.FindControl("gvExpenses");
+
+        //    foreach (GridViewRow gvE in gvExpenses.Rows)
+        //    {
+        //        Label lblName = (Label)gvE.FindControl("lblgvGroupName_1");
+        //        Label lblClosingBalance = (Label)gvE.FindControl("lblgvCb_1");
+        //        string strCB = lblClosingBalance.Text.Trim().Replace("<b>", "").Trim();
+
+        //        if (lblName.Text == "<b>Difference</b>")
+        //        {
+        //            double closingbalance = Convert.ToDouble(strCB);
+        //            if (closingbalance != 0)
+        //            {
+        //                DisplayMessage("You have Diffrence Value so you cant close It");
+        //                return;
+        //            }
+        //        }
+        //    }
+        //}
 
         //Check Status
         string strStatus = objFYI.GetInfoByTransId(HttpContext.Current.Session["CompId"].ToString(), HttpContext.Current.Session["FinanceYearId"].ToString()).Rows[0]["Status"].ToString();
@@ -546,7 +584,7 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
         }
 
         //Commented Code
-        string strCashFlowLocIds = new Ac_Parameter_Location(Session["DBConnection"].ToString()).getCashFlowLocationGroup(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString());
+        string strCashFlowLocIds =  new Ac_Parameter_Location(Session["DBConnection"].ToString()).getCashFlowLocationGroup(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString());
 
         //DataTable dtCashFlowAll = objCashFlowHeader.GetCashFlowAllTrue(Session["CompId"].ToString(), Session["BrandId"].ToString(), strCashFlowLocIds);
         //if (dtCashFlowAll.Rows.Count > 0 && dtCashFlowAll != null)
@@ -622,8 +660,7 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
         {
             strPaymentVoucherAcc = "0";
         }
-
-        string strLOCCurrencyId = ObjLocation.GetLocationMasterById(Session["CompId"].ToString(), Session["LocId"].ToString()).Rows[0]["Field1"].ToString();
+       string strLOCCurrencyId = ObjLocation.GetLocationMasterById(Session["CompId"].ToString(), Session["LocId"].ToString()).Rows[0]["Field1"].ToString();
         string strCapitalAccountId = string.Empty;
         string strCapitalAccount = string.Empty;
         DataTable dtCapitalVoucher = objAccParameter.GetParameterValue_By_ParameterName(Session["CompId"].ToString(), "CapitalAccount");
@@ -638,7 +675,7 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
             {
                 strCapitalAccount = "0";
             }
-
+            
         }
         else
         {
@@ -714,7 +751,7 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
                                     //string strCompanyRate = GetCurrency(Session["CurrencyId"].ToString(), lblClosingBalance.Text);
                                     //string strCompanyAmount = strCompanyRate.Trim().Split('/')[0].ToString();
 
-                                    if (hdnAccountId.Value == strPaymentVoucherAcc || hdnAccountId.Value == strEmployeesalaryaccount)
+                                    if (hdnAccountId.Value == strPaymentVoucherAcc || hdnAccountId.Value== strEmployeesalaryaccount)
                                     {
                                     }
                                     else
@@ -749,7 +786,7 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
                                                 string strSupplierId = dtAllSupplierData.Rows[i]["OtherAccountId"].ToString();
                                                 string strSupplierCurrency = string.Empty;
                                                 DataTable _dtTemp = objAcAccountMaster.GetAc_AccountMasterByTransId(strSupplierId);
-                                                strSupplierCurrency = _dtTemp.Rows.Count > 0 ? _dtTemp.Rows[0]["Currency_Id"].ToString() : "0";
+                                                strSupplierCurrency = _dtTemp.Rows.Count > 0 ? _dtTemp.Rows[0]["Currency_Id"].ToString():"0";
                                                 _dtTemp.Dispose();
                                                 //DataTable dtSupData = objSupplierMaster.GetSupplierAllDataBySupplierId(Session["CompId"].ToString(), Session["BrandId"].ToString(), strSupplierId, ref trns);
                                                 //if (dtSupData.Rows.Count > 0 && dtSupData != null)
@@ -806,7 +843,7 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
                                         {
                                             for (int i = 0; i < dtAllSupplierData.Rows.Count; i++)
                                             {
-
+                                                
 
                                                 double ClosingAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["Closing_Balance"].ToString());
                                                 double ForeignAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["ForeignClosing_Balance"].ToString());
@@ -832,6 +869,9 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
                                         }
                                     }
                                 }
+
+
+
                             }
                         }
 
@@ -957,13 +997,15 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
                                         {
                                             for (int i = 0; i < dtAllSupplierData.Rows.Count; i++)
                                             {
+
+
                                                 double ClosingAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["Closing_Balance"].ToString());
                                                 double ForeignAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["ForeignClosing_Balance"].ToString());
                                                 double CompanyAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["Company_ClosingBalance"].ToString());
                                                 if (ClosingAmount != 0)
                                                 {
                                                     if (ClosingAmount > 0)
-                                                    {
+                                                    { 
                                                         //Credit Entry
                                                         ClosingAmount = Math.Abs(ClosingAmount);
                                                         objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", hdnAccountId.Value, ClosingAmount.ToString(), "Finance Closing Entry OtherAccount", "CR", ForeignAmount.ToString(), CompanyAmount.ToString(), strLOCCurrencyId, "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), dtAllSupplierData.Rows[i]["Emp_Id"].ToString(), ref trns);
@@ -1081,592 +1123,5 @@ public partial class AccountSetup_ClosingFYearLocation : System.Web.UI.Page
             strForienAmount = "0";
         }
         return strForienAmount;
-    }
-
-    protected void btnTestYear_Click(object sender, EventArgs e)
-    {
-        string strEmployeesalaryaccount = "0";
-        string strEmployeeLoanaccount = "0";
-
-        //For Check Balances
-        btnExceute_Click(null, null);
-
-        if (GVComplete.Rows.Count == 0)
-        {
-            DisplayMessage("Your have no Record to Close");
-            return;
-        }
-
-        if (liabilitiesTotal != 0 && AssestTotal != 0)
-        {
-            if (liabilitiesTotal != AssestTotal)
-            {
-                DisplayMessage("Your Balances are not Same Please Reveiw your balances");
-                return;
-            }
-        }
-
-        //Check Status
-        string strStatus = objFYI.GetInfoByTransId(HttpContext.Current.Session["CompId"].ToString(), HttpContext.Current.Session["FinanceYearId"].ToString()).Rows[0]["Status"].ToString();
-        string strDetailStatus = string.Empty;
-
-        if (strStatus == "ReOpen")
-        {
-
-        }
-        else if (strStatus == "Open")
-        {
-            DataTable dtHeader = objFYI.GetInfoAllTrue(StrCompId);
-            if (dtHeader.Rows.Count > 0)
-            {
-                dtHeader = new DataView(dtHeader, "Status='ReOpen'", "", DataViewRowState.CurrentRows).ToTable();
-                if (dtHeader.Rows.Count > 0)
-                {
-                    DisplayMessage("First Close Your ReOpen Year then you can close the Same");
-                    return;
-                }
-            }
-        }
-
-        DataTable dtDetail = objFYIDetail.GetAllDataByHeader_Id(Session["FinanceYearId"].ToString());
-        if (dtDetail.Rows.Count > 0)
-        {
-            if (!Common.IsFinancialyearAllow(Convert.ToDateTime(txtFromDate.Text), "I", Session["DBConnection"].ToString(), HttpContext.Current.Session["FinanceTodate"].ToString(), HttpContext.Current.Session["CompId"].ToString(), HttpContext.Current.Session["FinanceYearId"].ToString(), HttpContext.Current.Session["LocId"].ToString()))
-            {
-
-            }
-            else
-            {
-                DisplayMessage("First you need to Close Inventory Section");
-                txtFromDate.Focus();
-                return;
-            }
-        }
-
-        //Check Validations For Accounts Closing.
-        DataTable dtTransferInFinance = objVoucherHeader.GetRecordforReconcileFinance(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), Session["FinanceYearId"].ToString());
-        if (dtTransferInFinance.Rows.Count > 0)
-        {
-            DisplayMessage("You have UnPosted data in Transfer In Finance");
-            txtFromDate.Focus();
-            return;
-        }
-
-        DataTable dtVoucherHeader = objVoucherHeader.GetVoucherAllTrueOnly(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), Session["FinanceYearId"].ToString());
-        if (dtVoucherHeader.Rows.Count > 0)
-        {
-            dtVoucherHeader = new DataView(dtVoucherHeader, "Field3='Pending'", "", DataViewRowState.CurrentRows).ToTable();
-            if (dtVoucherHeader.Rows.Count > 0)
-            {
-                DisplayMessage("You have " + dtVoucherHeader.Rows.Count + " Payment Vouchers Pending in Approval");
-                txtFromDate.Focus();
-                return;
-            }
-            else
-            {
-
-            }
-        }
-
-        //Commented Code
-        string strCashFlowLocIds = new Ac_Parameter_Location(Session["DBConnection"].ToString()).getCashFlowLocationGroup(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString());
-
-        //DataTable dtCashFlowAll = objCashFlowHeader.GetCashFlowAllTrue(Session["CompId"].ToString(), Session["BrandId"].ToString(), strCashFlowLocIds);
-        //if (dtCashFlowAll.Rows.Count > 0 && dtCashFlowAll != null)
-        //{
-        //    DataTable dtCashFlow = objCashFlowHeader.GetCashFlowByCashFlowDate(Session["CompId"].ToString(), Session["BrandId"].ToString(), strCashFlowLocIds, txtToDate.Text);
-        //    if (dtCashFlow.Rows.Count == 0)
-        //    {
-        //        DisplayMessage("You have UnPosted Cash Flow According to Financial Year");
-        //        txtFromDate.Focus();
-        //        return;
-        //    }
-        //}
-
-        DateTime dtToDate = new DateTime();
-        if (txtToDate.Text != "")
-        {
-            try
-            {
-                Convert.ToDateTime(txtToDate.Text);
-                dtToDate = Convert.ToDateTime(txtToDate.Text);
-                dtToDate = new DateTime(dtToDate.Year, dtToDate.Month, dtToDate.Day, 23, 59, 1);
-            }
-            catch
-            {
-                DisplayMessage("Enter valid date");
-                txtToDate.Focus();
-                return;
-            }
-        }
-
-        DataTable dtParam = new DataTable();
-
-        //for Customer, Supplier and Capital Account
-        string strReceiveVoucherAcc = string.Empty;
-        dtParam = objAccParameter.GetParameterValue_By_ParameterName(Session["CompId"].ToString(), "Receive Vouchers");
-        if (dtParam.Rows.Count > 0)
-        {
-            strReceiveVoucherAcc = dtParam.Rows[0]["Param_Value"].ToString();
-        }
-        else
-        {
-            strReceiveVoucherAcc = "0";
-        }
-
-
-        dtParam = objAccParameter.GetParameterValue_By_ParameterName(Session["CompId"].ToString(), "Employee Account");
-        if (dtParam.Rows.Count > 0)
-        {
-            strEmployeesalaryaccount = dtParam.Rows[0]["Param_Value"].ToString();
-        }
-        else
-        {
-            strEmployeesalaryaccount = "0";
-        }
-
-        dtParam = objAccParameter.GetParameterValue_By_ParameterName(Session["CompId"].ToString(), "Employee Loan Account");
-        if (dtParam.Rows.Count > 0)
-        {
-            strEmployeeLoanaccount = dtParam.Rows[0]["Param_Value"].ToString();
-        }
-        else
-        {
-            strEmployeeLoanaccount = "0";
-        }
-
-        string strPaymentVoucherAcc = string.Empty;
-        DataTable dtPaymentVoucher = objAccParameter.GetParameterValue_By_ParameterName(Session["CompId"].ToString(), "Payment Vouchers");
-        if (dtPaymentVoucher.Rows.Count > 0)
-        {
-            strPaymentVoucherAcc = dtPaymentVoucher.Rows[0]["Param_Value"].ToString();
-        }
-        else
-        {
-            strPaymentVoucherAcc = "0";
-        }
-
-        string strLOCCurrencyId = ObjLocation.GetLocationMasterById(Session["CompId"].ToString(), Session["LocId"].ToString()).Rows[0]["Field1"].ToString();
-        string strCapitalAccountId = string.Empty;
-        string strCapitalAccount = string.Empty;
-        DataTable dtCapitalVoucher = objAccParameter.GetParameterValue_By_ParameterName(Session["CompId"].ToString(), "CapitalAccount");
-        if (dtCapitalVoucher.Rows.Count > 0)
-        {
-            strCapitalAccountId = dtCapitalVoucher.Rows[0]["Param_Value"].ToString();
-            try
-            {
-                strCapitalAccount = ObjCOA.GetCOAByTransId(Session["CompId"].ToString(), strCapitalAccountId).Rows[0]["AccountName"].ToString();
-            }
-            catch
-            {
-                strCapitalAccount = "0";
-            }
-
-        }
-        else
-        {
-            strCapitalAccount = "0";
-        }
-
-        dtDetail = new DataView(dtDetail, "Location_Id='" + Session["LocId"].ToString() + "' and Status='" + strStatus + "'", "", DataViewRowState.CurrentRows).ToTable();
-
-        SqlConnection con = new SqlConnection(Session["DBConnection"].ToString());
-        con.Open();
-        SqlTransaction trns;
-        trns = con.BeginTransaction();
-
-        try
-        {
-            int q = 0;
-            if (dtDetail.Rows.Count > 0)
-            {
-                string strDetailId = dtDetail.Rows[0]["Trans_Id"].ToString();
-                objFYIClosingDetail.DeleteDetailRowsClosing(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, ref trns);
-                string strSQL = "Update Ac_FinancialYear_Detail set Status='Close', ModifiedBy='" + Session["UserId"].ToString() + "', ModifiedDate='" + DateTime.Now.ToString() + "' where Trans_Id='" + strDetailId + "'";
-                q = objDA.execute_Command(strSQL, ref trns);
-
-                if (q != 0)
-                {
-                    double CapitalAmount = 0;
-                    double ProfitLossAmount = 0;
-                    string strCAccType = string.Empty;
-                    string strPFType = string.Empty;
-
-                    //Insert In FDetail
-                    foreach (GridViewRow gv in GVComplete.Rows)
-                    {
-                        GridView gvIncome = (GridView)gv.FindControl("gvIncome");
-
-                        foreach (GridViewRow gvI in gvIncome.Rows)
-                        {
-                            double ClosingBalance = 0;
-                            Label lblGName = (Label)gvI.FindControl("lblgvGroupName");
-                            lblGName.Text = lblGName.Text.Trim().Replace("<b>", "").Trim();
-                            lblGName.Text = lblGName.Text.Trim().Replace("</b>", "").Trim();
-                            HiddenField hdnAccountId = (HiddenField)gvI.FindControl("hdngvAccountId");
-                            Label lblClosingBalance = (Label)gvI.FindControl("lblgvCb");
-                            lblClosingBalance.Text = lblClosingBalance.Text.Trim().Replace("<i>", "").Trim();
-                            lblClosingBalance.Text = lblClosingBalance.Text.Trim().Replace("</i>", "").Trim();
-                            Label lblBalanceType = (Label)gvI.FindControl("lblgvCbType");
-                            lblBalanceType.Text = lblBalanceType.Text.Trim().Replace("<i>", "").Trim();
-                            lblBalanceType.Text = lblBalanceType.Text.Trim().Replace("</i>", "").Trim();
-                            HiddenField hdnForeignClosing = (HiddenField)gvI.FindControl("hdngvForeignCB");
-                            HiddenField hdnCompanyClosing = (HiddenField)gvI.FindControl("hdngvCompanyCB");
-
-                            if (lblGName.Text == "By Profit & Loss A/c")
-                            {
-                                lblClosingBalance.Text = lblClosingBalance.Text.Trim().Replace("<b>", "").Trim();
-                                lblClosingBalance.Text = lblClosingBalance.Text.Trim().Replace("</b>", "").Trim();
-                                ProfitLossAmount = Convert.ToDouble(lblClosingBalance.Text);
-                                strPFType = "Income";
-                            }
-
-                            if (hdnAccountId.Value != "" && hdnAccountId.Value != "0")
-                            {
-                                ClosingBalance = Convert.ToDouble(lblClosingBalance.Text);
-                                if (hdnAccountId.Value == strCapitalAccountId)
-                                {
-                                    CapitalAmount = ClosingBalance;
-                                    strCAccType = lblBalanceType.Text;
-                                }
-                                else
-                                {
-                                    string strCurrencyId = (new DataView(ObjCOA.GetCOAAll(Session["CompId"].ToString(), ref trns), "Trans_Id='" + hdnAccountId.Value + "'", "", DataViewRowState.CurrentRows).ToTable()).Rows[0]["Currency_Id"].ToString();
-                                    //string strForeignRate = GetCurrency(strCurrencyId, lblClosingBalance.Text);
-                                    //string strForignAmount = strForeignRate.Trim().Split('/')[0].ToString();
-                                    //string strCompanyRate = GetCurrency(Session["CurrencyId"].ToString(), lblClosingBalance.Text);
-                                    //string strCompanyAmount = strCompanyRate.Trim().Split('/')[0].ToString();
-
-                                    if (hdnAccountId.Value == strPaymentVoucherAcc || hdnAccountId.Value == strEmployeesalaryaccount)
-                                    {
-                                    }
-                                    else
-                                    {
-                                        if (ClosingBalance != 0)
-                                        {
-                                            if (lblBalanceType.Text == "DR")
-                                            {
-                                                objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", hdnAccountId.Value, lblClosingBalance.Text, "Finance Closing Entry", lblBalanceType.Text, hdnForeignClosing.Value, hdnCompanyClosing.Value, strCurrencyId, "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), "0", ref trns);
-                                                //objSubCOA.InsertSubCOA(Session["FinanceYearId"].ToString(), Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), hdnAccountId.Value, "0", lblClosingBalance.Text, "0.00", strForignAmount, "0.00", strCurrencyId, strCompanyAmount, "0.00", "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
-                                            }
-                                            else if (lblBalanceType.Text == "CR")
-                                            {
-                                                objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", hdnAccountId.Value, lblClosingBalance.Text, "Finance Closing Entry", lblBalanceType.Text, hdnForeignClosing.Value, hdnCompanyClosing.Value, strCurrencyId, "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), "0", ref trns);
-                                                //objSubCOA.InsertSubCOA(Session["FinanceYearId"].ToString(), Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), hdnAccountId.Value, "0", "0.00", lblClosingBalance.Text, "0.00", strForignAmount, strCurrencyId, "0.00", strCompanyAmount, "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
-                                            }
-                                        }
-                                    }
-                                }
-
-
-                                if (hdnAccountId.Value == strPaymentVoucherAcc)
-                                {
-                                    DataTable dtAllSupplierData = objVoucherDetail.GetAllSupplierBalanceData(StrCompId, StrBrandId, strLocationId, strPaymentVoucherAcc, strPaymentVoucherAcc, txtFromDate.Text, dtToDate.ToString("dd-MMM-yyyy"), "1", Session["FinanceYearId"].ToString(), ref trns);
-                                    if (dtAllSupplierData.Rows.Count > 0)
-                                    {
-                                        dtAllSupplierData = new DataView(dtAllSupplierData, "Name not is null and (Closing_Final<>'0')", "", DataViewRowState.CurrentRows).ToTable();
-                                        if (dtAllSupplierData.Rows.Count > 0)
-                                        {
-                                            for (int i = 0; i < dtAllSupplierData.Rows.Count; i++)
-                                            {
-                                                string strSupplierId = dtAllSupplierData.Rows[i]["OtherAccountId"].ToString();
-                                                string strSupplierCurrency = string.Empty;
-                                                DataTable _dtTemp = objAcAccountMaster.GetAc_AccountMasterByTransId(strSupplierId);
-                                                strSupplierCurrency = _dtTemp.Rows.Count > 0 ? _dtTemp.Rows[0]["Currency_Id"].ToString() : "0";
-                                                _dtTemp.Dispose();
-                                                //DataTable dtSupData = objSupplierMaster.GetSupplierAllDataBySupplierId(Session["CompId"].ToString(), Session["BrandId"].ToString(), strSupplierId, ref trns);
-                                                //if (dtSupData.Rows.Count > 0 && dtSupData != null)
-                                                //{
-                                                //    strSupplierCurrency = dtSupData.Rows[0]["Field3"].ToString();
-                                                //}
-                                                //else
-                                                //{
-                                                //    strSupplierCurrency = "80";
-                                                //}
-
-
-                                                //if (strSupplierCurrency == "")
-                                                //{
-                                                //    strSupplierCurrency = "0";
-                                                //}
-
-                                                double ClosingAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["Closing_Balance"].ToString());
-                                                double ForeignAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["ForeignClosing_Balance"].ToString());
-                                                double CompanyAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["Company_ClosingBalance"].ToString());
-                                                if (ClosingAmount != 0)
-                                                {
-                                                    if (ClosingAmount > 0)
-                                                    {
-                                                        //Credit Entry
-                                                        ClosingAmount = Math.Abs(ClosingAmount);
-                                                        objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", hdnAccountId.Value, ClosingAmount.ToString(), "Finance Closing Entry OtherAccount", "CR", ForeignAmount.ToString(), CompanyAmount.ToString(), strSupplierCurrency, "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), strSupplierId, ref trns);
-                                                        //objSubCOA.InsertSubCOA(Session["FinanceYearId"].ToString(), Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), hdnAccountId.Value, strSupplierId, "0.00", ClosingAmount.ToString(), "0.00", ForeignAmount.ToString(), strSupplierCurrency, "0.00", CompanyAmount.ToString(), "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
-                                                    }
-                                                    else
-                                                    {
-                                                        //Debit Entry
-                                                        ClosingAmount = Math.Abs(ClosingAmount);
-                                                        objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", hdnAccountId.Value, ClosingAmount.ToString(), "Finance Closing Entry OtherAccount", "DR", ForeignAmount.ToString(), CompanyAmount.ToString(), strSupplierCurrency, "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), strSupplierId, ref trns);
-                                                        //objSubCOA.InsertSubCOA(Session["FinanceYearId"].ToString(), Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), hdnAccountId.Value, strSupplierId, ClosingAmount.ToString(), "0.00", ForeignAmount.ToString(), "0.00", strSupplierCurrency, CompanyAmount.ToString(), "0.00", "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-
-                                //code for insert employee opening balance
-
-
-                                if (hdnAccountId.Value == strEmployeesalaryaccount)
-                                {
-                                    DataTable dtAllSupplierData = objVoucherDetail.GetAllEmployeeBalanceData(StrCompId, StrBrandId, strLocationId, strEmployeesalaryaccount, strEmployeesalaryaccount, txtFromDate.Text, dtToDate.ToString("dd-MMM-yyyy"), "1", Session["FinanceYearId"].ToString(), ref trns);
-                                    if (dtAllSupplierData.Rows.Count > 0)
-                                    {
-                                        dtAllSupplierData = new DataView(dtAllSupplierData, "(Closing_Final<>'0')", "", DataViewRowState.CurrentRows).ToTable();
-                                        if (dtAllSupplierData.Rows.Count > 0)
-                                        {
-                                            for (int i = 0; i < dtAllSupplierData.Rows.Count; i++)
-                                            {
-
-
-                                                double ClosingAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["Closing_Balance"].ToString());
-                                                double ForeignAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["ForeignClosing_Balance"].ToString());
-                                                double CompanyAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["Company_ClosingBalance"].ToString());
-                                                if (ClosingAmount != 0)
-                                                {
-                                                    if (ClosingAmount > 0)
-                                                    {
-                                                        //Credit Entry
-                                                        ClosingAmount = Math.Abs(ClosingAmount);
-                                                        objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", hdnAccountId.Value, ClosingAmount.ToString(), "Finance Closing Entry OtherAccount", "CR", ForeignAmount.ToString(), CompanyAmount.ToString(), strLOCCurrencyId, "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), dtAllSupplierData.Rows[i]["Emp_Id"].ToString(), ref trns);
-                                                        //objSubCOA.InsertSubCOA(Session["FinanceYearId"].ToString(), Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), hdnAccountId.Value, strSupplierId, "0.00", ClosingAmount.ToString(), "0.00", ForeignAmount.ToString(), strSupplierCurrency, "0.00", CompanyAmount.ToString(), "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
-                                                    }
-                                                    else
-                                                    {
-                                                        //Debit Entry
-                                                        ClosingAmount = Math.Abs(ClosingAmount);
-                                                        objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", hdnAccountId.Value, ClosingAmount.ToString(), "Finance Closing Entry OtherAccount", "DR", ForeignAmount.ToString(), CompanyAmount.ToString(), strLOCCurrencyId, "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), dtAllSupplierData.Rows[i]["Emp_Id"].ToString(), ref trns);
-                                                        //objSubCOA.InsertSubCOA(Session["FinanceYearId"].ToString(), Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), hdnAccountId.Value, strSupplierId, ClosingAmount.ToString(), "0.00", ForeignAmount.ToString(), "0.00", strSupplierCurrency, CompanyAmount.ToString(), "0.00", "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        GridView gvExpense = (GridView)gv.FindControl("gvExpenses");
-                        foreach (GridViewRow gvE in gvExpense.Rows)
-                        {
-                            double ClosingBalance = 0;
-                            Label lblGName = (Label)gvE.FindControl("lblgvGroupName_1");
-                            lblGName.Text = lblGName.Text.Trim().Replace("<b>", "").Trim();
-                            lblGName.Text = lblGName.Text.Trim().Replace("</b>", "").Trim();
-                            HiddenField hdnAccountId = (HiddenField)gvE.FindControl("hdngvAccountId_1");
-                            Label lblClosingBalance = (Label)gvE.FindControl("lblgvCb_1");
-                            lblClosingBalance.Text = lblClosingBalance.Text.Trim().Replace("<i>", "").Trim();
-                            lblClosingBalance.Text = lblClosingBalance.Text.Trim().Replace("</i>", "").Trim();
-                            Label lblBalanceType = (Label)gvE.FindControl("lblgvCbType_1");
-                            lblBalanceType.Text = lblBalanceType.Text.Trim().Replace("<i>", "").Trim();
-                            lblBalanceType.Text = lblBalanceType.Text.Trim().Replace("</i>", "").Trim();
-                            HiddenField hdnForeignClosing = (HiddenField)gvE.FindControl("hdngvForeignCB_1");
-                            HiddenField hdnCompanyClosing = (HiddenField)gvE.FindControl("hdngvCompanyCB_1");
-
-                            if (lblGName.Text == "By Profit & Loss A/c")
-                            {
-                                lblClosingBalance.Text = lblClosingBalance.Text.Trim().Replace("<b>", "").Trim();
-                                lblClosingBalance.Text = lblClosingBalance.Text.Trim().Replace("</b>", "").Trim();
-                                ProfitLossAmount = Convert.ToDouble(lblClosingBalance.Text);
-                                strPFType = "Expenses";
-                            }
-
-                            if (hdnAccountId.Value != "" && hdnAccountId.Value != "0")
-                            {
-                                ClosingBalance = Convert.ToDouble(lblClosingBalance.Text);
-
-                                if (hdnAccountId.Value == strCapitalAccountId)
-                                {
-                                    CapitalAmount = ClosingBalance;
-                                    strCAccType = lblBalanceType.Text;
-                                }
-                                else
-                                {
-                                    string strCurrencyId = (new DataView(ObjCOA.GetCOAAll(Session["CompId"].ToString()), "Trans_Id='" + hdnAccountId.Value + "'", "", DataViewRowState.CurrentRows).ToTable()).Rows[0]["Currency_Id"].ToString();
-                                    //string strForeignRate = GetCurrency(strCurrencyId, lblClosingBalance.Text);
-                                    //string strForignAmount = strForeignRate.Trim().Split('/')[0].ToString();
-                                    //string strCompanyRate = GetCurrency(Session["CurrencyId"].ToString(), lblClosingBalance.Text);
-                                    //string strCompanyAmount = strCompanyRate.Trim().Split('/')[0].ToString();
-                                    if (hdnAccountId.Value == strReceiveVoucherAcc || hdnAccountId.Value == strEmployeeLoanaccount)
-                                    {
-                                    }
-                                    else
-                                    {
-                                        if (ClosingBalance != 0)
-                                        {
-                                            if (lblBalanceType.Text == "DR")
-                                            {
-                                                objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", hdnAccountId.Value, lblClosingBalance.Text, "Finance Closing Entry", lblBalanceType.Text, hdnForeignClosing.Value, hdnCompanyClosing.Value, strCurrencyId, "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), "0", ref trns);
-                                                //objSubCOA.InsertSubCOA(Session["FinanceYearId"].ToString(), Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), hdnAccountId.Value, "0", lblClosingBalance.Text, "0.00", strForignAmount, "0.00", strCurrencyId, strCompanyAmount, "0.00", "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
-                                            }
-                                            else if (lblBalanceType.Text == "CR")
-                                            {
-                                                objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", hdnAccountId.Value, lblClosingBalance.Text, "Finance Closing Entry", lblBalanceType.Text, hdnForeignClosing.Value, hdnCompanyClosing.Value, strCurrencyId, "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), "0", ref trns);
-                                                //objSubCOA.InsertSubCOA(Session["FinanceYearId"].ToString(), Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), hdnAccountId.Value, "0", "0.00", lblClosingBalance.Text, "0.00", strForignAmount, strCurrencyId, "0.00", strCompanyAmount, "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
-                                            }
-                                        }
-                                    }
-                                }
-
-                                if (hdnAccountId.Value == strReceiveVoucherAcc)
-                                {
-                                    DataTable dtAllCustomerData = objVoucherDetail.GetAllCustomerBalanceData(StrCompId, StrBrandId, strLocationId, strReceiveVoucherAcc, strReceiveVoucherAcc, txtFromDate.Text, dtToDate.ToString("dd-MMM-yyyy"), "1", Session["FinanceYearId"].ToString(), ref trns);
-                                    if (dtAllCustomerData.Rows.Count > 0)
-                                    {
-                                        dtAllCustomerData = new DataView(dtAllCustomerData, "Name not is null and (Closing_Final<>'0')", "", DataViewRowState.CurrentRows).ToTable();
-                                        if (dtAllCustomerData.Rows.Count > 0)
-                                        {
-                                            for (int i = 0; i < dtAllCustomerData.Rows.Count; i++)
-                                            {
-                                                string strCustomerId = dtAllCustomerData.Rows[i]["OtherAccountId"].ToString();
-                                                string strCustomerCurrency = string.Empty;
-                                                DataTable _dtTemp = objAcAccountMaster.GetAc_AccountMasterByTransId(strCustomerId);
-                                                strCustomerCurrency = _dtTemp.Rows.Count > 0 ? _dtTemp.Rows[0]["Currency_Id"].ToString() : "0";
-                                                _dtTemp.Dispose();
-
-                                                //string strCustomerCurrency = (new DataView(objCustomerMaster.GetCustomerAllDataByCompany(Session["CompId"].ToString(), ref trns), "Brand_Id='" + Session["BrandId"].ToString() + "' and Customer_Id='" + strCustomerId + "'", "", DataViewRowState.CurrentRows).ToTable()).Rows[0]["Field3"].ToString();
-                                                //if (strCustomerCurrency == "")
-                                                //{
-                                                //    strCustomerCurrency = "0";
-                                                //}
-
-                                                double ClosingAmount = Convert.ToDouble(dtAllCustomerData.Rows[i]["Closing_Balance"].ToString());
-                                                double ForeignAmount = Convert.ToDouble(dtAllCustomerData.Rows[i]["ForeignClosing_Balance"].ToString());
-                                                double CompanyAmount = Convert.ToDouble(dtAllCustomerData.Rows[i]["cmp_cb"].ToString());
-                                                if (ClosingAmount != 0)
-                                                {
-                                                    if (ClosingAmount > 0)
-                                                    {
-                                                        //Debit Entry
-                                                        ClosingAmount = Math.Abs(ClosingAmount);
-                                                        objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", hdnAccountId.Value, ClosingAmount.ToString(), "Finance Closing Entry OtherAccount", "DR", ForeignAmount.ToString(), CompanyAmount.ToString(), strCustomerCurrency, "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), strCustomerId, ref trns);
-                                                        //objSubCOA.InsertSubCOA(Session["FinanceYearId"].ToString(), Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), hdnAccountId.Value, strCustomerId, ClosingAmount.ToString(), "0.00", ForeignAmount.ToString(), "0.00", strCustomerCurrency, CompanyAmount.ToString(), "0.00", "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
-                                                    }
-                                                    else
-                                                    {
-                                                        //Credit Entry
-                                                        ClosingAmount = Math.Abs(ClosingAmount);
-                                                        objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", hdnAccountId.Value, ClosingAmount.ToString(), "Finance Closing Entry OtherAccount", "CR", ForeignAmount.ToString(), CompanyAmount.ToString(), strCustomerCurrency, "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), strCustomerId, ref trns);
-                                                        //objSubCOA.InsertSubCOA(Session["FinanceYearId"].ToString(), Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), hdnAccountId.Value, strCustomerId, "0.00", ClosingAmount.ToString(), "0.00", ForeignAmount.ToString(), strCustomerCurrency, "0.00", CompanyAmount.ToString(), "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-
-                                //insert employee loan account  opening balance
-
-                                if (hdnAccountId.Value == strEmployeeLoanaccount)
-                                {
-                                    DataTable dtAllSupplierData = objVoucherDetail.GetAllEmployeeBalanceData(StrCompId, StrBrandId, strLocationId, strEmployeeLoanaccount, strEmployeeLoanaccount, txtFromDate.Text, dtToDate.ToString("dd-MMM-yyyy"), "1", Session["FinanceYearId"].ToString(), ref trns);
-                                    if (dtAllSupplierData.Rows.Count > 0)
-                                    {
-                                        dtAllSupplierData = new DataView(dtAllSupplierData, "(Closing_Final<>'0')", "", DataViewRowState.CurrentRows).ToTable();
-                                        if (dtAllSupplierData.Rows.Count > 0)
-                                        {
-                                            for (int i = 0; i < dtAllSupplierData.Rows.Count; i++)
-                                            {
-                                                double ClosingAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["Closing_Balance"].ToString());
-                                                double ForeignAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["ForeignClosing_Balance"].ToString());
-                                                double CompanyAmount = Convert.ToDouble(dtAllSupplierData.Rows[i]["Company_ClosingBalance"].ToString());
-                                                if (ClosingAmount != 0)
-                                                {
-                                                    if (ClosingAmount > 0)
-                                                    {
-                                                        //Credit Entry
-                                                        ClosingAmount = Math.Abs(ClosingAmount);
-                                                        objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", hdnAccountId.Value, ClosingAmount.ToString(), "Finance Closing Entry OtherAccount", "CR", ForeignAmount.ToString(), CompanyAmount.ToString(), strLOCCurrencyId, "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), dtAllSupplierData.Rows[i]["Emp_Id"].ToString(), ref trns);
-                                                        //objSubCOA.InsertSubCOA(Session["FinanceYearId"].ToString(), Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), hdnAccountId.Value, strSupplierId, "0.00", ClosingAmount.ToString(), "0.00", ForeignAmount.ToString(), strSupplierCurrency, "0.00", CompanyAmount.ToString(), "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
-                                                    }
-                                                    else
-                                                    {
-                                                        //Debit Entry
-                                                        ClosingAmount = Math.Abs(ClosingAmount);
-                                                        objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", hdnAccountId.Value, ClosingAmount.ToString(), "Finance Closing Entry OtherAccount", "DR", ForeignAmount.ToString(), CompanyAmount.ToString(), strLOCCurrencyId, "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), dtAllSupplierData.Rows[i]["Emp_Id"].ToString(), ref trns);
-                                                        //objSubCOA.InsertSubCOA(Session["FinanceYearId"].ToString(), Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), hdnAccountId.Value, strSupplierId, ClosingAmount.ToString(), "0.00", ForeignAmount.ToString(), "0.00", strSupplierCurrency, CompanyAmount.ToString(), "0.00", "", "", "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString());
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-
-                            }
-                        }
-
-
-                        double FinalAmt = 0;
-                        if (CapitalAmount != 0)
-                        {
-                            if (strPFType == "Income")
-                            {
-                                FinalAmt = CapitalAmount + ProfitLossAmount;
-                            }
-                            else if (strPFType == "Expenses")
-                            {
-                                FinalAmt = CapitalAmount - ProfitLossAmount;
-                            }
-
-                            if (FinalAmt != 0)
-                            {
-                                if (0 > FinalAmt)
-                                {
-                                    objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", strCapitalAccountId, FinalAmt.ToString(), "Finance Closing Entry for CapitalAccount", "DR", FinalAmt.ToString(), FinalAmt.ToString(), "0", "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), "0", ref trns);
-                                }
-                                else if (0 < FinalAmt)
-                                {
-                                    objFYIClosingDetail.InsertFinancialYearClosingDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), Session["LocId"].ToString(), strDetailId, "F", strCapitalAccountId, FinalAmt.ToString(), "Finance Closing Entry for CapitalAccount", "CR", FinalAmt.ToString(), FinalAmt.ToString(), "0", "", true.ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), "0", ref trns);
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                {
-
-                }
-
-                DisplayMessage("Successfully Close Financial Year");
-                GVComplete.DataSource = null;
-                GVComplete.DataBind();
-            }
-
-            trns.Commit();
-            if (con.State == System.Data.ConnectionState.Open)
-            {
-                con.Close();
-            }
-            trns.Dispose();
-            con.Dispose();
-        }
-        catch (Exception ex)
-        {
-            DisplayMessage(Common.ConvertErrorMessage(ex.Message.ToString(), ex));
-
-            trns.Rollback();
-            if (con.State == System.Data.ConnectionState.Open)
-            {
-
-                con.Close();
-            }
-            trns.Dispose();
-            con.Dispose();
-            return;
-        }
     }
 }

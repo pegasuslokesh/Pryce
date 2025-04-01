@@ -70,7 +70,7 @@ public partial class AccountSetup_FinancialYearInfo : BasePage
 
         if (!IsPostBack)
         {
-
+           
 
             Common.clsPagePermission clsPagePermission = cmn.getPagePermission("../AccountSetup/FinancialYearInfo.aspx", HttpContext.Current.Session["CompId"].ToString(), HttpContext.Current.Session["UserId"].ToString(), HttpContext.Current.Session["Application_Id"].ToString());
             if (clsPagePermission.bHavePermission == false)
@@ -598,7 +598,7 @@ public partial class AccountSetup_FinancialYearInfo : BasePage
                 if (b != 0)
                 {
                     DisplayMessage("Record Updated Successfully !", "green");
-
+                   
                     Lbl_Tab_New.Text = Resources.Attendance.New;
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "LI_List_Active()", true);
                 }
@@ -626,7 +626,7 @@ public partial class AccountSetup_FinancialYearInfo : BasePage
                     }
 
                     DisplayMessage("Record Saved Successfully !", "green");
-
+                    
                 }
             }
 
@@ -1356,7 +1356,7 @@ public partial class AccountSetup_FinancialYearInfo : BasePage
             }
         }
     }
-    public void DisplayMessage(string str, string color = "orange")
+    public void DisplayMessage(string str,string color="orange")
     {
         if (Session["lang"] == null)
         {
@@ -1364,11 +1364,11 @@ public partial class AccountSetup_FinancialYearInfo : BasePage
         }
         if (Session["lang"].ToString() == "1")
         {
-            ScriptManager.RegisterStartupScript(this, GetType(), "", "showAlert('" + str + "','" + color + "','white');", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "", "showAlert('" + str + "','"+color+"','white');", true);
         }
         else if (Session["lang"].ToString() == "2")
         {
-            ScriptManager.RegisterStartupScript(this, GetType(), "", "showAlert('" + GetArebicMessage(str) + "','" + color + "','white');", true);
+             ScriptManager.RegisterStartupScript(this, GetType(), "", "showAlert('" + GetArebicMessage(str) + "','"+color+"','white');", true);
         }
     }
     public string GetArebicMessage(string EnglishMessage)
@@ -1421,7 +1421,7 @@ public partial class AccountSetup_FinancialYearInfo : BasePage
             if (dtDetail.Rows.Count > 0)
             {
                 //string strSQL = "Select * from Ac_FinancialYear_Detail where Trans_Id in (Select Max(Trans_Id) from Ac_FinancialYear_Detail where Header_Trans_Id='" + Session["FinanceYearId"].ToString() + "' Group by Location_Id)";
-                string strSQL = "Select * from Ac_FinancialYear_Detail where Trans_Id in (Select Max(Trans_Id) from Ac_FinancialYear_Detail where Header_Trans_Id='" + Session["FinanceYearId"].ToString() + "'  and Location_Id IN (Select Location_Id from Set_LocationMaster Where Isactive ='1') Group by Location_Id) and Company_Id='"+ Session["CompId"].ToString() + "'";
+                string strSQL = "Select * from Ac_FinancialYear_Detail where Trans_Id in (Select Max(Trans_Id) from Ac_FinancialYear_Detail where Header_Trans_Id='" + Session["FinanceYearId"].ToString() + "'  and Location_Id IN (Select Location_Id from Set_LocationMaster Where Isactive ='1') Group by Location_Id)";
                 dtDetail = objDA.return_DataTable(strSQL);
                 //dtDetail = new DataView(dtDetail, "Field7='" + strMaxDate + "'", "", DataViewRowState.CurrentRows).ToTable();
                 if (dtDetail.Rows.Count > 0)
@@ -1543,7 +1543,7 @@ public partial class AccountSetup_FinancialYearInfo : BasePage
             con.Open();
             SqlTransaction trns;
             trns = con.BeginTransaction();
-
+            
             try
             {
                 int i = 0;
@@ -1621,81 +1621,71 @@ public partial class AccountSetup_FinancialYearInfo : BasePage
                                 //code added by jitendra upadhyay for inventory closing 
                                 //16-12-2016
                                 DataTable dtStock = new DataView(dtFilter, "Finance_Year_Id=" + HttpContext.Current.Session["FinanceYearId"].ToString() + " and Location_Id=" + ((HiddenField)gvr.FindControl("hdnLocationId")).Value + "", "", DataViewRowState.CurrentRows).ToTable();
-                                string strBreak;
-                                if (((HiddenField)gvr.FindControl("hdnLocationId")).Value.ToString() == "6")
+
+                                foreach (DataRow dr in dtStock.Rows)
                                 {
+                                    if (strFinancialYearStatus.Trim().ToUpper() == "OPEN")
+                                    {
+                                        objstockDetail.InsertStockDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), ((HiddenField)gvr.FindControl("hdnLocationId")).Value, dr["ProductId"].ToString(), dr["Quantity"].ToString(), "0", "0", "0", "0", "0", "0", "0", "0", dr["LastPrice"].ToString(), dr["UnitCost"].ToString(), "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["NextFinancialYearId"].ToString(), ref trns);
+                                        ObjProductLadger.InsertProductLedger(Session["CompId"].ToString(), Session["BrandId"].ToString(), ((HiddenField)gvr.FindControl("hdnLocationId")).Value, "OP", "0", "0", dr["ProductId"].ToString(), dr["Unit_Id"].ToString(), "I", "0", "0", dr["Quantity"].ToString(), "0", "1/1/1800", dr["UnitCost"].ToString(), "1/1/1800", "0", "1/1/1800", "0", "0", "", "", "", "", true.ToString(), "1/1/1800", true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), HttpContext.Current.Session["NextFinancialYearId"].ToString(), ref trns);
+                                    }
+                                    else if (strFinancialYearStatus.Trim().ToUpper() == "REOPEN")
+                                    {
+                                        double NextFianceOpeningStock = 0;
+                                        double CurrentStock = 0;
 
-                                    strBreak = "";
+                                        double NextYearStock = 0;
+                                        try
+                                        {
+                                            NextFianceOpeningStock = Convert.ToDouble(objstockDetail.GetStockDetail_By_CompanyId_BrandId_LocationId_and_ProductId_and_FinanceyearId(Session["CompId"].ToString(), Session["BrandId"].ToString(), ((HiddenField)gvr.FindControl("hdnLocationId")).Value, HttpContext.Current.Session["NextFinancialYearId"].ToString(), dr["ProductId"].ToString(), ref trns).Rows[0]["OpeningBalance"].ToString());
+                                        }
+                                        catch
+                                        {
+
+                                        }
+                                        try
+                                        {
+                                            NextYearStock = Convert.ToDouble(objstockDetail.GetStockDetail_By_CompanyId_BrandId_LocationId_and_ProductId_and_FinanceyearId(Session["CompId"].ToString(), Session["BrandId"].ToString(), ((HiddenField)gvr.FindControl("hdnLocationId")).Value, HttpContext.Current.Session["NextFinancialYearId"].ToString(), dr["ProductId"].ToString(), ref trns).Rows[0]["Quantity"].ToString());
+                                        }
+                                        catch
+                                        {
+
+                                        }
+
+                                        try
+                                        {
+                                            CurrentStock = Convert.ToDouble(dr["Quantity"].ToString());
+                                        }
+                                        catch
+                                        {
+
+                                        }
+
+                                        //if ((0 - NextFianceOpeningStock + CurrentStock) != 0)
+                                        //{
+
+                                        objDA.execute_Command("delete from Inv_ProductLedger where TransType='OP' and Location_Id=" + ((HiddenField)gvr.FindControl("hdnLocationId")).Value + " and Finance_Year_Id=" + HttpContext.Current.Session["NextFinancialYearId"].ToString() + " and ProductId=" + dr["ProductId"].ToString() + "", ref trns);
+
+                                        string strsql = "select ISNULL( SUM(quantityin*unitprice)/SUM(quantityin),0) from Inv_ProductLedger where ProductId=" + dr["ProductId"].ToString() + " and location_id=" + ((HiddenField)gvr.FindControl("hdnLocationId")).Value + " and Finance_Year_Id=" + HttpContext.Current.Session["NextFinancialYearId"].ToString() + "";
+                                        double averageCost = 0;
+                                        try
+                                        {
+                                            averageCost = Convert.ToDouble(objDA.return_DataTable(strsql, ref trns).Rows[0][0].ToString());
+                                        }
+                                        catch
+                                        {
+                                            averageCost = 0;
+                                        }
+                                        objDA.execute_Command("update Inv_StockDetail set Quantity=" + (NextYearStock - NextFianceOpeningStock).ToString() + ",Field2='" + averageCost.ToString() + "' where Location_Id=" + ((HiddenField)gvr.FindControl("hdnLocationId")).Value + " and Finance_Year_Id=" + HttpContext.Current.Session["NextFinancialYearId"].ToString() + " and ProductId=" + dr["ProductId"].ToString() + "", ref trns);
+
+
+                                        //objDA.execute_Command("update Inv_StockDetail set Quantity=" + (NextYearStock - NextFianceOpeningStock).ToString() + " where Location_Id=" + ((HiddenField)gvr.FindControl("hdnLocationId")).Value + " and Finance_Year_Id=" + HttpContext.Current.Session["NextFinancialYearId"].ToString() + " and ProductId=" + dr["ProductId"].ToString() + "", ref trns);
+                                        ObjProductLadger.InsertProductLedger(Session["CompId"].ToString(), Session["BrandId"].ToString(), ((HiddenField)gvr.FindControl("hdnLocationId")).Value, "OP", "0", "0", dr["ProductId"].ToString(), dr["Unit_Id"].ToString(), "I", "0", "0", (CurrentStock).ToString(), "0", "1/1/1800", dr["UnitCost"].ToString(), "1/1/1800", "0", "1/1/1800", "0", "0", "", "", "", "", true.ToString(), "1/1/1800", true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), HttpContext.Current.Session["NextFinancialYearId"].ToString(), ref trns);
+
+                                        objDA.execute_Command("update Inv_StockDetail set OpeningBalance=" + (CurrentStock).ToString() + " where Location_Id=" + ((HiddenField)gvr.FindControl("hdnLocationId")).Value + " and Finance_Year_Id=" + HttpContext.Current.Session["NextFinancialYearId"].ToString() + " and ProductId=" + dr["ProductId"].ToString() + "", ref trns);
+                                        //}
+                                    }
                                 }
-
-                                //foreach (DataRow dr in dtStock.Rows)
-                                //{
-                                //    if (strFinancialYearStatus.Trim().ToUpper() == "OPEN")
-                                //    {
-                                //        if (dr["ProductId"].ToString() == "3385")
-                                //        {
-                                //            strBreak = "";
-                                //        }
-                                //        objstockDetail.InsertStockDetail(Session["CompId"].ToString(), Session["BrandId"].ToString(), ((HiddenField)gvr.FindControl("hdnLocationId")).Value, dr["ProductId"].ToString(), dr["Quantity"].ToString(), "0", "0", "0", "0", "0", "0", "0", "0", dr["LastPrice"].ToString(), dr["UnitCost"].ToString(), "", "", "", true.ToString(), DateTime.Now.ToString(), true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["NextFinancialYearId"].ToString(), ref trns);
-                                //        ObjProductLadger.InsertProductLedger(Session["CompId"].ToString(), Session["BrandId"].ToString(), ((HiddenField)gvr.FindControl("hdnLocationId")).Value, "OP", "0", "0", dr["ProductId"].ToString(), dr["Unit_Id"].ToString(), "I", "0", "0", dr["Quantity"].ToString(), "0", "1/1/1800", dr["UnitCost"].ToString() == "" ? "0" : dr["UnitCost"].ToString(), "1/1/1800", "0", "1/1/1800", "0", "0", "", "", "", "", true.ToString(), "1/1/1800", true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), HttpContext.Current.Session["NextFinancialYearId"].ToString(), ref trns);
-                                //    }
-                                //    else if (strFinancialYearStatus.Trim().ToUpper() == "REOPEN")
-                                //    {
-                                //        double NextFianceOpeningStock = 0;
-                                //        double CurrentStock = 0;
-
-                                //        double NextYearStock = 0;
-                                //        try
-                                //        {
-                                //            NextFianceOpeningStock = Convert.ToDouble(objstockDetail.GetStockDetail_By_CompanyId_BrandId_LocationId_and_ProductId_and_FinanceyearId(Session["CompId"].ToString(), Session["BrandId"].ToString(), ((HiddenField)gvr.FindControl("hdnLocationId")).Value, HttpContext.Current.Session["NextFinancialYearId"].ToString(), dr["ProductId"].ToString(), ref trns).Rows[0]["OpeningBalance"].ToString());
-                                //        }
-                                //        catch
-                                //        {
-
-                                //        }
-                                //        try
-                                //        {
-                                //            NextYearStock = Convert.ToDouble(objstockDetail.GetStockDetail_By_CompanyId_BrandId_LocationId_and_ProductId_and_FinanceyearId(Session["CompId"].ToString(), Session["BrandId"].ToString(), ((HiddenField)gvr.FindControl("hdnLocationId")).Value, HttpContext.Current.Session["NextFinancialYearId"].ToString(), dr["ProductId"].ToString(), ref trns).Rows[0]["Quantity"].ToString());
-                                //        }
-                                //        catch
-                                //        {
-
-                                //        }
-
-                                //        try
-                                //        {
-                                //            CurrentStock = Convert.ToDouble(dr["Quantity"].ToString());
-                                //        }
-                                //        catch
-                                //        {
-
-                                //        }
-
-                                //        //if ((0 - NextFianceOpeningStock + CurrentStock) != 0)
-                                //        //{
-
-                                //        objDA.execute_Command("delete from Inv_ProductLedger where TransType='OP' and Location_Id=" + ((HiddenField)gvr.FindControl("hdnLocationId")).Value + " and Finance_Year_Id=" + HttpContext.Current.Session["NextFinancialYearId"].ToString() + " and ProductId=" + dr["ProductId"].ToString() + "", ref trns);
-
-                                //        string strsql = "select ISNULL( SUM(quantityin*unitprice)/SUM(quantityin),0) from Inv_ProductLedger where ProductId=" + dr["ProductId"].ToString() + " and location_id=" + ((HiddenField)gvr.FindControl("hdnLocationId")).Value + " and Finance_Year_Id=" + HttpContext.Current.Session["NextFinancialYearId"].ToString() + "";
-                                //        double averageCost = 0;
-                                //        try
-                                //        {
-                                //            averageCost = Convert.ToDouble(objDA.return_DataTable(strsql, ref trns).Rows[0][0].ToString());
-                                //        }
-                                //        catch
-                                //        {
-                                //            averageCost = 0;
-                                //        }
-                                //        objDA.execute_Command("update Inv_StockDetail set Quantity=" + (NextYearStock - NextFianceOpeningStock).ToString() + ",Field2='" + averageCost.ToString() + "' where Location_Id=" + ((HiddenField)gvr.FindControl("hdnLocationId")).Value + " and Finance_Year_Id=" + HttpContext.Current.Session["NextFinancialYearId"].ToString() + " and ProductId=" + dr["ProductId"].ToString() + "", ref trns);
-
-
-                                //        //objDA.execute_Command("update Inv_StockDetail set Quantity=" + (NextYearStock - NextFianceOpeningStock).ToString() + " where Location_Id=" + ((HiddenField)gvr.FindControl("hdnLocationId")).Value + " and Finance_Year_Id=" + HttpContext.Current.Session["NextFinancialYearId"].ToString() + " and ProductId=" + dr["ProductId"].ToString() + "", ref trns);
-                                //        ObjProductLadger.InsertProductLedger(Session["CompId"].ToString(), Session["BrandId"].ToString(), ((HiddenField)gvr.FindControl("hdnLocationId")).Value, "OP", "0", "0", dr["ProductId"].ToString(), dr["Unit_Id"].ToString(), "I", "0", "0", (CurrentStock).ToString(), "0", "1/1/1800", dr["UnitCost"].ToString(), "1/1/1800", "0", "1/1/1800", "0", "0", "", "", "", "", true.ToString(), "1/1/1800", true.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), Session["UserId"].ToString(), DateTime.Now.ToString(), HttpContext.Current.Session["NextFinancialYearId"].ToString(), ref trns);
-
-                                //        objDA.execute_Command("update Inv_StockDetail set OpeningBalance=" + (CurrentStock).ToString() + " where Location_Id=" + ((HiddenField)gvr.FindControl("hdnLocationId")).Value + " and Finance_Year_Id=" + HttpContext.Current.Session["NextFinancialYearId"].ToString() + " and ProductId=" + dr["ProductId"].ToString() + "", ref trns);
-                                //        //}
-                                //    }
-                                //}
 
                             }
 
